@@ -7,8 +7,8 @@ export class ContentHeading extends Component {
 
     render() {
         return (
-            <div className="clearfix">
-                <h1 className="heading clearfix">{this.props.name}</h1>
+            <div>
+                <h1 className="heading">{this.props.name}</h1>
                 <hr className="line" />
             </div>
                 );
