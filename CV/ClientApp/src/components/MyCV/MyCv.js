@@ -7,6 +7,7 @@ import { Experience } from '../Experience/Experience';
 import { PersonalInfo } from '../PersonalInfo/PersonalInfo';
 import { ProudOf } from '../ProudOf/ProudOf';
 import { Language } from '../Language/Language';
+import { Education } from '../Education/Education';
 
 
 
@@ -110,7 +111,25 @@ export class MyCv extends Component {
         var strengths = [["Hard-Working 18/24", "Persuasive", "Motivator&Leader"],
         ["User Experience", "Mobile Devices & Applications", "Product Management & Marketing"]];
 
-        var languages = [{ language: "English", level: 5 }, { language: "Spanish", level: 5 }, { language: "German", level: 5 }];
+        var languages = [{ language: "English", level: 5 }, { language: "Spanish", level: 4 }, { language: "German", level: 3 }];
+
+        var education1 = {
+            stream: "M.S in Computer Science",
+            university: "Stanford University",
+            icon: "fa fa-calendar",
+            from: "Sep 1997",
+            to: "June 1999"
+
+        }
+        var education2 = {
+            stream: "B.S in Symbolic Systems",
+            university: "Stanford University",
+            icon: "fa fa-calendar",
+            from: "Sep 1993",
+            to: "June 1997"
+        }
+
+        var educations = [education1, education2];
 
         return (
             <div className="page">
@@ -157,9 +176,10 @@ export class MyCv extends Component {
                                 return <Language key={index} language={name} />;
                             })}
                             <ContentHeading name="Education" />
-                            {languages.map(function (name, index) {
-                                return <Language key={index} language={name} />;
+                            {educations.map(function (name, index) {
+                                return ([<Education key={index} education={name} />, <hr className="style3" />]);
                             })}
+                           
                         </Col>
                     </Row>
                 </Grid>
