@@ -1,2 +1,9 @@
-﻿body {
+﻿.bulletlist {
+    text-align: justify;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.heading4 {
+    margin: 0;
 }

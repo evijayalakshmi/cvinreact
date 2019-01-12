@@ -1,6 +1,7 @@
 ﻿body {
     background: rgb(204,204,204);
     font-family: 'Titillium Web', sans-serif;
+    font-size: 12px;
 }
 
 .page {
@@ -14,5 +15,14 @@
 }
 
 hr.style3 {
-    border-top: 1px dashed #8c8b8b;
+    border-bottom: 1px dashed #8c8b8b;
+    margin-top: 0;
+}
+
+.strengthstyle {
+    background-color: transparent;
+    color: black;
+    border: 1px solid;
+    border-color: cornflowerblue;
+    margin-right: 5px;
 }

@@ -8,9 +8,8 @@ export class ContentHeading extends Component {
     render() {
         return (
             <div>
-                <h1 className="heading">{this.props.name}</h1>
-                <hr className="line" />
+                <h3 className="heading"><b>{this.props.name.toUpperCase()}</b></h3>
             </div>
-                );
-            }
+        );
+    }
 }

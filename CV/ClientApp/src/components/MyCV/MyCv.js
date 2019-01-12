@@ -1,12 +1,13 @@
 ﻿import React, { Component } from 'react';
 import { Col, Grid, Row, img } from 'react-bootstrap';
-
 import { ContentHeading } from './../ContentHeading/ContentHeading';
-
 import personalPhoto from '../../assets/img/SamImg.jpg'
-
 import './MyCV.css';
 import { Experience } from '../Experience/Experience';
+import { PersonalInfo } from '../PersonalInfo/PersonalInfo';
+import { ProudOf } from '../ProudOf/ProudOf';
+import { Language } from '../Language/Language';
+
 
 
 export class MyCv extends Component {
@@ -27,10 +28,10 @@ export class MyCv extends Component {
 
         var experience2 = {
             title: "Vice President of Location & Local Services",
-            company: "Google!",
+            company: "Google",
             from: "Oct 2010",
             to: "July 2012",
-            location: "9 Palo Alto.CA",
+            location: "Palo Alto.CA",
             responsibilities: [
                 "Positioned Google Maps as the world leader in moble maps and navigation",
                 "Oversaw 1000• engineers and product managers workingon Google Maps.Google Places and Google Earth.",
@@ -39,7 +40,7 @@ export class MyCv extends Component {
 
         var experience3 = {
             title: "Vice President of Search Products & UX",
-            company: "Google!",
+            company: "Google",
             from: "Oct 2005",
             to: "July 2010",
             location: "Palo Alto.CA",
@@ -48,7 +49,7 @@ export class MyCv extends Component {
 
         var experience4 = {
             title: "Product Manager & Technical UILead",
-            company: "Google!",
+            company: "Google",
             from: "Oct 2001",
             to: "July 2005",
             location: "Palo Alto.CA",
@@ -59,8 +60,8 @@ export class MyCv extends Component {
         }
 
         var experience5 = {
-            title: "Product Engioeer",
-            company: "Google!",
+            title: "Product Engineer",
+            company: "Google",
             from: "June 1999",
             to: "2001",
             location: "Palo Alto.CA",
@@ -70,29 +71,95 @@ export class MyCv extends Component {
             ]
         }
 
-        var experiences = [experience1, experience2, experience3, experience4, experience5]
+        var PersonalDetails = {
+            Name: "Marissa Mayer",
+            Designation: "Business Woman & Proud Geek",
+            Email: "mmayer@yahoo-inc.com",
+            blog: "http://marissamayr.tumblr.com/",
+            Address: "Sunnyvale.CA"
+        }
+
+        var experiences = [experience1, experience2, experience3, experience4, experience5];
+
+        var moment1 = {
+            icon: "fa fa-at",
+            heading: "Courage I had",
+            content: "to take a sinking ship and try to make it float"
+        }
+
+        var moment2 = {
+            icon: "fa fa-calendar fa-2x",
+            heading: "Persistence & Loyalty",
+            content: "Ishowed despite the hard moments and my willingness to stay with Yahoo after the acquisition"
+        }
+
+        var moment3 = {
+            icon: "fa fa-at",
+            heading: "Google's   growth",
+            content: "from a hundred thousand searches per day to over a billion"
+        }
+
+        var moment4 = {
+            icon: "fa fa-at",
+            heading: "Inspiringwomen in tech",
+            content: "Youngest CEOin Fortune's list of 50 most powerfulwomen"
+        }
+
+        var moments = [moment1, moment2, moment3, moment4];
+
+        var strengths = [["Hard-Working 18/24", "Persuasive", "Motivator&Leader"],
+        ["User Experience", "Mobile Devices & Applications", "Product Management & Marketing"]];
+
+        var languages = [{ language: "English", level: 5 }, { language: "Spanish", level: 5 }, { language: "German", level: 5 }];
 
         return (
             <div className="page">
                 <Grid fluid>
                     <Row>
-                        <Col xs={6} md={6} xsOffset={1}>
-
+                        <Col xs={6} md={9} xsOffset={1}>
+                            <PersonalInfo info={PersonalDetails} />
                         </Col>
-                        <Col xs={6} md={4} xsOffset={1}>
+                        <Col xs={6} md={2}>
                             <div>
                                 <img src={personalPhoto} className="responsive" alt="my-photo" />
                             </div>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={6} md={7} xsOffset={1}>
+                        <Col xs={6} md={6} xsOffset={1}>
                             <ContentHeading name="Experience" />
                             {experiences.map(function (name, index) {
-                                return ([<Experience key={index} experience={name} /> , <hr className="style3" />]);
+                                return ([<Experience key={index} experience={name} />,
+                                <hr key={index + "h"} className="style3" />]);
+                            })}
+                            <ContentHeading name="A day of my life" />
+                            {languages.map(function (name, index) {
+                                return <Language key={index} language={name} />;
                             })}
                         </Col>
-                        <Col xs={6} md={3} xsOffset={1}>
+                        <Col xs={6} md={4}>
+                            <ContentHeading name="Life Philosophy" />
+                            <em> "If you don't haveany shadows, you 're not standing in the light."</em>
+                            <ContentHeading name="Most Proud Of" />
+                            {moments.map(function (name, index) {
+                                return ([<ProudOf key={index} moment={name} />,
+                                <hr key={index + "p"} className="style3" />]);
+                            })}
+                            <ContentHeading name="Strengths" />
+                            {strengths.map(function (name, index) {
+                                var sts = name.map(function (strength, sindex) {
+                                    return <label className="label label-default strengthstyle">{strength}</label>;
+                                })
+                                return [sts, <hr className="style3" />];
+                            })}
+                            <ContentHeading name="Languages" />
+                            {languages.map(function (name, index) {
+                                return <Language key={index} language={name} />;
+                            })}
+                            <ContentHeading name="Education" />
+                            {languages.map(function (name, index) {
+                                return <Language key={index} language={name} />;
+                            })}
                         </Col>
                     </Row>
                 </Grid>

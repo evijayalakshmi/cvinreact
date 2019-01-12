@@ -1,26 +1,27 @@
 ﻿
 
 .heading {
-    color: black;
+    color: #500f8e;
     /*text-decoration :underline;*/
     text-decoration-style: solid;
-    border-bottom: red;
-    border-width: thick;
+    border-bottom: solid #500f8e;
+    line-height: 2;
+    margin-top: 0;
+}
+
+hr {
+    border-top: 0px !important;
 }
 
 
-.line {
+/*.line {
     border-bottom: solid blueviolet;
     border-right-width: 2px;
-}
+}*/
 
 img {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
-}
-
-.clearfix {
-    overflow: auto;
 }
