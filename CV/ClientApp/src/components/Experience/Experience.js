@@ -12,10 +12,10 @@ export class Experience extends Component {
                 <h4 className="heading4">{this.props.experience.title}</h4>
                 <h5 className="heading4"><b>{this.props.experience.company}</b></h5>
                 <Row>
-                    <Col xs={6} md={6}>
+                    <Col xs={6} md={6} sm={6}>
                         <i className="fa fa-calendar"></i> {this.props.experience.from} - {this.props.experience.to}
                     </Col>
-                    <Col xs={6} md={6}>
+                    <Col xs={6} md={6} sm={6}>
                         <i className="fa fa-map-marker"></i> {this.props.experience.location}
                     </Col>
                 </Row>

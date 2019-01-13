@@ -12,16 +12,16 @@ export class PersonalInfo extends Component {
                 <h1><b> {this.props.info.Name.toUpperCase()}</b></h1>
                 <h4> {this.props.info.Designation} </h4>
                 <Row>
-                    <Col xs={4} md={4}>
+                    <Col xs={4} md={4} sm={4}>
                         <i className="fa fa-at"></i>
                         <span> {this.props.info.Email} </span>
                     </Col>
-                    <Col xs={4} md={5}>
+                    <Col xs={4} md={5} sm={5}>
                         { this.props.info.blog !== ''  ?
                             [<i className="fa fa-map-marker"></i>, <span> {this.props.info.blog} </span>] :
                             null }
                     </Col>
-                    <Col xs={4} md={3}>
+                    <Col xs={4} md={3} sm={3}>
                         <i className="fa fa-map-marker"></i>
                         <span> {this.props.info.Address} </span>
                     </Col>

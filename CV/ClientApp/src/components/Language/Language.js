@@ -17,10 +17,10 @@ export class Language extends Component {
         return (
             <div>
                 <Row>
-                    <Col md={6}>
+                    <Col md={6} sm={6}>
                         <span><b>{this.props.language.language}</b></span>
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} sm={6}>
                         {indents}
                     </Col>
                 </Row>

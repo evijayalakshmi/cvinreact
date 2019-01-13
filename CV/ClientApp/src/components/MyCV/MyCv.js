@@ -23,17 +23,17 @@ export class MyCv extends Component {
             <div className="page">
                 <Grid fluid>
                     <Row className="marginTop">
-                        <Col xs={6} md={8} xsOffset={1}>
+                        <Col xs={6} md={8} sm={8} xsOffset={1}>
                             <PersonalInfo info={data.personalDetails} />
                         </Col>
-                        <Col xs={6} md={2}>
+                        <Col xs={6} md={2} sm={2}>
                             <div>
                                 <img src={personalPhoto} className="img-circle responsive" alt="my-photo" />
                             </div>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={6} md={6} xsOffset={1}>
+                        <Col xs={6} md={6} sm={6} xsOffset={1}>
                             <ContentHeading name="Experience" />
                             {data.experiences.map(function (name, index) {
                                 return (index + 1 !== data.experiences.length) ?
@@ -42,7 +42,7 @@ export class MyCv extends Component {
                             })}
                             <ContentHeading name="A day of my life" />
                         </Col>
-                        <Col xs={6} md={4}>
+                        <Col xs={6} md={4} sm={4}>
                             <ContentHeading name="Life Philosophy" />
                             <em> "If you don't haveany shadows, you 're not standing in the light."</em>
                             <ContentHeading name="Most Proud Of" />
