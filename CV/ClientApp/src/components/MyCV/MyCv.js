@@ -8,6 +8,7 @@ import { PersonalInfo } from '../PersonalInfo/PersonalInfo';
 import { ProudOf } from '../ProudOf/ProudOf';
 import { Language } from '../Language/Language';
 import { Education } from '../Education/Education';
+import { Strength } from '../Strength/Strength';
 
 
 
@@ -166,10 +167,7 @@ export class MyCv extends Component {
                             })}
                             <ContentHeading name="Strengths" />
                             {strengths.map(function (name, index) {
-                                var sts = name.map(function (strength, sindex) {
-                                    return <label className="label label-default strengthstyle">{strength}</label>;
-                                })
-                                return [sts, <hr className="style3" />];
+                                return [<Strength strengths={name} />, <hr className="style3" />] ;
                             })}
                             <ContentHeading name="Languages" />
                             {languages.map(function (name, index) {
