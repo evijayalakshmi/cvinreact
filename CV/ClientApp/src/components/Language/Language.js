@@ -24,7 +24,6 @@ export class Language extends Component {
                         {indents}
                     </Col>
                 </Row>
-                <hr className="style3" />
             </div>
         );
     }

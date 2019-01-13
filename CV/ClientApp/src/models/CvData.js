@@ -61,19 +61,19 @@ export class CvData {
             }],
 
             moments: [{
-                icon: "fa fa-at",
+                icon: "fa fa-trophy fa-2x",
                 heading: "Courage I had",
                 content: "to take a sinking ship and try to make it float"
             }, {
-                icon: "fa fa-calendar fa-2x",
+                icon: "fa fa-hand-peace-o fa-2x",
                 heading: "Persistence & Loyalty",
                 content: "Ishowed despite the hard moments and my willingness to stay with Yahoo after the acquisition"
             }, {
-                icon: "fa fa-at",
+                icon: "fa fa-line-chart fa-2x",
                 heading: "Google's   growth",
                 content: "from a hundred thousand searches per day to over a billion"
             }, {
-                icon: "fa fa-at",
+                icon: "fa fa-female fa-2x",
                 heading: "Inspiringwomen in tech",
                 content: "Youngest CEOin Fortune's list of 50 most powerfulwomen"
             }],
@@ -97,6 +97,65 @@ export class CvData {
                 icon: "fa fa-calendar",
                 from: "Sep 1993",
                 to: "June 1997"
+            }]
+        }
+    }
+
+    getMyData() {
+        return {
+            personalDetails: {
+                Name: "Vijaya Lakshmi E",
+                Designation: "Software Developer",
+                Email: "vijaya.laxmi502@gmail.com",
+                blog: "",
+                Address: "Espoo"
+            },
+            experiences: [{
+                title: "Software Trainee",
+                company: "Kiva Helsinki Oy!",
+                from: "January 2019",
+                to: "Ongoing",
+                location: "Helsinki",
+                responsibilities: [
+                    "Learning new technologies",
+                    "Developing software applications"
+                ]
+            }, {
+                title: "Software Programmer Trainee",
+                company: "Deccansoft Software Solutions",
+                from: "Mar 2015",
+                to: "Dec 2015",
+                location: "Hyderabad, India",
+                responsibilities: [
+                    "Developing web applications",
+                    "Training sessions on C and c#",
+                ]
+            }],
+
+            moments: [{
+                icon: "fa fa-trophy fa-2x",
+                heading: "Courage I had",
+                content: "Self-Learning"
+            }, {
+                icon: "fa fa-hand-peace-o fa-2x",
+                heading: "Accomplishments",
+                content: "Appreciation from CEO and Team Leaders for my work"
+                }
+            ],
+
+
+            strengths: [["Hard-Working 18/24", "Confidence", "Motivator"],
+            ["Designing", "Front-End Development",]],
+
+            languages: [{ language: "English", level: 5 }, { language: "Hindi", level: 3}, { language: "Finnish", level: 2 }],
+
+            educations: [{
+                stream: "B.Tech in Computer Science",
+                university: "JNTUK",
+                icon: "fa fa-calendar",
+                from: "Sep 2010",
+                to: "May 2014"
+
             }]
         }
     }

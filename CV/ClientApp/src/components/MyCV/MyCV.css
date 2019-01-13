@@ -17,3 +17,11 @@
 hr.style3 {
     border-bottom: 1px dashed #8c8b8b;
 }
+
+.img-circle {
+    width: 100%;
+}
+
+.marginTop {
+    margin-top: 15px;
+}
