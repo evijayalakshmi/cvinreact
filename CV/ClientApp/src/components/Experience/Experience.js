@@ -9,7 +9,7 @@ export class Experience extends Component {
     render() {
         return (
             <div>
-                <h4 className="heading4">{this.props.experience.title}</h4>
+                <h3 className="heading4">{this.props.experience.title}</h3>
                 <h5 className="heading4"><b>{this.props.experience.company}</b></h5>
                 <Row>
                     <Col xs={6} md={6} sm={6}>

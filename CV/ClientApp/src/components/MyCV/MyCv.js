@@ -10,7 +10,7 @@ import { Language } from '../Language/Language';
 import { Education } from '../Education/Education';
 import { Strength } from '../Strength/Strength';
 import { CvData } from '../../models/CvData';
-
+import { DayChart } from '../DayChart/DayChart';
 
 export class MyCv extends Component {
     displayName = MyCv.name;
@@ -41,10 +41,11 @@ export class MyCv extends Component {
                                     <Experience key={index} experience={name} />;
                             })}
                             <ContentHeading name="A day of my life" />
+                            <DayChart />
                         </Col>
                         <Col xs={6} md={4} sm={4}>
                             <ContentHeading name="Life Philosophy" />
-                            <em> "If you don't haveany shadows, you 're not standing in the light."</em>
+                            <em> "If you don't have any shadows, you're not standing in the light."</em>
                             <ContentHeading name="Most Proud Of" />
                             {data.moments.map(function (name, index) {
                                 return (index + 1 !== data.moments.length) ?

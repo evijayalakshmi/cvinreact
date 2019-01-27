@@ -1,6 +1,4 @@
-﻿
-
-export class CvData {
+﻿export class CvData {
 
     getData() {
         return {
@@ -67,15 +65,15 @@ export class CvData {
             }, {
                 icon: "fa fa-hand-peace-o fa-2x",
                 heading: "Persistence & Loyalty",
-                content: "Ishowed despite the hard moments and my willingness to stay with Yahoo after the acquisition"
+                content: "I showed despite the hard moments and my willingness to stay with Yahoo after the acquisition"
             }, {
                 icon: "fa fa-line-chart fa-2x",
-                heading: "Google's   growth",
+                heading: "Google's growth",
                 content: "from a hundred thousand searches per day to over a billion"
             }, {
                 icon: "fa fa-female fa-2x",
-                heading: "Inspiringwomen in tech",
-                content: "Youngest CEOin Fortune's list of 50 most powerfulwomen"
+                heading: "Inspiring women in tech",
+                content: "Youngest CEO in Fortune's list of 50 most powerful women"
             }],
 
 
@@ -97,7 +95,13 @@ export class CvData {
                 icon: "fa fa-calendar",
                 from: "Sep 1993",
                 to: "June 1997"
-            }]
+                }],
+
+            dayOfLife: [
+                { task: "Publicly resolving issues with Yahoo! investors", percentage: 75 }, { task: "Building a business development strategy for yahoo's future after the Verizon acquisition", percentage: 20 }, { task: "Showing Yahoo! employees that their work has meaning", percentage: 85 },
+                { task: "sleeping & dreaming  about work on the 38th floor of the Four Seasons Hotel in SF", percentage: 40 }, { task: "Spending time with Zachary, Mascalliser, and Sylvana", percentage: 90 },
+                { task: "Baking cupcakes & creating spread-sheets for all of the needed ingradients", percentage: 30 }, { task: "Taking care of New York & San Francisco Ballet Jawbone by being a member of their boards ", percentage: 20 }
+            ]
         }
     }
 
@@ -140,14 +144,14 @@ export class CvData {
                 icon: "fa fa-hand-peace-o fa-2x",
                 heading: "Accomplishments",
                 content: "Appreciation from CEO and Team Leaders for my work"
-                }
+            }
             ],
 
 
             strengths: [["Hard-Working 18/24", "Confidence", "Motivator"],
             ["Designing", "Front-End Development",]],
 
-            languages: [{ language: "English", level: 5 }, { language: "Hindi", level: 3}, { language: "Finnish", level: 2 }],
+            languages: [{ language: "English", level: 5 }, { language: "Hindi", level: 3 }, { language: "Finnish", level: 2 }],
 
             educations: [{
                 stream: "B.Tech in Computer Science",

@@ -5,7 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { MyCv } from './components/MyCV/MyCv';
-import NewCVForm from './components/NewCVForm/NewCVForm';
+import { NewCVForm } from './components/NewCVForm/NewCVForm';
 
 
 export default class App extends Component {
