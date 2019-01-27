@@ -3,17 +3,15 @@ import { Col, Grid, Row, FormGroup, FormControl, ControlLabel, Checkbox, Radio, 
 import { ContentHeading } from '../ContentHeading/ContentHeading';
 import { FieldGroup } from './FieldGroup';
 import { IconFieldGroup } from './IconFieldGroup';
-import NewExperience from './NewExprience';
+import NewExperience from './NewExperience/NewExprience';
 
 export default class NewCVForm extends Component {
-
-    dislayName = NewCVForm.name;
-    experiencesList = [];
 
     constructor(props, context) {
         super(props, context);
 
         this.state = {
+            numExperiences: 0,
             formControls: {
                 personalInfo: {
                     name: {
@@ -44,10 +42,16 @@ export default class NewCVForm extends Component {
                         value: '',
                         placeHolder: 'Enter blog URL'
                     }
-                }
+                },
+                experiences: [
+
+                ]
             }
         };
     }
+
+    dislayName = NewCVForm.name;
+    experiencesList = [];
 
     changePersonalInfoHandler = (event) => {
         const name = event.target.name;
@@ -89,13 +93,22 @@ export default class NewCVForm extends Component {
     }
 
     addExperience = (e) => {
-        e.preventDefault();
-        console.log('experiences ', this.state.experiences);
-        this.state.experiences.push(<NewExperience />);
-        console.log('experiences ', this.state.experiences);
+        const updatedControls = {
+            ...this.state
+        };
+        updatedControls.numExperiences = this.state.numExperiences + 1;
+        this.setState({
+            numExperiences: updatedControls.numExperiences
+        });
     }
 
     render() {
+        const experiences = [];
+
+        for (var i = 0; i < this.state.numExperiences; i += 1) {
+            experiences.push(<NewExperience key={i} />);
+        };
+
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit}>
                 <Grid>
@@ -190,8 +203,10 @@ export default class NewCVForm extends Component {
                     </Row>
                     <Row>
                         <ContentHeading name="Experience" />
-                        <Button type="submit" onClick={this.addExperience}>Add expereince</Button>
-                        {this.state.experiences}
+                        <Button onClick={this.addExperience}>Add experience</Button>
+                        <br />
+                        <br />
+                        {experiences}
                     </Row>
                     <Button type="submit">Submit</Button>
                 </Grid>

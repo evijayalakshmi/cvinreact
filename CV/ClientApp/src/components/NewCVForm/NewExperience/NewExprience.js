@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import { Col, Grid, Row, FormGroup, FormControl, ControlLabel, Checkbox, Radio, HelpBlock, Button, InputGroup } from 'react-bootstrap';
-import { FieldGroup } from './FieldGroup';
+import { FieldGroup } from '../FieldGroup';
+import './NewExperience.css';
 
 export default class NewExperience extends Component {
 
     constructor(props, context) {
         super(props, context);
-
-        this.state = {
-            jobTitle: '',
-            company: '',
-            location: ''
-        }
     }
 
     render() {
         return (
-            <Grid>
+            <div>
+            <Grid className="experience-style">
                 <Button type="submit">delete expereince</Button>
                 <Row>
                     <Col md={4}>
@@ -47,7 +43,15 @@ export default class NewExperience extends Component {
                         />
                     </Col>
                 </Row>
+                <Row>
+                    <FormGroup controlId="formControlsTextarea">
+                        <ControlLabel>Roles & Responsibilities</ControlLabel>
+                        <FormControl componentClass="textarea" placeholder="textarea" />
+                    </FormGroup>
+                </Row>
             </Grid>
+            <br></br>
+            </div>
         );
     }
 }
