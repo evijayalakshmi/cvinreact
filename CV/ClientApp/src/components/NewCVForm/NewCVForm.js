@@ -1,12 +1,11 @@
 ﻿import React, { Component } from 'react';
-<<<<<<< HEAD
 import { Col, Grid, Row, FormGroup, FormControl, ControlLabel, Checkbox, Radio, HelpBlock, Button, InputGroup } from 'react-bootstrap';
 import { ContentHeading } from '../ContentHeading/ContentHeading';
 import { FieldGroup } from './FieldGroup';
 import { IconFieldGroup } from './IconFieldGroup';
 import NewExperience from './NewExperience/NewExprience';
 
-export default class NewCVForm extends Component {
+export class NewCVForm extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -213,59 +212,5 @@ export default class NewCVForm extends Component {
                 </Grid>
             </form>
         );
-=======
-import { Col, Grid, Row, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
-import { ContentHeading } from './../ContentHeading/ContentHeading';
-
-export class NewCVForm extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleChange = this.handleChange.bind(this);
-
-        this.state = {
-            value: ''
-        };
-    }
-
-    getValidationState = () => {
-        const length = this.state.value.length;
-        if (length > 10) return 'success';
-        else if (length > 5) return 'warning';
-        else if (length > 0) return 'error';
-        return null;
-    }
-
-    handleChange = (e) => {
-        this.setState({ value: e.target.value });
-    }
-
-    render() {
-        return (
-            <form>
-                <Grid>
-                    <Row>
-                        <ContentHeading name="Personal Info" />
-                        <Col md={6}>
-                            <FormGroup
-                                controlId="formBasicText"
-                                validationState={this.getValidationState()}>
-                                <ControlLabel>Name</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.value}
-                                    placeholder="Enter text"
-                                    onChange={this.handleChange}
-                                />
-                                <FormControl.Feedback />
-                                <HelpBlock>Validation is based on string length.</HelpBlock>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                </Grid>
-            </form>
-
-         );
->>>>>>> added daychart for showing day activities
     }
 }
