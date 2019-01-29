@@ -9,9 +9,12 @@ export default class NewExperience extends Component {
         super(props, context);
     }
 
+    deleteExperience = (e) => {
+
+    }
+
     render() {
         return (
-            <div>
             <Grid className="experience-style">
                 <Button type="submit">delete expereince</Button>
                 <Row>
@@ -50,8 +53,6 @@ export default class NewExperience extends Component {
                     </FormGroup>
                 </Row>
             </Grid>
-            <br></br>
-            </div>
         );
     }
 }

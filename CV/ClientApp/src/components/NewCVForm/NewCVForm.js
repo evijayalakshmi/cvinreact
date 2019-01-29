@@ -4,6 +4,7 @@ import { ContentHeading } from '../ContentHeading/ContentHeading';
 import { FieldGroup } from './FieldGroup';
 import { IconFieldGroup } from './IconFieldGroup';
 import NewExperience from './NewExperience/NewExprience';
+import NewAchievement from './NewAchievement/NewAchievement';
 
 export class NewCVForm extends Component {
 
@@ -12,6 +13,7 @@ export class NewCVForm extends Component {
 
         this.state = {
             numExperiences: 0,
+            numAchievements: 0,
             formControls: {
                 personalInfo: {
                     name: {
@@ -41,18 +43,23 @@ export class NewCVForm extends Component {
                     blogURL: {
                         value: '',
                         placeHolder: 'Enter blog URL'
+                    },
+                    LifePhilosophyContent: {
+                        value: '',
+                        placeHolder: 'Write Your Life Philosophy'
                     }
                 },
                 experiences: [
 
                 ]
-            }
-        };
-    }
+            },
+            achievements: [
+
+            ]
+        }
+    };
 
     dislayName = NewCVForm.name;
-    experiencesList = [];
-
     changePersonalInfoHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -72,6 +79,7 @@ export class NewCVForm extends Component {
     }
 
     handleSubmit = (e) => {
+        debugger;
         console.log('state value is ', this.state);
         const formData = {
             personalInfo: {}
@@ -102,12 +110,28 @@ export class NewCVForm extends Component {
         });
     }
 
-    render() {
-        const experiences = [];
+    addAchievement = (e) => {
+        debugger;
+        const updatedControls = {
+            ...this.state
+        };
+        updatedControls.numAchievements = this.state.numAchievements + 1;
+        this.setState({
+            numAchievements: updatedControls.numAchievements
+        });
+    }
 
+    render() {
+
+        const experiences = [];
         for (var i = 0; i < this.state.numExperiences; i += 1) {
             experiences.push(<NewExperience key={i} />);
         };
+
+        const achievements = [];
+        for (var i = 0; i < this.state.numAchievements; i += 1) {
+            achievements.push(<NewAchievement key={i} />);
+        }
 
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit}>
@@ -203,11 +227,70 @@ export class NewCVForm extends Component {
                     </Row>
                     <Row>
                         <ContentHeading name="Experience" />
-                        <Button onClick={this.addExperience}>Add experience</Button>
-                        <br />
-                        <br />
                         {experiences}
+                        <br />
+                        <Button onClick={this.addExperience}>Add experience</Button>
                     </Row>
+                    <Row>
+                        <ContentHeading name="Life Philosophy" />
+                        <FieldGroup
+                            name="LifePhilosophyContent"
+                            componentClass="textarea"
+                            id="formControlsLifePhilosophy"
+                            label="Life Philosophy"
+                            value={this.state.formControls.personalInfo.LifePhilosophyContent.value}
+                            placeholder={this.state.formControls.personalInfo.LifePhilosophyContent.placeHolder}
+                            onChange={this.changePersonalInfoHandler}
+                        />
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col md={6}>
+                            <ContentHeading name="Most Proud Of" />
+                            <Button onClick={this.addAchievement} >Add Your Achievements</Button>
+                            {achievements}
+                        </Col>
+                        <Col md={6}>
+                            <ContentHeading name="Strenghts" />
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col md={6}>
+                            <ContentHeading name="Languages" />
+                            <Col md={6}>
+                                <h4> Select Language </h4>
+                                <FormControl componentClass="select" placeholder="select" className="languagesDropdown">
+                                    <option value="select" active>Select</option>
+                                    <option value="english">English</option>
+                                    <option value="finnish">Finnish</option>
+                                    <option value="swedish">Swedish</option>
+                                </FormControl>
+                            </Col>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <h4> Level </h4>
+                                    <Radio name="radioGroup" inline>
+                                        1
+                                    </Radio>{' '}
+                                    <Radio name="radioGroup" inline>
+                                        2
+                                    </Radio>{' '}
+                                    <Radio name="radioGroup" inline>
+                                        3
+                                    </Radio>{' '}
+                                    <Radio name="radioGroup" inline>
+                                        4
+                                    </Radio>{' '}
+                                    <Radio name="radioGroup" inline>
+                                        5
+                                    </Radio>{' '}
+                                </FormGroup>
+                            </Col>
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
                     <Button type="submit">Submit</Button>
                 </Grid>
             </form>

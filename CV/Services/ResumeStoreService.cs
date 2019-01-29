@@ -10,8 +10,8 @@ namespace cv.Services {
 
         public ResumeStoreService(IConfiguration config) {
             var client = new MongoClient(config.GetConnectionString("resumedb"));
-            var database = client.GetDatabase("resumedb");
-            _resumes = database.GetCollection<ResumeData>("resumes");
+            var database = client.GetDatabase("CV");
+            _resumes = database.GetCollection<ResumeData>("ResumeData");
         }
 
         public ResumeData Create(ResumeData resume) {
