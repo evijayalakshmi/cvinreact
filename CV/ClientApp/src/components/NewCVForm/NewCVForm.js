@@ -12,7 +12,6 @@ export class NewCVForm extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            numExperiences: 0,
             numAchievements: 0,
             formControls: {
                 personalInfo: {
@@ -71,26 +70,25 @@ export class NewCVForm extends Component {
     };
 
     dislayName = NewCVForm.name;
-
     emptyExperience = {
         title: {
             value: '',
-            placeHolder: 'Enter title'
+            placeHolder: 'Enter Title'
         },
         company: {
             value: '',
-            placeHolder: 'Enter company'
+            placeHolder: 'Enter Name of Company'
         },
         location: {
             value: '',
-            placeHolder: 'Enter location'
+            placeHolder: 'Enter the location'
         },
         isCurrentEmployer: false,
         fromDate: '',
         toDate: '',
         rolesAndResponsibilities: {
             value: '',
-            placeHolder: 'Enter roles & responsibilities'
+            placeHolder: 'Enter Your Role'
         }
     }
 
@@ -125,15 +123,6 @@ export class NewCVForm extends Component {
     }
 
     addExperience = (e) => {
-        debugger;
-        const updatedControls = {
-            ...this.state
-        };
-        updatedControls.numExperiences = this.state.numExperiences + 1;
-        this.setState({
-            numExperiences: updatedControls.numExperiences
-        });
-
         const updatedFormControls = {
             ...this.state.formControls
         };
@@ -144,14 +133,6 @@ export class NewCVForm extends Component {
     }
 
     deleteExperience = (i) => {
-        const updatedControls = {
-            ...this.state
-        };
-        updatedControls.numExperiences = this.state.numExperiences - 1;
-        this.setState({
-            numExperiences: updatedControls.numExperiences
-        });
-
         const updatedFormControls = {
             ...this.state.formControls
         };
@@ -196,7 +177,7 @@ export class NewCVForm extends Component {
     render() {
 
         const experiences = [];
-        for (var i = 0; i < this.state.numExperiences; i += 1) {
+        for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
             experiences.push(<NewExperience key={i} experience={this.state.formControls.experience.allExperiences[i]} delete={() => this.deleteExperience(i)} />);
         };
 
@@ -306,8 +287,8 @@ export class NewCVForm extends Component {
                         {experiences}
                         <br />
                         {this.state.formControls.experience.isPreviousExperienceChecked ?
-                        <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button> :
-                        null}
+                            <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button> :
+                            null}
                     </Row>
                     <br />
                     <Row>
