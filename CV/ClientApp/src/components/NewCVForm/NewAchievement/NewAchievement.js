@@ -16,7 +16,6 @@ export default class NewAchievement extends Component {
                             <IconFieldGroup
                                 name="achievement"
                                 id="formControlsachievement"
-                                label="Add Achievement"
                                 placeholder="Enter your achievement"
                                 icon="fa fa-trophy fa-1x"
                                 componentClass="textarea"

@@ -5,12 +5,12 @@ import { FieldGroup } from './FieldGroup';
 import { IconFieldGroup } from './IconFieldGroup';
 import NewExperience from './NewExperience/NewExprience';
 import NewAchievement from './NewAchievement/NewAchievement';
+import './NewCVForm.css';
 
 export class NewCVForm extends Component {
 
     constructor(props, context) {
         super(props, context);
-
         this.state = {
             numExperiences: 0,
             numAchievements: 0,
@@ -43,23 +43,57 @@ export class NewCVForm extends Component {
                     blogURL: {
                         value: '',
                         placeHolder: 'Enter blog URL'
-                    },
-                    LifePhilosophyContent: {
-                        value: '',
-                        placeHolder: 'Write Your Life Philosophy'
                     }
                 },
-                experiences: [
+                experience: {
+                    isPreviousExperienceChecked: false,
+                    allExperiences: []
+                },
+                achievements: [
 
-                ]
-            },
-            achievements: [
-
-            ]
+                ],
+                lifePhilosophyContent: {
+                    value: '',
+                    placeHolder: 'Write Your Life Philosophy'
+                },
+                education: [{
+                    educationUniversity: {
+                        value: '',
+                        placeHolder: 'UNIVERSITY'
+                    },
+                    educationStream: {
+                        value: '',
+                        placeHolder: 'STREAM OF GRADUATION'
+                    }
+                }]
+            }
         }
     };
 
     dislayName = NewCVForm.name;
+
+    emptyExperience = {
+        title: {
+            value: '',
+            placeHolder: 'Enter title'
+        },
+        company: {
+            value: '',
+            placeHolder: 'Enter company'
+        },
+        location: {
+            value: '',
+            placeHolder: 'Enter location'
+        },
+        isCurrentEmployer: false,
+        fromDate: '',
+        toDate: '',
+        rolesAndResponsibilities: {
+            value: '',
+            placeHolder: 'Enter roles & responsibilities'
+        }
+    }
+
     changePersonalInfoHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -78,8 +112,67 @@ export class NewCVForm extends Component {
         });
     }
 
-    handleSubmit = (e) => {
+    handlePreviousExperienceChecked = (e) => {
+        const updatedControls = {
+            ...this.state.formControls
+        };
+
+        updatedControls.experience.isPreviousExperienceChecked = !updatedControls.experience.isPreviousExperienceChecked;
+        //this.setState({ isExpChecked: !this.state.isExpChecked });
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    addExperience = (e) => {
         debugger;
+        const updatedControls = {
+            ...this.state
+        };
+        updatedControls.numExperiences = this.state.numExperiences + 1;
+        this.setState({
+            numExperiences: updatedControls.numExperiences
+        });
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.experience.allExperiences.push(this.emptyExperience);
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
+    deleteExperience = (i) => {
+        const updatedControls = {
+            ...this.state
+        };
+        updatedControls.numExperiences = this.state.numExperiences - 1;
+        this.setState({
+            numExperiences: updatedControls.numExperiences
+        });
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.experience.allExperiences.splice(i, 1);
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
+    addAchievement = (e) => {
+        debugger;
+        const updatedControls = {
+            ...this.state
+        };
+        updatedControls.numAchievements = this.state.numAchievements + 1;
+        this.setState({
+            numAchievements: updatedControls.numAchievements
+        });
+    }
+
+    handleSubmit = (e) => {
         console.log('state value is ', this.state);
         const formData = {
             personalInfo: {}
@@ -100,39 +193,17 @@ export class NewCVForm extends Component {
         e.preventDefault();
     }
 
-    addExperience = (e) => {
-        const updatedControls = {
-            ...this.state
-        };
-        updatedControls.numExperiences = this.state.numExperiences + 1;
-        this.setState({
-            numExperiences: updatedControls.numExperiences
-        });
-    }
-
-    addAchievement = (e) => {
-        debugger;
-        const updatedControls = {
-            ...this.state
-        };
-        updatedControls.numAchievements = this.state.numAchievements + 1;
-        this.setState({
-            numAchievements: updatedControls.numAchievements
-        });
-    }
-
     render() {
 
         const experiences = [];
         for (var i = 0; i < this.state.numExperiences; i += 1) {
-            experiences.push(<NewExperience key={i} />);
+            experiences.push(<NewExperience key={i} experience={this.state.formControls.experience.allExperiences[i]} delete={() => this.deleteExperience(i)} />);
         };
 
         const achievements = [];
         for (var i = 0; i < this.state.numAchievements; i += 1) {
             achievements.push(<NewAchievement key={i} />);
         }
-
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit}>
                 <Grid>
@@ -227,73 +298,105 @@ export class NewCVForm extends Component {
                     </Row>
                     <Row>
                         <ContentHeading name="Experience" />
+                        <FormGroup>
+                            <Checkbox inline checked={this.state.formControls.experience.isPreviousExperienceChecked} onChange={this.handlePreviousExperienceChecked}>
+                                <h4 style={{ 'margin-top': '0px', 'margin-bottom': '0px' }}> Any Previous Experiences?</h4>
+                            </Checkbox>
+                        </FormGroup>
                         {experiences}
                         <br />
-                        <Button onClick={this.addExperience}>Add experience</Button>
-                    </Row>
-                    <Row>
-                        <ContentHeading name="Life Philosophy" />
-                        <FieldGroup
-                            name="LifePhilosophyContent"
-                            componentClass="textarea"
-                            id="formControlsLifePhilosophy"
-                            label="Life Philosophy"
-                            value={this.state.formControls.personalInfo.LifePhilosophyContent.value}
-                            placeholder={this.state.formControls.personalInfo.LifePhilosophyContent.placeHolder}
-                            onChange={this.changePersonalInfoHandler}
-                        />
+                        {this.state.formControls.experience.isPreviousExperienceChecked ?
+                        <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button> :
+                        null}
                     </Row>
                     <br />
                     <Row>
                         <Col md={6}>
-                            <ContentHeading name="Most Proud Of" />
-                            <Button onClick={this.addAchievement} >Add Your Achievements</Button>
-                            {achievements}
+                            <ContentHeading name="Education" />
+                            <Col md={6} style={{ 'padding-left': '0px' }}>
+                                <FieldGroup
+                                    name="educationStream"
+                                    id="formControlseducationStream"
+                                    type="text"
+                                    value={this.state.formControls.education[0].educationStream.value}
+                                    placeholder={this.state.formControls.education[0].educationStream.placeHolder}
+                                    onChange={this.changePersonalInfoHandler}
+                                />
+                            </Col>
+                            <Col md={6}>
+                                <FieldGroup
+                                    name="educationUniversity"
+                                    id="formControlseducationUniversity"
+                                    type="text"
+                                    value={this.state.formControls.education[0].educationUniversity.value}
+                                    placeholder={this.state.formControls.education[0].educationUniversity.placeHolder}
+                                    onChange={this.changePersonalInfoHandler}
+                                />
+                            </Col>
+
                         </Col>
-                        <Col md={6}>
-                            <ContentHeading name="Strenghts" />
-                        </Col>
-                    </Row>
-                    <br />
-                    <Row>
-                        <Col md={6}>
+
+                        <Col md={6} style={{ 'padding-right': '0px' }}>
                             <ContentHeading name="Languages" />
                             <Col md={6}>
-                                <h4> Select Language </h4>
                                 <FormControl componentClass="select" placeholder="select" className="languagesDropdown">
-                                    <option value="select" active>Select</option>
+                                    <option value="select" active>SELECT LANGUAGE</option>
                                     <option value="english">English</option>
                                     <option value="finnish">Finnish</option>
                                     <option value="swedish">Swedish</option>
                                 </FormControl>
                             </Col>
                             <Col md={6}>
-                                <FormGroup>
-                                    <h4> Level </h4>
-                                    <Radio name="radioGroup" inline>
-                                        1
+                                <ControlLabel> Select Level </ControlLabel>
+                                <br />
+                                <Radio name="radioGroup" inline>
+                                    1
                                     </Radio>{' '}
-                                    <Radio name="radioGroup" inline>
-                                        2
+                                <Radio name="radioGroup" inline>
+                                    2
                                     </Radio>{' '}
-                                    <Radio name="radioGroup" inline>
-                                        3
+                                <Radio name="radioGroup" inline>
+                                    3
                                     </Radio>{' '}
-                                    <Radio name="radioGroup" inline>
-                                        4
+                                <Radio name="radioGroup" inline>
+                                    4
                                     </Radio>{' '}
-                                    <Radio name="radioGroup" inline>
-                                        5
+                                <Radio name="radioGroup" inline>
+                                    5
                                     </Radio>{' '}
-                                </FormGroup>
                             </Col>
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <ContentHeading name="Life Philosophy" />
+                        <FieldGroup
+                            name="LifePhilosophyContent"
+                            componentClass="textarea"
+                            id="formControlsLifePhilosophy"
+                            value={this.state.formControls.lifePhilosophyContent.value}
+                            placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
+                            onChange={this.changePersonalInfoHandler}
+                        />
+                    </Row>
+                    <br />
+
+                    <br />
+                    <Row>
+                        <Col md={6} style={{ 'padding-left': '0px' }}>
+                            <ContentHeading name="Most Proud Of" />
+                            <Button onClick={this.addAchievement} >Add Your Achievements</Button>
+                            {achievements}
+                        </Col>
+                        <Col md={6} style={{ 'padding-right': '0px' }}>
+                            <ContentHeading name="Strenghts" />
                         </Col>
                     </Row>
                     <br />
                     <br />
                     <Button type="submit">Submit</Button>
                 </Grid>
-            </form>
+            </form >
         );
     }
 }
