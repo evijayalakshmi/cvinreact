@@ -10,11 +10,7 @@ export default class NewExperience extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            dateValue: new Date().toISOString(),
-            isCurrentEmpChecked: false,
-            handleChecked: this.handleChecked.bind(this)
-        };
+       
     }
 
     handleChecked = (e) => {
@@ -29,39 +25,46 @@ export default class NewExperience extends Component {
                     <Row>
                         <Col md={4}>
                             <FieldGroup
+                                name="title"
                                 id="formControlsTitle"
                                 type="text"
                                 label="Title"
                                 value={this.props.experience.title.value}
                                 placeholder={this.props.experience.title.placeHolder}
                                 required="true"
+                                onChange={(e) => this.props.valueChange(e)}
                             />
                         </Col>
                         <Col md={4}>
                             <FieldGroup
+                                name="company"
                                 id="formControlsCompany"
                                 type="text"
                                 label="Company"
                                 value={this.props.experience.company.value}
                                 placeholder={this.props.experience.company.placeHolder}
                                 required="true"
+                                onChange={(e) => this.props.valueChange(e)}
                             />
                         </Col>
                         <Col md={4}>
                             <FieldGroup
+                                name="location"
                                 id="formControlsLocation"
                                 type="text"
                                 label="Location"
                                 value={this.props.experience.location.value}
                                 placeholder={this.props.experience.location.placeHolder}
                                 required="true"
+                                onChange={(e) => this.props.valueChange(e)}
                             />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={6}>
                             <FormGroup>
-                                <Checkbox inline checked={this.state.isCurrentEmpChecked} onChange={this.handleChecked}>
+                                <Checkbox inline checked={this.props.experience.isCurrentEmployer}
+                                    onChange={this.props.handleCurrentEmployerCheck}>
                                     <h4 style={{ 'margin-top': '0px', 'margin-bottom': '0px' }}> Current Employer? </h4>
                                 </Checkbox>
                             </FormGroup>
@@ -73,14 +76,15 @@ export default class NewExperience extends Component {
                                     <ControlLabel>From</ControlLabel>
                                     <DatePicker
                                         id="ex-fromDatepicker"
-                                        value={this.state.value}
-                                        onChange={this.handleChange} />
+                                        value={this.props.experience.fromDate}
+                                        />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
                                     <ControlLabel>To</ControlLabel>
-                                    <DatePicker id="ex-toDatepicker" value={this.state.value} onChange={this.handleChange} disabled={this.state.isCurrentEmpChecked} />
+                                    <DatePicker id="ex-toDatepicker" value={this.props.experience.toDate}
+                                        disabled={this.props.experience.isCurrentEmployer} />
                                 </FormGroup>
                             </Col>
                         </Col>
@@ -90,8 +94,10 @@ export default class NewExperience extends Component {
                             <FormGroup controlId="formControlsTextarea">
                                 <ControlLabel>Roles & Responsibilities</ControlLabel>
                                 <FormControl
+                                    name="rolesAndResponsibilities"
                                     componentClass="textarea"
-                                    placeholder="Roles & Responsibilities" />
+                                    placeholder="Roles & Responsibilities"
+                                    onChange={(e) => this.props.valueChange(e)}/>
                             </FormGroup>
                         </Col>
                         <Col md={3} xsOffset={1}>

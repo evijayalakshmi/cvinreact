@@ -114,6 +114,40 @@ export class NewCVForm extends Component {
         });
     }
 
+    changeExperienceHandler = (event, i) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.experience.allExperiences[i][name]
+        };
+        updatedFormElement.value = value;
+        updatedControls.experience.allExperiences[i][name] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    changeCurrentEmployerCheck = (i) => {
+        debugger;
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.experience.allExperiences[i]
+        };
+        updatedFormElement.isCurrentEmployer = !updatedFormElement.isCurrentEmployer;
+        updatedControls.experience.allExperiences[i] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
     handlePreviousExperienceChecked = (e) => {
         const updatedControls = {
             ...this.state.formControls
@@ -201,7 +235,10 @@ export class NewCVForm extends Component {
 
         const experiences = [];
         for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
-            experiences.push(<NewExperience key={i} experience={this.state.formControls.experience.allExperiences[i]} delete={() => this.deleteExperience(i)} />);
+            experiences.push(<NewExperience key={i} experience={this.state.formControls.experience.allExperiences[i]}
+                handleCurrentEmployerCheck={() => this.changeCurrentEmployerCheck(i)}
+                valueChange={(e) => this.changeExperienceHandler(e, i)}
+                delete={() => this.deleteExperience(i)} />);
         };
 
         const educations = [];
