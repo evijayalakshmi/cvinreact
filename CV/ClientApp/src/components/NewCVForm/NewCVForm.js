@@ -6,6 +6,7 @@ import { IconFieldGroup } from './IconFieldGroup';
 import NewExperience from './NewExperience/NewExprience';
 import NewAchievement from './NewAchievement/NewAchievement';
 import './NewCVForm.css';
+import { NewEducation } from './NewEducation/NewEducation';
 
 export class NewCVForm extends Component {
 
@@ -55,16 +56,7 @@ export class NewCVForm extends Component {
                     value: '',
                     placeHolder: 'Write Your Life Philosophy'
                 },
-                education: [{
-                    educationUniversity: {
-                        value: '',
-                        placeHolder: 'UNIVERSITY'
-                    },
-                    educationStream: {
-                        value: '',
-                        placeHolder: 'STREAM OF GRADUATION'
-                    }
-                }]
+                education: []
             }
         }
     };
@@ -90,6 +82,18 @@ export class NewCVForm extends Component {
             value: '',
             placeHolder: 'Enter Your Role'
         }
+    }
+
+    emptyEducation = {
+        educationUniversity: {
+            value: '',
+            placeHolder: 'UNIVERSITY'
+        },
+        educationStream: {
+            value: '',
+            placeHolder: 'STREAM OF GRADUATION'
+        }
+
     }
 
     changePersonalInfoHandler = (event) => {
@@ -142,6 +146,16 @@ export class NewCVForm extends Component {
         });
     }
 
+    addEducation = (e) => {
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.education.push(this.emptyEducation);
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
     addAchievement = (e) => {
         debugger;
         const updatedControls = {
@@ -179,6 +193,11 @@ export class NewCVForm extends Component {
         const experiences = [];
         for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
             experiences.push(<NewExperience key={i} experience={this.state.formControls.experience.allExperiences[i]} delete={() => this.deleteExperience(i)} />);
+        };
+
+        const educations = [];
+        for (var i = 0; i < this.state.formControls.education.length; i += 1) {
+            educations.push(<NewEducation key={i} education={this.state.formControls.education[i]} />);
         };
 
         const achievements = [];
@@ -294,27 +313,8 @@ export class NewCVForm extends Component {
                     <Row>
                         <Col md={6}>
                             <ContentHeading name="Education" />
-                            <Col md={6} style={{ 'padding-left': '0px' }}>
-                                <FieldGroup
-                                    name="educationStream"
-                                    id="formControlseducationStream"
-                                    type="text"
-                                    value={this.state.formControls.education[0].educationStream.value}
-                                    placeholder={this.state.formControls.education[0].educationStream.placeHolder}
-                                    onChange={this.changePersonalInfoHandler}
-                                />
-                            </Col>
-                            <Col md={6}>
-                                <FieldGroup
-                                    name="educationUniversity"
-                                    id="formControlseducationUniversity"
-                                    type="text"
-                                    value={this.state.formControls.education[0].educationUniversity.value}
-                                    placeholder={this.state.formControls.education[0].educationUniversity.placeHolder}
-                                    onChange={this.changePersonalInfoHandler}
-                                />
-                            </Col>
-
+                            <Button id="addEducationBtn" onClick={this.addEducation}>Add Education </Button>
+                            <NewEducation key={i} education={this.state.formControls.education[i]} />
                         </Col>
 
                         <Col md={6} style={{ 'padding-right': '0px' }}>
