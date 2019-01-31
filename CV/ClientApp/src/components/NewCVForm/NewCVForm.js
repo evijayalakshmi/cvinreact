@@ -146,6 +146,15 @@ export class NewCVForm extends Component {
         });
     }
 
+    deleteEducation = (i) => {
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.education.splice(i, 1);
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
     addEducation = (e) => {
         const updatedFormControls = {
             ...this.state.formControls
@@ -197,7 +206,7 @@ export class NewCVForm extends Component {
 
         const educations = [];
         for (var i = 0; i < this.state.formControls.education.length; i += 1) {
-            educations.push(<NewEducation key={i} education={this.state.formControls.education[i]} />);
+            educations.push(<NewEducation key={i} education={this.state.formControls.education[i]} delete={() => this.deleteEducation(i)} />);
         };
 
         const achievements = [];
@@ -328,8 +337,6 @@ export class NewCVForm extends Component {
                                 </FormControl>
                             </Col>
                             <Col md={6}>
-                                <ControlLabel> Select Level </ControlLabel>
-                                <br />
                                 <Radio name="radioGroup" inline>
                                     1
                                     </Radio>{' '}
