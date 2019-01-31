@@ -314,7 +314,7 @@ export class NewCVForm extends Component {
                         <Col md={6}>
                             <ContentHeading name="Education" />
                             <Button id="addEducationBtn" onClick={this.addEducation}>Add Education </Button>
-                            <NewEducation key={i} education={this.state.formControls.education[i]} />
+                            {educations}
                         </Col>
 
                         <Col md={6} style={{ 'padding-right': '0px' }}>
