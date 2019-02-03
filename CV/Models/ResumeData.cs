@@ -14,6 +14,9 @@ namespace cv.Models {
 
         [BsonElement("Personal Info")]
         public PersonalInfo PersonalInfo { get; set; }
+
+        [BsonElement("Experiences")]
+        public IEnumerable<Experience> Experiences { get; set; }
     }
 
     public class PersonalInfo {
@@ -29,6 +32,21 @@ namespace cv.Models {
 
         [BsonElement("Email")]
         public string EMail { get; set; }
+    }
+
+    public class Experience {
+
+        [BsonElement("Title")]
+        public string Title { get; set; }
+
+        [BsonElement("Company")]
+        public string Company { get; set; }
+
+        [BsonElement("Location")]
+        public string Location { get; set; }
+
+        [BsonElement("RolesAndResponsibilities")]
+        public string RolesAndResponsibilities { get; set; }
     }
 
 }
