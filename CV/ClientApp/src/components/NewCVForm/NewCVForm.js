@@ -7,6 +7,7 @@ import NewExperience from './NewExperience/NewExprience';
 import NewAchievement from './NewAchievement/NewAchievement';
 import './NewCVForm.css';
 import { NewEducation } from './NewEducation/NewEducation';
+import { NewLanguage } from './NewLanguage/NewLanguage';
 
 export class NewCVForm extends Component {
 
@@ -49,52 +50,22 @@ export class NewCVForm extends Component {
                     isPreviousExperienceChecked: false,
                     allExperiences: []
                 },
-                achievements: [
-
-                ],
+                education: [],
+                language: [],
+                achievements: [],
                 lifePhilosophyContent: {
                     value: '',
                     placeHolder: 'Write Your Life Philosophy'
                 },
-                education: []
+                strength: {
+                    value: '',
+                    placeHolder: 'Enter strengths with comma separated values'
+                }
             }
         }
     };
 
     dislayName = NewCVForm.name;
-    emptyExperience = {
-        title: {
-            value: '',
-            placeHolder: 'Enter Title'
-        },
-        company: {
-            value: '',
-            placeHolder: 'Enter Name of Company'
-        },
-        location: {
-            value: '',
-            placeHolder: 'Enter the location'
-        },
-        isCurrentEmployer: false,
-        fromDate: '',
-        toDate: '',
-        rolesAndResponsibilities: {
-            value: '',
-            placeHolder: 'Enter Your Role'
-        }
-    }
-
-    emptyEducation = {
-        educationUniversity: {
-            value: '',
-            placeHolder: 'UNIVERSITY'
-        },
-        educationStream: {
-            value: '',
-            placeHolder: 'STREAM OF GRADUATION'
-        }
-
-    }
 
     changePersonalInfoHandler = (event) => {
         const name = event.target.name;
@@ -114,7 +85,41 @@ export class NewCVForm extends Component {
         });
     }
 
+    addExperience = (e) => {
+        e.preventDefault();
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.experience.allExperiences.push({
+            title: {
+                value: '',
+                placeHolder: 'Enter Title'
+            },
+            company: {
+                value: '',
+                placeHolder: 'Enter Name of Company'
+            },
+            location: {
+                value: '',
+                placeHolder: 'Enter the location'
+            },
+            isCurrentEmployer: false,
+            fromDate: '',
+            toDate: '',
+            rolesAndResponsibilities: {
+                value: '',
+                placeHolder: 'Enter Your Role'
+            }
+        });
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
     changeExperienceHandler = (event, i) => {
+        event.preventDefault();
+
         const name = event.target.name;
         const value = event.target.value;
 
@@ -133,7 +138,6 @@ export class NewCVForm extends Component {
     }
 
     changeCurrentEmployerCheck = (i) => {
-        debugger;
         const updatedControls = {
             ...this.state.formControls
         };
@@ -149,28 +153,20 @@ export class NewCVForm extends Component {
     }
 
     handlePreviousExperienceChecked = (e) => {
+        e.preventDefault();
+
         const updatedControls = {
             ...this.state.formControls
         };
 
         updatedControls.experience.isPreviousExperienceChecked = !updatedControls.experience.isPreviousExperienceChecked;
-        //this.setState({ isExpChecked: !this.state.isExpChecked });
         this.setState({
             formControls: updatedControls
         });
     }
 
-    addExperience = (e) => {
-        const updatedFormControls = {
-            ...this.state.formControls
-        };
-        updatedFormControls.experience.allExperiences.push(this.emptyExperience);
-        this.setState({
-            formControls: updatedFormControls
-        });
-    }
-
-    deleteExperience = (i) => {
+    deleteExperience = (e, i) => {
+        e.preventDefault();
         const updatedFormControls = {
             ...this.state.formControls
         };
@@ -180,7 +176,50 @@ export class NewCVForm extends Component {
         });
     }
 
-    deleteEducation = (i) => {
+    addEducation = (e) => {
+        e.preventDefault();
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.education.push({
+            educationStream: {
+                value: '',
+                placeHolder: 'STREAM OF GRADUATION'
+            },
+            educationUniversity: {
+                value: '',
+                placeHolder: 'UNIVERSITY'
+            }
+        });
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
+    changeEducationHandler = (event, i) => {
+        event.preventDefault();
+
+        const name = event.target.name;
+        const value = event.target.value;
+
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.education[i][name]
+        };
+        updatedFormElement.value = value;
+        updatedControls.education[i][name] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    deleteEducation = (e, i) => {
+        e.preventDefault();
+
         const updatedFormControls = {
             ...this.state.formControls
         };
@@ -189,18 +228,10 @@ export class NewCVForm extends Component {
             formControls: updatedFormControls
         });
     }
-    addEducation = (e) => {
-        const updatedFormControls = {
-            ...this.state.formControls
-        };
-        updatedFormControls.education.push(this.emptyEducation);
-        this.setState({
-            formControls: updatedFormControls
-        });
-    }
 
     addAchievement = (e) => {
-        debugger;
+        e.preventDefault();
+
         const updatedControls = {
             ...this.state
         };
@@ -210,14 +241,124 @@ export class NewCVForm extends Component {
         });
     }
 
+    changeAchievementHandler = (event, i) => {
+        event.preventDefault();
+
+        const name = event.target.name;
+        const value = event.target.value;
+
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.achievement[i][name]
+        };
+        updatedFormElement.value = value;
+        updatedControls.achievement[i][name] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    deleteAchievemnt = (e, i) => {
+        e.preventDefault();
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.achievement.splice(i, 1);
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
+    changeLifePhilosophyHandler = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        updatedControls.lifePhilosophyContent.value = value;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    addLanguage = (e) => {
+        e.preventDefault();
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.language.push({
+            language: '',
+            level: 0
+        });
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
+    changeLanguageHandler = (event, i) => {
+        event.preventDefault();
+
+        const name = event.target.name;
+        const value = event.target.value;
+
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.language[i][name]
+        };
+        updatedFormElement.value = value;
+        updatedControls.language[i][name] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    deleteLanguage = (e, i) => {
+        e.preventDefault();
+
+        const updatedFormControls = {
+            ...this.state.formControls
+        };
+        updatedFormControls.language.splice(i, 1);
+        this.setState({
+            formControls: updatedFormControls
+        });
+    }
+
     handleSubmit = (e) => {
         console.log('state value is ', this.state);
         const formData = {
-            personalInfo: {}
+            personalInfo: {},
+            experiences: [],
         };
+
+        // personal info
         for (let formElementId in this.state.formControls.personalInfo) {
             formData.personalInfo[formElementId] = this.state.formControls.personalInfo[formElementId].value;
         }
+
+        // Experience
+        for(var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
+            var experience = this.state.formControls.experience.allExperiences[i];
+            formData.experiences.push({});
+            for (let formElementId in experience) {
+                formData.experiences[i][formElementId] = this.state.formControls.experience.allExperiences[i][formElementId].value;
+            }
+        }
+
+        // Education
+        // for (let formElementId in this.state.formControls.education) {
+        //     formData.personalInfo[formElementId] = this.state.formControls.personalInfo[formElementId].value;
+        // }
 
         console.log(formData);
         fetch('api/ResumeData/SaveToMongoDB', {
@@ -232,24 +373,51 @@ export class NewCVForm extends Component {
     }
 
     render() {
-
         const experiences = [];
         for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
-            experiences.push(<NewExperience key={i} experience={this.state.formControls.experience.allExperiences[i]}
-                handleCurrentEmployerCheck={() => this.changeCurrentEmployerCheck(i)}
-                valueChange={(e) => this.changeExperienceHandler(e, i)}
-                delete={() => this.deleteExperience(i)} />);
+            experiences.push(<NewExperience
+                key={i}
+                index={i}
+                innerRef={React.createRef()}
+                experience={this.state.formControls.experience.allExperiences[i]}
+                handleCurrentEmployerCheck={(idx) => this.changeCurrentEmployerCheck(idx)}
+                valueChange={(e, idx) => this.changeExperienceHandler(e, idx)}
+                delete={(e, idx) => this.deleteExperience(e, idx)} />);
         };
 
         const educations = [];
         for (var i = 0; i < this.state.formControls.education.length; i += 1) {
-            educations.push(<NewEducation key={i} education={this.state.formControls.education[i]} delete={() => this.deleteEducation(i)} />);
+            educations.push(<NewEducation
+                key={i}
+                index={i}
+                innerRef={React.createRef()}
+                education={this.state.formControls.education[i]}
+                valueChange={(e, idx) => this.changeEducationHandler(e, idx)}
+                delete={(e, idx) => this.deleteEducation(e, idx)} />);
         };
 
         const achievements = [];
-        for (var i = 0; i < this.state.numAchievements; i += 1) {
-            achievements.push(<NewAchievement key={i} />);
+        for (var i = 0; i < this.state.formControls.achievements.length; i += 1) {
+            achievements.push(<NewAchievement
+                key={i}
+                index={i}
+                innerRef={React.createRef()}
+                achievement={this.state.formControls.achievement[i]}
+                valueChange={(e, idx) => this.changeAchievementHandler(e, idx)}
+                delete={(e, idx) => this.deleteAchievemnt(e, idx)} />);
         }
+
+        const languages = [];
+        for (var i = 0; i < this.state.formControls.language.length; i += 1) {
+            languages.push(<NewLanguage
+                key={i}
+                index={i}
+                innerRef={React.createRef()}
+                language={this.state.formControls.language[i]}
+                valueChange={(e, idx) => this.changeLanguageHandler(e, idx)}
+                delete={(e, idx) => this.deleteLanguage(e, idx)} />);
+        }
+
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit}>
                 <Grid>
@@ -359,37 +527,14 @@ export class NewCVForm extends Component {
                     <Row>
                         <Col md={6}>
                             <ContentHeading name="Education" />
-                            <Button id="addEducationBtn" onClick={this.addEducation}>Add Education </Button>
+                            <Button id="addEducationBtn" onClick={this.addEducation}>Add Education</Button>
                             {educations}
                         </Col>
 
-                        <Col md={6} style={{ 'padding-right': '0px' }}>
+                        <Col md={6}>
                             <ContentHeading name="Languages" />
-                            <Col md={6}>
-                                <FormControl componentClass="select" placeholder="select" className="languagesDropdown">
-                                    <option value="select" active>SELECT LANGUAGE</option>
-                                    <option value="english">English</option>
-                                    <option value="finnish">Finnish</option>
-                                    <option value="swedish">Swedish</option>
-                                </FormControl>
-                            </Col>
-                            <Col md={6}>
-                                <Radio name="radioGroup" inline>
-                                    1
-                                    </Radio>{' '}
-                                <Radio name="radioGroup" inline>
-                                    2
-                                    </Radio>{' '}
-                                <Radio name="radioGroup" inline>
-                                    3
-                                    </Radio>{' '}
-                                <Radio name="radioGroup" inline>
-                                    4
-                                    </Radio>{' '}
-                                <Radio name="radioGroup" inline>
-                                    5
-                                    </Radio>{' '}
-                            </Col>
+                            <Button id="addLanguageBtn" onClick={this.addLanguage}>Add language</Button>
+                            {languages}
                         </Col>
                     </Row>
                     <br />
@@ -401,20 +546,23 @@ export class NewCVForm extends Component {
                             id="formControlsLifePhilosophy"
                             value={this.state.formControls.lifePhilosophyContent.value}
                             placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
-                            onChange={this.changePersonalInfoHandler}
+                            onChange={this.changeLifePhilosophyHandler}
                         />
                     </Row>
                     <br />
-
-                    <br />
                     <Row>
-                        <Col md={6} style={{ 'padding-left': '0px' }}>
+                        <Col md={6}>
                             <ContentHeading name="Most Proud Of" />
                             <Button onClick={this.addAchievement} >Add Your Achievements</Button>
                             {achievements}
                         </Col>
-                        <Col md={6} style={{ 'padding-right': '0px' }}>
-                            <ContentHeading name="Strenghts" />
+                        <Col md={6}>
+                            <ContentHeading name="Strengths" />
+                            <FormControl
+                                name="strength"
+                                componentClass="textarea"
+                                value={this.state.formControls.strength.value}
+                                placeholder={this.state.formControls.strength.placeHolder} />
                         </Col>
                     </Row>
                     <br />

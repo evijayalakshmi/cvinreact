@@ -10,7 +10,7 @@ export default class NewExperience extends Component {
 
     constructor(props, context) {
         super(props, context);
-       
+
     }
 
     handleChecked = (e) => {
@@ -21,7 +21,7 @@ export default class NewExperience extends Component {
     render() {
         return (
             <div>
-                <Grid className="experience-style">
+                <Grid className="experience-style" ref={this.props.innerRef}>
                     <Row>
                         <Col md={4}>
                             <FieldGroup
@@ -32,7 +32,7 @@ export default class NewExperience extends Component {
                                 value={this.props.experience.title.value}
                                 placeholder={this.props.experience.title.placeHolder}
                                 required="true"
-                                onChange={(e) => this.props.valueChange(e)}
+                                onChange={(e) => this.props.valueChange(e, this.props.index)}
                             />
                         </Col>
                         <Col md={4}>
@@ -44,7 +44,7 @@ export default class NewExperience extends Component {
                                 value={this.props.experience.company.value}
                                 placeholder={this.props.experience.company.placeHolder}
                                 required="true"
-                                onChange={(e) => this.props.valueChange(e)}
+                                onChange={(e) => this.props.valueChange(e, this.props.index)}
                             />
                         </Col>
                         <Col md={4}>
@@ -56,7 +56,7 @@ export default class NewExperience extends Component {
                                 value={this.props.experience.location.value}
                                 placeholder={this.props.experience.location.placeHolder}
                                 required="true"
-                                onChange={(e) => this.props.valueChange(e)}
+                                onChange={(e) => this.props.valueChange(e, this.props.index)}
                             />
                         </Col>
                     </Row>
@@ -64,7 +64,7 @@ export default class NewExperience extends Component {
                         <Col md={6}>
                             <FormGroup>
                                 <Checkbox inline checked={this.props.experience.isCurrentEmployer}
-                                    onChange={this.props.handleCurrentEmployerCheck}>
+                                    onChange={() => this.props.handleCurrentEmployerCheck(this.props.index)}>
                                     <h4 style={{ 'margin-top': '0px', 'margin-bottom': '0px' }}> Current Employer? </h4>
                                 </Checkbox>
                             </FormGroup>
@@ -83,7 +83,8 @@ export default class NewExperience extends Component {
                             <Col md={6}>
                                 <FormGroup>
                                     <ControlLabel>To</ControlLabel>
-                                    <DatePicker id="ex-toDatepicker" value={this.props.experience.toDate}
+                                    <DatePicker id="ex-toDatepicker"
+                                        value={this.props.experience.toDate}
                                         disabled={this.props.experience.isCurrentEmployer} />
                                 </FormGroup>
                             </Col>
@@ -97,13 +98,11 @@ export default class NewExperience extends Component {
                                     name="rolesAndResponsibilities"
                                     componentClass="textarea"
                                     placeholder="Roles & Responsibilities"
-                                    onChange={(e) => this.props.valueChange(e)}/>
+                                    onChange={(e) => this.props.valueChange(e, this.props.index)}/>
                             </FormGroup>
                         </Col>
                         <Col md={3} xsOffset={1}>
-                            <label> Delete Experience</label>
-                            <br />
-                            <Button type="submit" onClick={this.props.delete}>Delete Experience</Button>
+                            <Button type="submit" onClick={(e) => this.props.delete(e, this.props.index)}>Delete Experience</Button>
                         </Col>
                     </Row>
                 </Grid>

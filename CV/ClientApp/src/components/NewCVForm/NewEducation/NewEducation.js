@@ -10,26 +10,30 @@ export class NewEducation extends Component {
 
     render() {
         return (
-            <Row>
-                <Col md={6} style={{ 'padding-left': '0px' }}>
+            <Row ref={this.props.innerRef}>
+                <Col md={5} style={{ 'padding-left': '0px' }}>
                     <FieldGroup
                         name="educationStream"
                         id="formControlseducationStream"
                         type="text"
                         value={this.props.education.educationStream.value}
                         placeholder={this.props.education.educationStream.placeHolder}
-                        onChange={this.changePersonalInfoHandler}
+                        onChange={(e) => this.props.valueChange(e, this.props.index)}
+                        required="true"
                     />
                 </Col>
-                <Col md={6}>
+                <Col md={5}>
                     <FieldGroup
                         name="educationUniversity"
                         id="formControlseducationUniversity"
                         type="text"
                         value={this.props.education.educationUniversity.value}
                         placeholder={this.props.education.educationUniversity.placeHolder}
-                        onChange={this.changePersonalInfoHandler}
+                        onChange={(e) => this.props.valueChange(e, this.props.index)}
                     />
+                </Col>
+                <Col md={2}>
+                    <Button type="submit" onClick={(e) => this.props.delete(e, this.props.index)}><i class="fa fa-times"></i></Button>
                 </Col>
             </Row>
         )
