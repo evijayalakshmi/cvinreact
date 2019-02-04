@@ -17,6 +17,22 @@ namespace cv.Models {
 
         [BsonElement("Experiences")]
         public IEnumerable<Experience> Experiences { get; set; }
+
+        [BsonElement("Educations")]
+        public IEnumerable<Education> Educations { get; set; }
+
+        [BsonElement("Languages")]
+        public IEnumerable<Language> Languages { get; set; }
+
+        [BsonElement("LifePhilosophy")]
+        public string LifePhilosophy { get; set; }
+
+        [BsonElement("Achievements")]
+        public IEnumerable<string> Achievements { get; set; }
+
+        [BsonElement("Strengths")]
+        public IEnumerable<string> Strengths { get; set; }
+
     }
 
     public class PersonalInfo {
@@ -47,6 +63,22 @@ namespace cv.Models {
 
         [BsonElement("RolesAndResponsibilities")]
         public string RolesAndResponsibilities { get; set; }
+    }
+
+    public class Education {
+        [BsonElement("Stream")]
+        public string Stream { get; set; }
+
+        [BsonElement("University")]
+        public string University { get; set; }
+    }
+
+    public class Language {
+        [BsonElement("Name")]
+        public string Name { get; set; }
+
+        [BsonElement("Level")]
+        public string Level { get; set; }
     }
 
 }

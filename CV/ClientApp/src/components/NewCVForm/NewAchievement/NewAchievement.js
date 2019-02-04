@@ -9,21 +9,22 @@ export default class NewAchievement extends Component {
 
     render() {
         return (
-            <div>
-                <Grid>
-                    <Row>
-                        <Col md={6}>
-                            <IconFieldGroup
-                                name="achievement"
-                                id="formControlsachievement"
-                                placeholder="Enter your achievement"
-                                icon="fa fa-trophy fa-1x"
-                                componentClass="textarea"
-                            />
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
+            <Row  ref={this.props.innerRef}>
+                <Col md={10}>
+                    <IconFieldGroup
+                        name="achievement"
+                        id="formControlsachievement"
+                        value={this.props.achievement.value}
+                        placeholder={this.props.achievement.placeHolder}
+                        icon="fa fa-trophy fa-1x"
+                        componentClass="textarea"
+                        onChange={(e) => this.props.valueChange(e, this.props.index)}
+                    />
+                </Col>
+                <Col md={2}>
+                    <Button onClick={(e) => this.props.delete(e, this.props.index)}><i class="fa fa-times"></i></Button>
+                </Col>
+            </Row>
         )
     }
 }

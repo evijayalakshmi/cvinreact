@@ -13,22 +13,22 @@ export class NewEducation extends Component {
             <Row ref={this.props.innerRef}>
                 <Col md={5} style={{ 'padding-left': '0px' }}>
                     <FieldGroup
-                        name="educationStream"
+                        name="stream"
                         id="formControlseducationStream"
                         type="text"
-                        value={this.props.education.educationStream.value}
-                        placeholder={this.props.education.educationStream.placeHolder}
+                        value={this.props.education.stream.value}
+                        placeholder={this.props.education.stream.placeHolder}
                         onChange={(e) => this.props.valueChange(e, this.props.index)}
                         required="true"
                     />
                 </Col>
                 <Col md={5}>
                     <FieldGroup
-                        name="educationUniversity"
+                        name="university"
                         id="formControlseducationUniversity"
                         type="text"
-                        value={this.props.education.educationUniversity.value}
-                        placeholder={this.props.education.educationUniversity.placeHolder}
+                        value={this.props.education.university.value}
+                        placeholder={this.props.education.university.placeHolder}
                         onChange={(e) => this.props.valueChange(e, this.props.index)}
                     />
                 </Col>

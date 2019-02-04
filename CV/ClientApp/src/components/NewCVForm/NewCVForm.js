@@ -14,7 +14,6 @@ export class NewCVForm extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            numAchievements: 0,
             formControls: {
                 personalInfo: {
                     name: {
@@ -52,7 +51,7 @@ export class NewCVForm extends Component {
                 },
                 education: [],
                 language: [],
-                achievements: [],
+                achievement: [],
                 lifePhilosophyContent: {
                     value: '',
                     placeHolder: 'Write Your Life Philosophy'
@@ -62,11 +61,12 @@ export class NewCVForm extends Component {
                     placeHolder: 'Enter strengths with comma separated values'
                 }
             }
-        }
-    };
+        };
+    }
 
     dislayName = NewCVForm.name;
 
+    // Personal Info
     changePersonalInfoHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -85,6 +85,7 @@ export class NewCVForm extends Component {
         });
     }
 
+    // Experience
     addExperience = (e) => {
         e.preventDefault();
 
@@ -176,6 +177,7 @@ export class NewCVForm extends Component {
         });
     }
 
+    // Education
     addEducation = (e) => {
         e.preventDefault();
 
@@ -183,11 +185,11 @@ export class NewCVForm extends Component {
             ...this.state.formControls
         };
         updatedFormControls.education.push({
-            educationStream: {
+            stream: {
                 value: '',
                 placeHolder: 'STREAM OF GRADUATION'
             },
-            educationUniversity: {
+            university: {
                 value: '',
                 placeHolder: 'UNIVERSITY'
             }
@@ -229,15 +231,19 @@ export class NewCVForm extends Component {
         });
     }
 
+    // Achievement
     addAchievement = (e) => {
         e.preventDefault();
 
-        const updatedControls = {
-            ...this.state
+        const updatedFormControls = {
+            ...this.state.formControls
         };
-        updatedControls.numAchievements = this.state.numAchievements + 1;
+        updatedFormControls.achievement.push({
+            value: '',
+            placeHolder: 'Enter your achievement'
+        });
         this.setState({
-            numAchievements: updatedControls.numAchievements
+            formControls: updatedFormControls
         });
     }
 
@@ -251,10 +257,10 @@ export class NewCVForm extends Component {
             ...this.state.formControls
         };
         const updatedFormElement = {
-            ...updatedControls.achievement[i][name]
+            ...updatedControls.achievement[i]
         };
         updatedFormElement.value = value;
-        updatedControls.achievement[i][name] = updatedFormElement;
+        updatedControls.achievement[i] = updatedFormElement;
 
         this.setState({
             formControls: updatedControls
@@ -273,6 +279,7 @@ export class NewCVForm extends Component {
         });
     }
 
+    // Life Philosophy
     changeLifePhilosophyHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -287,6 +294,7 @@ export class NewCVForm extends Component {
         });
     }
 
+    // Language
     addLanguage = (e) => {
         e.preventDefault();
 
@@ -294,7 +302,7 @@ export class NewCVForm extends Component {
             ...this.state.formControls
         };
         updatedFormControls.language.push({
-            language: '',
+            name: '',
             level: 0
         });
         this.setState({
@@ -305,20 +313,26 @@ export class NewCVForm extends Component {
     changeLanguageHandler = (event, i) => {
         event.preventDefault();
 
-        const name = event.target.name;
-        const value = event.target.value;
+        let name = event.target.name;
+        let value = event.target.value;
 
-        const updatedControls = {
+        // TODO: Find a better way later
+        if (name.startsWith("level")) {
+            value = parseInt(value);
+            name = "level";
+        }
+
+        const updatedFormControls = {
             ...this.state.formControls
         };
         const updatedFormElement = {
-            ...updatedControls.language[i][name]
+            ...updatedFormControls.language[i]
         };
-        updatedFormElement.value = value;
-        updatedControls.language[i][name] = updatedFormElement;
+        updatedFormElement[name] = value;
+        updatedFormControls.language[i] = updatedFormElement;
 
         this.setState({
-            formControls: updatedControls
+            formControls: updatedFormControls
         });
     }
 
@@ -334,11 +348,33 @@ export class NewCVForm extends Component {
         });
     }
 
+    // Strengths
+    changeStrengthsHandler = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        updatedControls.strength.value = value;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    // Submit Form
     handleSubmit = (e) => {
         console.log('state value is ', this.state);
+
         const formData = {
             personalInfo: {},
             experiences: [],
+            educations: [],
+            languages: [],
+            lifePhilosophy: '',
+            achievements: [],
+            strengths: []
         };
 
         // personal info
@@ -356,9 +392,34 @@ export class NewCVForm extends Component {
         }
 
         // Education
-        // for (let formElementId in this.state.formControls.education) {
-        //     formData.personalInfo[formElementId] = this.state.formControls.personalInfo[formElementId].value;
-        // }
+        for (var i = 0; i < this.state.formControls.education.length; i += 1) {
+            var education = this.state.formControls.education[i];
+            formData.educations.push({});
+            for (let formElementId in education) {
+                formData.educations[i][formElementId] = this.state.formControls.education[i][formElementId].value;
+            }
+        }
+
+        // Languages
+        for (var i = 0; i < this.state.formControls.language.length; i += 1) {
+            var language = this.state.formControls.language[i];
+            formData.languages.push(language);
+        }
+
+        // Life Philosophy
+        formData.lifePhilosophy = this.state.formControls.lifePhilosophyContent.value;
+
+        // Achievements
+        for (var i = 0; i < this.state.formControls.achievement.length; i += 1) {
+            var achievement = this.state.formControls.achievement[i].value;
+            formData.achievements.push(achievement);
+        }
+
+        // Strengths
+        var strength = this.state.formControls.strength.value;
+        var values = strength.split(',');
+
+        values.forEach(val => formData.strengths.push(val));
 
         console.log(formData);
         fetch('api/ResumeData/SaveToMongoDB', {
@@ -373,6 +434,8 @@ export class NewCVForm extends Component {
     }
 
     render() {
+
+        // Experiences
         const experiences = [];
         for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
             experiences.push(<NewExperience
@@ -383,8 +446,9 @@ export class NewCVForm extends Component {
                 handleCurrentEmployerCheck={(idx) => this.changeCurrentEmployerCheck(idx)}
                 valueChange={(e, idx) => this.changeExperienceHandler(e, idx)}
                 delete={(e, idx) => this.deleteExperience(e, idx)} />);
-        };
+        }
 
+        // Educations
         const educations = [];
         for (var i = 0; i < this.state.formControls.education.length; i += 1) {
             educations.push(<NewEducation
@@ -394,10 +458,11 @@ export class NewCVForm extends Component {
                 education={this.state.formControls.education[i]}
                 valueChange={(e, idx) => this.changeEducationHandler(e, idx)}
                 delete={(e, idx) => this.deleteEducation(e, idx)} />);
-        };
+        }
 
+        // Achievements
         const achievements = [];
-        for (var i = 0; i < this.state.formControls.achievements.length; i += 1) {
+        for (var i = 0; i < this.state.formControls.achievement.length; i += 1) {
             achievements.push(<NewAchievement
                 key={i}
                 index={i}
@@ -407,14 +472,16 @@ export class NewCVForm extends Component {
                 delete={(e, idx) => this.deleteAchievemnt(e, idx)} />);
         }
 
+        // Languages
         const languages = [];
         for (var i = 0; i < this.state.formControls.language.length; i += 1) {
             languages.push(<NewLanguage
                 key={i}
                 index={i}
                 innerRef={React.createRef()}
+                levelGroupName={"level" + i}
                 language={this.state.formControls.language[i]}
-                valueChange={(e, idx) => this.changeLanguageHandler(e, idx)}
+                selectionChange={(e, idx) => this.changeLanguageHandler(e, idx)}
                 delete={(e, idx) => this.deleteLanguage(e, idx)} />);
         }
 
@@ -513,7 +580,9 @@ export class NewCVForm extends Component {
                     <Row>
                         <ContentHeading name="Experience" />
                         <FormGroup>
-                            <Checkbox inline checked={this.state.formControls.experience.isPreviousExperienceChecked} onChange={this.handlePreviousExperienceChecked}>
+                            <Checkbox inline
+                                checked={this.state.formControls.experience.isPreviousExperienceChecked}
+                                onChange={this.handlePreviousExperienceChecked}>
                                 <h4 style={{ 'margin-top': '0px', 'margin-bottom': '0px' }}> Any Previous Experiences?</h4>
                             </Checkbox>
                         </FormGroup>
@@ -562,7 +631,9 @@ export class NewCVForm extends Component {
                                 name="strength"
                                 componentClass="textarea"
                                 value={this.state.formControls.strength.value}
-                                placeholder={this.state.formControls.strength.placeHolder} />
+                                placeholder={this.state.formControls.strength.placeHolder}
+                                onChange={this.changeStrengthsHandler}
+                            />
                         </Col>
                     </Row>
                     <br />
