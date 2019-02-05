@@ -494,7 +494,7 @@ export class NewCVForm extends Component {
                     from: "",
                     to: "",
                     location: exp.location.value,
-                    responsibilities: exp.rolesAndResponsibilities.value.split(',')
+                    responsibilities: exp.rolesAndResponsibilities.value.split('\r\n')
                 }
             }),
             moments: formControls.achievement.map(mom => {
