@@ -94,10 +94,11 @@ export default class NewExperience extends Component {
                         <Col md={8}>
                             <FormGroup controlId="formControlsTextarea">
                                 <ControlLabel>Roles & Responsibilities</ControlLabel>
-                                <FormControl
+                                <FormControl style={{ height: 100 }}
                                     name="rolesAndResponsibilities"
                                     componentClass="textarea"
                                     placeholder="Roles & Responsibilities"
+                                    value={this.props.experience.rolesAndResponsibilities.value}
                                     onChange={(e) => this.props.valueChange(e, this.props.index)}/>
                             </FormGroup>
                         </Col>

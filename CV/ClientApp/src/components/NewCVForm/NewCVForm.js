@@ -8,24 +8,31 @@ import NewAchievement from './NewAchievement/NewAchievement';
 import './NewCVForm.css';
 import { NewEducation } from './NewEducation/NewEducation';
 import { NewLanguage } from './NewLanguage/NewLanguage';
+import { Redirect } from 'react-router';
+import { CvData } from '../../models/CvData';
 
 export class NewCVForm extends Component {
 
     constructor(props, context) {
         super(props, context);
+
+        var cvData = new CvData();
+        var data = cvData.getMyData();
+
         this.state = {
+            toPdf: false,
             formControls: {
                 personalInfo: {
                     name: {
-                        value: '',
+                        value: data.personalDetails.Name,
                         placeHolder: 'Enter name'
                     },
                     location: {
-                        value: '',
+                        value: data.personalDetails.Address,
                         placeHolder: 'Enter location'
                     },
                     email: {
-                        value: '',
+                        value: data.personalDetails.Email,
                         placeHolder: 'Enter email'
                     },
                     linkedIn: {
@@ -41,30 +48,70 @@ export class NewCVForm extends Component {
                         placeHolder: 'Enter Git URL'
                     },
                     blogURL: {
-                        value: '',
+                        value: data.personalDetails.blog,
                         placeHolder: 'Enter blog URL'
                     }
                 },
                 experience: {
-                    isPreviousExperienceChecked: false,
-                    allExperiences: []
+                    isPreviousExperienceChecked: true,
+                    allExperiences: data.experiences.map(exp => {
+                        return {
+                            title: {
+                                value: exp.title,
+                                placeHolder: 'Enter Title'
+                            },
+                            company: {
+                                value: exp.company,
+                                placeHolder: 'Enter company'
+                            },
+                            location: {
+                                value: exp.location,
+                                placeHolder: 'Enter location'
+                            },
+                            rolesAndResponsibilities: {
+                                value: exp.responsibilities.join("\r\n"),
+                                placeHolder: 'Enter roles & responsibilities'
+                            }
+                        }
+                    })
                 },
-                education: [],
-                language: [],
-                achievement: [],
+                education: data.educations.map(edu => {
+                    return {
+                        stream: {
+                            value: edu.stream,
+                            placeHolder: 'STREAM OF GRADUATION'
+                        },
+                        university: {
+                            value: edu.university,
+                            placeHolder: 'UNIVERSITY'
+                        }
+                    }
+                }),
+                language: data.languages.map(lan => {
+                    return {
+                        name: lan.language.toLocaleLowerCase(),
+                        level: lan.level
+                    }
+                }),
+                achievement: data.moments.map(mom => {
+                    return {
+                        value: mom.content,
+                        placeHolder: 'Enter your achievement'
+                    }
+                }),
                 lifePhilosophyContent: {
                     value: '',
                     placeHolder: 'Write Your Life Philosophy'
                 },
                 strength: {
-                    value: '',
+                    value: ([].concat.apply([], data.strengths)).join(','),
                     placeHolder: 'Enter strengths with comma separated values'
                 }
             }
         };
     }
 
-    dislayName = NewCVForm.name;
+    displayName = NewCVForm.name;
 
     // Personal Info
     changePersonalInfoHandler = (event) => {
@@ -363,10 +410,7 @@ export class NewCVForm extends Component {
         });
     }
 
-    // Submit Form
-    handleSubmit = (e) => {
-        console.log('state value is ', this.state);
-
+    stateToFormData = () => {
         const formData = {
             personalInfo: {},
             experiences: [],
@@ -383,7 +427,7 @@ export class NewCVForm extends Component {
         }
 
         // Experience
-        for(var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
+        for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
             var experience = this.state.formControls.experience.allExperiences[i];
             formData.experiences.push({});
             for (let formElementId in experience) {
@@ -421,7 +465,67 @@ export class NewCVForm extends Component {
 
         values.forEach(val => formData.strengths.push(val));
 
-        console.log(formData);
+        return formData;
+    }
+
+    splitArrayIntoChunks = (arr, chunkLen) => {
+        var chunkList = []
+        var chunkCount = Math.ceil(arr.length / chunkLen)
+        for (var i = 0; i < chunkCount; i++) {
+            chunkList.push(arr.splice(0, chunkLen))
+        }
+        return chunkList
+    }
+
+    renderToHTMLData = () => {
+        const formControls = this.state.formControls;
+        return {
+            personalDetails: {
+                Name: formControls.personalInfo.name.value,
+                Designation: '',
+                Email: formControls.personalInfo.email.value,
+                blog: formControls.personalInfo.blogURL.value,
+                Address: formControls.personalInfo.location.value
+            },
+            experiences: formControls.experience.allExperiences.map(exp => {
+                return {
+                    title: exp.title.value,
+                    company: exp.company.value,
+                    from: "",
+                    to: "",
+                    location: exp.location.value,
+                    responsibilities: exp.rolesAndResponsibilities.value.split(',')
+                }
+            }),
+            moments: formControls.achievement.map(mom => {
+                return {
+                    icon: "fa fa-trophy fa-2x",
+                    heading: "Courage I had",
+                    content: mom.value
+                }
+            }),
+            strengths: this.splitArrayIntoChunks(formControls.strength.value.split(','), 3),
+            languages: formControls.language.map(lan => {
+                return { language: lan.name, level: lan.level }
+            }),
+            educations: formControls.education.map(edu => {
+                return {
+                    stream: edu.stream.value,
+                    university: edu.university.value,
+                    icon: "fa fa-calendar",
+                    from: "",
+                    to: ""
+                }
+            }),
+            dayOfLife: []
+        }
+    }
+
+    // Submit Form
+    handleSubmit = (e) => {
+        console.log('state value is ', this.state);
+        var formData = this.stateToFormData();
+        console.log('form data to backend ', formData);
         fetch('api/ResumeData/SaveToMongoDB', {
             method: 'POST',
             headers: {
@@ -429,11 +533,19 @@ export class NewCVForm extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
-        });
+        }).then(() => this.setState(() => ({
+            toPdf: true
+        })));
         e.preventDefault();
     }
 
     render() {
+
+        if (this.state.toPdf === true) {
+            return <Redirect to={{
+                pathname: '/MyCv', state: this.renderToHTMLData()
+            }} />
+        }
 
         // Experiences
         const experiences = [];
@@ -627,7 +739,7 @@ export class NewCVForm extends Component {
                         </Col>
                         <Col md={6}>
                             <ContentHeading name="Strengths" />
-                            <FormControl
+                            <FormControl style={{ height: 100 }}
                                 name="strength"
                                 componentClass="textarea"
                                 value={this.state.formControls.strength.value}
@@ -638,7 +750,7 @@ export class NewCVForm extends Component {
                     </Row>
                     <br />
                     <br />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">Save & Render as HTML</Button>
                 </Grid>
             </form >
         );

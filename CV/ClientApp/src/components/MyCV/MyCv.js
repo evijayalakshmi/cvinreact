@@ -17,8 +17,8 @@ export class MyCv extends Component {
 
     render() {
 
-        var cvData = new CvData();
-        var data = cvData.getData();
+        console.log('from url ', this.props.location.state);
+        var data = this.props.location.state;
         return (
             <div className="page">
                 <Grid fluid>
