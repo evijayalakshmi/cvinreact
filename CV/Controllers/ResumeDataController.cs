@@ -24,13 +24,13 @@ namespace cv.Controllers
         }
 
         [HttpPost("[action]")]
-        public bool SaveToMongoDB([FromBody] ResumeData request) {
+        public ActionResult<ResumeData> SaveToMongoDB([FromBody] ResumeData request) {
             var req = request;
 
             _resumeStoreService.Create(request);
 
-            return true;
-            //return CreatedAtRoute("GetBook", new { id = request.Id.ToString() }, request);
+            //return OkObjectResult(insertedResume);
+            return CreatedAtRoute("GetResume", new { id = request.Id.ToString() }, request);
         }
 
     }

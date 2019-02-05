@@ -17,7 +17,7 @@ export class NewCVForm extends Component {
         super(props, context);
 
         var cvData = new CvData();
-        var data = cvData.getMyData();
+        var data = cvData.getData();
 
         this.state = {
             toPdf: false,
@@ -533,9 +533,9 @@ export class NewCVForm extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
-        }).then(() => this.setState(() => ({
-            toPdf: true
-        })));
+        }).then((res) => {
+            this.setState(() => ({ toPdf: true }))
+        });
         e.preventDefault();
     }
 

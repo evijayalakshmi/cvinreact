@@ -163,4 +163,25 @@
             }]
         }
     }
+
+    getEmptyData() {
+        return {
+            personalDetails: {
+                Name: '',
+                Designation: '',
+                Email: '',
+                blog: '',
+                Address: ''
+            },
+            experiences: [],
+
+            moments: [],
+
+            strengths: [],
+
+            languages: [],
+
+            educations: []
+        }
+    }
 }
