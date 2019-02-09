@@ -23,13 +23,6 @@ export default class MainPage extends Component {
         return this.setState({ login: login, signup: signup })
     };
 
-    showLoginBox() {
-        this.setState({ isLoginOpen: true, isRegisterOpen: false });
-    }
-
-    showRegisterBox() {
-        this.setState({ isRegisterOpen: true, isLoginOpen: false });
-    }
 
     render() {
 
