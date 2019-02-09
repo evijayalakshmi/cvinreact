@@ -6,8 +6,8 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { MyCv } from './components/MyCV/MyCv';
 import { NewCVForm } from './components/NewCVForm/NewCVForm';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from './components/Login/Login';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import MainPage from './components/MainPage/MainPage';
 
 export default class App extends Component {
     displayName = App.name
@@ -21,10 +21,11 @@ export default class App extends Component {
                 </Navbar>
 
                 <Router>
-                    <div>
-                        <Route exact path='/' component={NewCVForm} />
+                    <Switch>
+                        <Route exact path='/' component={MainPage} />
+                        <Route path='/NewCv' component={NewCVForm} />
                         <Route path='/MyCv' component={MyCv} />
-                    </div>
+                    </Switch>
                 </Router>
             </div>
         );
