@@ -17,7 +17,7 @@ export class NewCVForm extends Component {
         super(props, context);
 
         var cvData = new CvData();
-        var data = cvData.getData();
+        var data = cvData.getEmptyData();
 
         this.state = {
             toPdf: false,

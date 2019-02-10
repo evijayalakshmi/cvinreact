@@ -4,7 +4,9 @@ import {
     HelpBlock,
     FormGroup,
     FormControl,
-    ControlLabel
+    ControlLabel,
+    Alert,
+    AlertProps
 } from "react-bootstrap";
 import "./Signup.css";
 
@@ -19,7 +21,8 @@ export default class Signup extends Component {
             password: "",
             confirmPassword: "",
             confirmationCode: "",
-            newUser: null
+            newUser: null,
+            isUserRegistered: false
         };
     }
 
@@ -43,6 +46,28 @@ export default class Signup extends Component {
     }
 
     handleSubmit = async event => {
+        var newUserData = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password
+        }
+        fetch('api/User/RegisterUser', {
+            method: 'POST',
+            headers: {
+                'Accept': 'appication/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUserData)
+        }).then((res) => {
+
+            debugger;
+            console.log(JSON.stringify(res.json()));
+            if (res.status === 200) {
+                this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' })
+            }
+        }
+        )
+
         event.preventDefault();
 
         this.setState({ isLoading: true });
@@ -120,16 +145,22 @@ export default class Signup extends Component {
                 >
                     SignIn
                 </Button>
+                {this.state.isUserRegistered === true
+                    ? <Alert variant="success">
+                        <p>Hey {this.state.name},</p>
+                        <hr />
+                        <p> You registered Successfully! Please login with your credentials. </p>
+                    </Alert>
+                    : null}
             </form>
         );
     }
 
     render() {
+
         return (
             <div className="Signup">
-                {this.state.newUser === null
-                    ? this.renderForm()
-                    : this.renderConfirmationForm()}
+                {this.renderForm()}
             </div>
         );
     }

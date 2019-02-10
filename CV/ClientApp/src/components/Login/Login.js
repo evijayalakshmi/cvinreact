@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
+import { Redirect } from 'react-router';
 
 export default class Login extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ export default class Login extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            isUserValid: false
         };
     }
 
@@ -23,10 +25,34 @@ export default class Login extends Component {
     }
 
     handleSubmit = event => {
+        var userData = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        fetch('api/User/ValidateUser', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        }).then((response) => {
+            return response.json();
+        }
+        ).then((data) => {
+            return data;
+        }
+        )
+
         event.preventDefault();
     }
 
     render() {
+        if (this.state.isUserValid === true) {
+            return <Redirect to={{
+                pathname: '/NewCv'
+            }} />
+        }
         return (
             <div className="Login">
                 <form onSubmit={this.handleSubmit}>
