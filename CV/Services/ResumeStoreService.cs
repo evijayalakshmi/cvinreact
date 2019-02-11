@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace cv.Services {
-    public class ResumeStoreService {
+    public class ResumeStoreService : IResumeStoreService {
         private readonly IMongoCollection<ResumeData> _resumes;
 
         public ResumeStoreService(IConfiguration config) {

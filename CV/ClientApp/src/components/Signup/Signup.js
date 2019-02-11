@@ -21,7 +21,6 @@ export default class Signup extends Component {
             password: "",
             confirmPassword: "",
             confirmationCode: "",
-            newUser: null,
             isUserRegistered: false
         };
     }
@@ -50,7 +49,8 @@ export default class Signup extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password
-        }
+        };
+
         fetch('api/User/RegisterUser', {
             method: 'POST',
             headers: {
@@ -59,20 +59,16 @@ export default class Signup extends Component {
             },
             body: JSON.stringify(newUserData)
         }).then((res) => {
-
-            debugger;
             console.log(JSON.stringify(res.json()));
             if (res.status === 200) {
-                this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' })
+                this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
             }
         }
-        )
+        );
 
         event.preventDefault();
 
         this.setState({ isLoading: true });
-
-        this.setState({ newUser: "test" });
 
         this.setState({ isLoading: false });
     }

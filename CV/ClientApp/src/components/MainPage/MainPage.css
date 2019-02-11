@@ -4,7 +4,6 @@
 
 #buttons {
     margin: 0 auto;
-    max-width: 320px;
     height: 100px;
     background: #2c3e50;
 }
@@ -24,3 +23,18 @@
             color: #2c3e50;
             cursor: pointer;
         }
+
+
+.card {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+}
+
+.card > img {
+    width: 50%;
+}

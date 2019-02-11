@@ -12,6 +12,15 @@ namespace cv.Models {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonElement("User Email")]
+        public string UserEmail { get; set; }
+
+        [BsonElement("User Name")]
+        public string UserName { get; set; }
+
+        [BsonElement("Resume Name")]
+        public string Name { get; set; }
+
         [BsonElement("Personal Info")]
         public PersonalInfo PersonalInfo { get; set; }
 

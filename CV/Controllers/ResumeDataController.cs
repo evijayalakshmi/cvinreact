@@ -12,9 +12,9 @@ namespace cv.Controllers
     public class ResumeDataController : Controller
     {
 
-        private readonly ResumeStoreService _resumeStoreService;
+        private readonly IResumeStoreService _resumeStoreService;
 
-        public ResumeDataController(ResumeStoreService resumeStoreService) {
+        public ResumeDataController(IResumeStoreService resumeStoreService) {
             _resumeStoreService = resumeStoreService;
         }
 
@@ -26,6 +26,7 @@ namespace cv.Controllers
         [HttpPost("[action]")]
         public ActionResult<ResumeData> SaveToMongoDB([FromBody] ResumeData request) {
             var req = request;
+            req.Name = string.Format("{0} {1}", "Resume", DateTime.UtcNow.ToString());
 
             _resumeStoreService.Create(request);
 

@@ -15,11 +15,6 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Navbar bg="dark" variant="dark" fixed="top"
-                    style={{ width: "100%" }}>
-                    <Navbar.Brand href="#">Resume Builder App</Navbar.Brand>
-                </Navbar>
-
                 <Router>
                     <Switch>
                         <Route exact path='/' component={MainPage} />

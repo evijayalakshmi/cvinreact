@@ -28,7 +28,7 @@ namespace CV
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
 
-            services.AddScoped<ResumeStoreService>();
+            services.AddScoped<IResumeStoreService, ResumeStoreService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the React files will be served from this directory

@@ -4,16 +4,6 @@
     font-size: 12px;
 }
 
-.page {
-    background: white;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 0.5cm;
-    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-    width: 25cm;
-    height: 0 auto;
-}
-
 hr.style3 {
     border-bottom: 1px dashed #8c8b8b;
 }
