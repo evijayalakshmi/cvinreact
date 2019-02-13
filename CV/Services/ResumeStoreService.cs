@@ -18,5 +18,10 @@ namespace cv.Services {
             _resumes.InsertOne(resume);
             return resume;
         }
+
+        public IReadOnlyCollection<ResumeData> TryGetByUser(string emailId)
+        {
+            return _resumes.Find(_ => _.UserEmail == emailId).ToListAsync().Result;
+        }
     }
 }

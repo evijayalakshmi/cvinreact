@@ -19,14 +19,13 @@ export class NewCVForm extends Component {
         super(props, context);
 
         var cvData = new CvData();
-        var data = cvData.getData();
-
-        console.log('from url ', this.props.location.userInfo);
+        var data = cvData.getEmptyData();
 
         this.state = {
             toPdf: false,
-            userEmail: '',
-            userName: '',
+            userEmail: this.props.location.userInfo.userEmail,
+            userName: this.props.location.userInfo.userName,
+            oldResumes: [],
             formControls: {
                 personalInfo: {
                     name: {
@@ -116,8 +115,13 @@ export class NewCVForm extends Component {
             }
         };
 
-        this.setState({ userEmail: this.props.location.userInfo.userEmail, userName: this.props.location.userInfo.userName });
-        console.log('state from ctor: ', this.state);
+        fetch('api/ResumeData/GetByEmailId?emailId=' + this.props.location.userInfo.userEmail)
+            .then((response) => {
+                return response.json();
+            }).then((data) => {
+                debugger;
+                this.setState({ oldResumes: data });
+            });
     }
 
     // Personal Info
@@ -202,19 +206,6 @@ export class NewCVForm extends Component {
         updatedFormElement.isCurrentEmployer = !updatedFormElement.isCurrentEmployer;
         updatedControls.experience.allExperiences[i] = updatedFormElement;
 
-        this.setState({
-            formControls: updatedControls
-        });
-    }
-
-    handlePreviousExperienceChecked = (e) => {
-        e.preventDefault();
-
-        const updatedControls = {
-            ...this.state.formControls
-        };
-
-        updatedControls.experience.isPreviousExperienceChecked = !updatedControls.experience.isPreviousExperienceChecked;
         this.setState({
             formControls: updatedControls
         });
@@ -419,8 +410,8 @@ export class NewCVForm extends Component {
 
     stateToFormData = () => {
         const formData = {
-            userEmail: this.props.location.userInfo.userEmail,
-            userName: this.props.location.userInfo.userName,
+            userEmail: this.state.userEmail,
+            userName: this.state.userName,
             personalInfo: {},
             experiences: [],
             educations: [],
@@ -550,11 +541,18 @@ export class NewCVForm extends Component {
 
     render() {
 
-        //if (this.state.toPdf === true) {
-        //    return (<Redirect to={{ pathname: '/MyCv', state: this.renderToHTMLData() }} />);
-        //}
+        if (this.state.toPdf === true) {
+            return (<Redirect to={{ pathname: '/MyCv', state: this.renderToHTMLData() }} />);
+        }
 
         const resumes = [];
+        for (var i = 0; i < this.state.oldResumes.length; i += 1) {
+            resumes.push(<NewListItem
+                key={i}
+                index={i}
+                innerRef={React.createRef()}
+                listItem={this.state.oldResumes[i]} />);
+        }
 
         // Experiences
         const experiences = [];
@@ -610,14 +608,24 @@ export class NewCVForm extends Component {
             <div>
             <Navbar bg="dark" variant="dark" fixed="top"
                 style={{ width: "100%" }}>
-                    <Navbar.Brand href="#">Resume Builder App</Navbar.Brand>
+                <Navbar.Brand href="#">Resume Builder App</Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="justify-content-end">
+                    <Navbar.Text>
+                        Signed in as: {this.state.userName}
+                    </Navbar.Text>
+                    <Navbar.Text>
+                        <a href="#login">Logout</a>
+                    </Navbar.Text>
+                </Navbar.Collapse>
             </Navbar>
             <form key="CVFormKey" onSubmit={this.handleSubmit}>
                     <Grid fluid>
                         <Row className="w-100">
                             <Col md={2}>
+                                <ContentHeading name="Saved Resumes" />
                                 <ul className="list-group">
-                                    {this.resumes}
+                                    {resumes}
                                 </ul>
                             </Col>
                             <Col md={10}>
@@ -713,18 +721,9 @@ export class NewCVForm extends Component {
                                     </Row>
                                     <Row>
                                         <ContentHeading name="Experience" />
-                                        <FormGroup>
-                                            <Checkbox inline
-                                                checked={this.state.formControls.experience.isPreviousExperienceChecked}
-                                                onChange={this.handlePreviousExperienceChecked}>
-                                                <h4 style={{ 'margin-top': '0px', 'margin-bottom': '0px' }}> Any Previous Experiences?</h4>
-                                            </Checkbox>
-                                        </FormGroup>
                                         {experiences}
                                         <br />
-                                        {this.state.formControls.experience.isPreviousExperienceChecked ?
-                                            <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button> :
-                                            null}
+                                        <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button>
                                     </Row>
                                     <br />
                                     <Row>

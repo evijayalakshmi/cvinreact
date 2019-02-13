@@ -21,6 +21,9 @@ namespace cv.Models {
         [BsonElement("Resume Name")]
         public string Name { get; set; }
 
+        [BsonElement("Created Time")]
+        public DateTime CreatedTime { get; set; }
+
         [BsonElement("Personal Info")]
         public PersonalInfo PersonalInfo { get; set; }
 

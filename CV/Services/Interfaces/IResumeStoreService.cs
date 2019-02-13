@@ -7,5 +7,7 @@ using cv.Models;
 namespace cv.Services {
     public interface IResumeStoreService {
         ResumeData Create(ResumeData resume);
+
+        IReadOnlyCollection<ResumeData> TryGetByUser(string emailId);
     }
 }
