@@ -76,7 +76,8 @@ export default class NewExperience extends Component {
                                     <ControlLabel>From</ControlLabel>
                                     <DatePicker
                                         id="ex-fromDatepicker"
-                                        value={this.props.experience.fromDate}
+                                        value={this.props.experience.fromDate.value}
+                                        onChange={(v, fv) => this.props.dateValueChange('fromDate', v, fv, this.props.index)}
                                         />
                                 </FormGroup>
                             </Col>
@@ -84,8 +85,10 @@ export default class NewExperience extends Component {
                                 <FormGroup>
                                     <ControlLabel>To</ControlLabel>
                                     <DatePicker id="ex-toDatepicker"
-                                        value={this.props.experience.toDate}
-                                        disabled={this.props.experience.isCurrentEmployer} />
+                                        value={this.props.experience.toDate.value}
+                                        disabled={this.props.experience.isCurrentEmployer}
+                                        onChange={(v, fv) => this.props.dateValueChange('toDate', v, fv, this.props.index)}
+                                        />
                                 </FormGroup>
                             </Col>
                         </Col>

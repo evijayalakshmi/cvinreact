@@ -57,29 +57,35 @@ export class NewCVForm extends Component {
                         placeHolder: 'Enter blog URL'
                     }
                 },
-                experience: {
-                    isPreviousExperienceChecked: true,
-                    allExperiences: data.experiences.map(exp => {
-                        return {
-                            title: {
-                                value: exp.title,
-                                placeHolder: 'Enter Title'
-                            },
-                            company: {
-                                value: exp.company,
-                                placeHolder: 'Enter company'
-                            },
-                            location: {
-                                value: exp.location,
-                                placeHolder: 'Enter location'
-                            },
-                            rolesAndResponsibilities: {
-                                value: exp.responsibilities.join("\r\n"),
-                                placeHolder: 'Enter roles & responsibilities'
-                            }
-                        };
-                    })
-                },
+                experience:  data.experiences.map(exp => {
+                    return {
+                        title: {
+                            value: exp.title,
+                            placeHolder: 'Enter Title'
+                        },
+                        company: {
+                            value: exp.company,
+                            placeHolder: 'Enter company'
+                        },
+                        location: {
+                            value: exp.location,
+                            placeHolder: 'Enter location'
+                        },
+                        fromDate: {
+                            value: '',
+                            formattedValue: ''
+                        },
+                        toDate: {
+                            value: '',
+                            formattedValue: ''
+                        },
+                        rolesAndResponsibilities: {
+                            value: exp.responsibilities.join("\r\n"),
+                            placeHolder: 'Enter roles & responsibilities'
+                        },
+                        isCurrentEmployer: false
+                    };
+                }),
                 education: data.educations.map(edu => {
                     return {
                         stream: {
@@ -150,7 +156,7 @@ export class NewCVForm extends Component {
         const updatedFormControls = {
             ...this.state.formControls
         };
-        updatedFormControls.experience.allExperiences.push({
+        updatedFormControls.experience.push({
             title: {
                 value: '',
                 placeHolder: 'Enter Title'
@@ -177,6 +183,7 @@ export class NewCVForm extends Component {
     }
 
     changeExperienceHandler = (event, i) => {
+        debugger;
         event.preventDefault();
 
         const name = event.target.name;
@@ -186,10 +193,27 @@ export class NewCVForm extends Component {
             ...this.state.formControls
         };
         const updatedFormElement = {
-            ...updatedControls.experience.allExperiences[i][name]
+            ...updatedControls.experience[i][name]
         };
         updatedFormElement.value = value;
-        updatedControls.experience.allExperiences[i][name] = updatedFormElement;
+        updatedControls.experience[i][name] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls
+        });
+    }
+
+    changeDateExperienceHandler = (name, value, formattedValue, i) => {
+        debugger;
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.experience[i][name]
+        };
+        updatedFormElement.value = value;
+        updatedFormElement.formattedValue = formattedValue;
+        updatedControls.experience[i][name] = updatedFormElement;
 
         this.setState({
             formControls: updatedControls
@@ -201,10 +225,10 @@ export class NewCVForm extends Component {
             ...this.state.formControls
         };
         const updatedFormElement = {
-            ...updatedControls.experience.allExperiences[i]
+            ...updatedControls.experience[i]
         };
         updatedFormElement.isCurrentEmployer = !updatedFormElement.isCurrentEmployer;
-        updatedControls.experience.allExperiences[i] = updatedFormElement;
+        updatedControls.experience[i] = updatedFormElement;
 
         this.setState({
             formControls: updatedControls
@@ -216,7 +240,7 @@ export class NewCVForm extends Component {
         const updatedFormControls = {
             ...this.state.formControls
         };
-        updatedFormControls.experience.allExperiences.splice(i, 1);
+        updatedFormControls.experience.splice(i, 1);
         this.setState({
             formControls: updatedFormControls
         });
@@ -427,11 +451,11 @@ export class NewCVForm extends Component {
         }
 
         // Experience
-        for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
-            var experience = this.state.formControls.experience.allExperiences[i];
+        for (var i = 0; i < this.state.formControls.experience.length; i += 1) {
+            var experience = this.state.formControls.experience[i];
             formData.experiences.push({});
             for (let formElementId in experience) {
-                formData.experiences[i][formElementId] = this.state.formControls.experience.allExperiences[i][formElementId].value;
+                formData.experiences[i][formElementId] = this.state.formControls.experience[i][formElementId].value;
             }
         }
 
@@ -487,7 +511,7 @@ export class NewCVForm extends Component {
                 blog: formControls.personalInfo.blogURL.value,
                 Address: formControls.personalInfo.location.value
             },
-            experiences: formControls.experience.allExperiences.map(exp => {
+            experiences: formControls.experience.map(exp => {
                 return {
                     title: exp.title.value,
                     company: exp.company.value,
@@ -555,14 +579,15 @@ export class NewCVForm extends Component {
 
         // Experiences
         const experiences = [];
-        for (var i = 0; i < this.state.formControls.experience.allExperiences.length; i += 1) {
+        for (var i = 0; i < this.state.formControls.experience.length; i += 1) {
             experiences.push(<NewExperience
                 key={i}
                 index={i}
                 innerRef={React.createRef()}
-                experience={this.state.formControls.experience.allExperiences[i]}
+                experience={this.state.formControls.experience[i]}
                 handleCurrentEmployerCheck={(idx) => this.changeCurrentEmployerCheck(idx)}
                 valueChange={(e, idx) => this.changeExperienceHandler(e, idx)}
+                dateValueChange={(n, v, fv, i) => this.changeDateExperienceHandler(n, v, fv, i)}
                 delete={(e, idx) => this.deleteExperience(e, idx)} />);
         }
 
@@ -719,7 +744,6 @@ export class NewCVForm extends Component {
                                     <Col md={12}>
                                         <ContentHeading name="Experience" />
                                         {experiences}
-                                        <br />
                                         <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button>
                                     </Col>
                                 </Row>
