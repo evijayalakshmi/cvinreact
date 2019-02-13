@@ -540,7 +540,6 @@ export class NewCVForm extends Component {
     }
 
     render() {
-
         if (this.state.toPdf === true) {
             return (<Redirect to={{ pathname: '/MyCv', state: this.renderToHTMLData() }} />);
         }
@@ -606,22 +605,22 @@ export class NewCVForm extends Component {
 
         return (
             <div>
-            <Navbar bg="dark" variant="dark" fixed="top"
-                style={{ width: "100%" }}>
-                <Navbar.Brand href="#">Resume Builder App</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        Signed in as: {this.state.userName}
-                    </Navbar.Text>
-                    <Navbar.Text>
-                        <a href="#login">Logout</a>
-                    </Navbar.Text>
-                </Navbar.Collapse>
-            </Navbar>
-            <form key="CVFormKey" onSubmit={this.handleSubmit}>
+                <Navbar bg="dark" variant="dark" fixed="top"
+                    style={{ width: "100%" }}>
+                    <Navbar.Brand href="#">Resume Builder App</Navbar.Brand>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text>
+                            Signed in as: {this.state.userName}
+                        </Navbar.Text>
+                        <Navbar.Text>
+                            <a href="#login">Logout</a>
+                        </Navbar.Text>
+                    </Navbar.Collapse>
+                </Navbar>
+                <form key="CVFormKey" onSubmit={this.handleSubmit}>
                     <Grid fluid>
-                        <Row className="w-100">
+                        <Row>
                             <Col md={2}>
                                 <ContentHeading name="Saved Resumes" />
                                 <ul className="list-group">
@@ -629,118 +628,119 @@ export class NewCVForm extends Component {
                                 </ul>
                             </Col>
                             <Col md={10}>
+                                <ContentHeading name="Personal Info" />
                                 <Row>
-                                    <Row>
-                                        <ContentHeading name="Personal Info" />
-                                        <Row>
-                                            <Col md={6}>
-                                                <FieldGroup
-                                                    name="name"
-                                                    id="formControlsName"
-                                                    type="text"
-                                                    label="Name"
-                                                    value={this.state.formControls.personalInfo.name.value}
-                                                    placeholder={this.state.formControls.personalInfo.name.placeHolder}
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
-                                            <Col md={6}>
-                                                <IconFieldGroup
-                                                    name="location"
-                                                    id="formControlsLocaiton"
-                                                    label="Location"
-                                                    value={this.state.formControls.personalInfo.location.value}
-                                                    placeholder={this.state.formControls.personalInfo.location.placeHolder}
-                                                    icon="fa fa-map-marker"
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={4}>
-                                                <IconFieldGroup
-                                                    name="email"
-                                                    id="formControlsEmail"
-                                                    label="Email address"
-                                                    value={this.state.formControls.personalInfo.email.value}
-                                                    placeholder={this.state.formControls.personalInfo.email.placeHolder}
-                                                    icon="fa fa-at"
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
+                                    <Col md={6}>
+                                        <FieldGroup
+                                            name="name"
+                                            id="formControlsName"
+                                            type="text"
+                                            label="Name"
+                                            value={this.state.formControls.personalInfo.name.value}
+                                            placeholder={this.state.formControls.personalInfo.name.placeHolder}
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
+                                    <Col md={6}>
+                                        <IconFieldGroup
+                                            name="location"
+                                            id="formControlsLocaiton"
+                                            label="Location"
+                                            value={this.state.formControls.personalInfo.location.value}
+                                            placeholder={this.state.formControls.personalInfo.location.placeHolder}
+                                            icon="fa fa-map-marker"
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={4}>
+                                        <IconFieldGroup
+                                            name="email"
+                                            id="formControlsEmail"
+                                            label="Email address"
+                                            value={this.state.formControls.personalInfo.email.value}
+                                            placeholder={this.state.formControls.personalInfo.email.placeHolder}
+                                            icon="fa fa-at"
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
 
-                                            <Col md={4}>
-                                                <IconFieldGroup
-                                                    name="linkedIn"
-                                                    id="formControlsLinkedIn"
-                                                    label="LinkedIn"
-                                                    value={this.state.formControls.personalInfo.linkedIn.value}
-                                                    placeholder={this.state.formControls.personalInfo.linkedIn.placeHolder}
-                                                    icon="fa fa-linkedin"
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
+                                    <Col md={4}>
+                                        <IconFieldGroup
+                                            name="linkedIn"
+                                            id="formControlsLinkedIn"
+                                            label="LinkedIn"
+                                            value={this.state.formControls.personalInfo.linkedIn.value}
+                                            placeholder={this.state.formControls.personalInfo.linkedIn.placeHolder}
+                                            icon="fa fa-linkedin"
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
 
-                                            <Col md={4}>
-                                                <IconFieldGroup
-                                                    name="phoneNumber"
-                                                    id="formControlsPhone"
-                                                    label="Phone number"
-                                                    value={this.state.formControls.personalInfo.phoneNumber.value}
-                                                    placeholder={this.state.formControls.personalInfo.phoneNumber.placeHolder}
-                                                    icon="fa fa-phone"
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}>
-                                                <IconFieldGroup
-                                                    name="gitURL"
-                                                    id="formControlsGitHub"
-                                                    label="GitHub/GitLab"
-                                                    value={this.state.formControls.personalInfo.gitURL.value}
-                                                    placeholder={this.state.formControls.personalInfo.gitURL.placeHolder}
-                                                    icon="fa fa-github"
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
+                                    <Col md={4}>
+                                        <IconFieldGroup
+                                            name="phoneNumber"
+                                            id="formControlsPhone"
+                                            label="Phone number"
+                                            value={this.state.formControls.personalInfo.phoneNumber.value}
+                                            placeholder={this.state.formControls.personalInfo.phoneNumber.placeHolder}
+                                            icon="fa fa-phone"
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
+                                        <IconFieldGroup
+                                            name="gitURL"
+                                            id="formControlsGitHub"
+                                            label="GitHub/GitLab"
+                                            value={this.state.formControls.personalInfo.gitURL.value}
+                                            placeholder={this.state.formControls.personalInfo.gitURL.placeHolder}
+                                            icon="fa fa-github"
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
 
-                                            <Col md={6}>
-                                                <IconFieldGroup
-                                                    name="blogURL"
-                                                    id="formControlsBlog"
-                                                    label="Blog"
-                                                    value={this.state.formControls.personalInfo.blogURL.value}
-                                                    placeholder={this.state.formControls.personalInfo.blogURL.placeHolder}
-                                                    icon="fa fa-newspaper-o"
-                                                    onChange={this.changePersonalInfoHandler}
-                                                />
-                                            </Col>
-                                        </Row>
-                                    </Row>
-                                    <Row>
+                                    <Col md={6}>
+                                        <IconFieldGroup
+                                            name="blogURL"
+                                            id="formControlsBlog"
+                                            label="Blog"
+                                            value={this.state.formControls.personalInfo.blogURL.value}
+                                            placeholder={this.state.formControls.personalInfo.blogURL.placeHolder}
+                                            icon="fa fa-newspaper-o"
+                                            onChange={this.changePersonalInfoHandler}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
                                         <ContentHeading name="Experience" />
                                         {experiences}
                                         <br />
                                         <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button>
-                                    </Row>
-                                    <br />
-                                    <Row>
-                                        <Col md={6}>
-                                            <ContentHeading name="Education" />
-                                            <Button id="addEducationBtn" onClick={this.addEducation}>Add Education</Button>
-                                            {educations}
-                                        </Col>
+                                    </Col>
+                                </Row>
+                                <br />
+                                <Row>
+                                    <Col md={6}>
+                                        <ContentHeading name="Education" />
+                                        <Button id="addEducationBtn" onClick={this.addEducation}>Add Education</Button>
+                                        <br />
+                                        {educations}
+                                    </Col>
 
-                                        <Col md={6}>
-                                            <ContentHeading name="Languages" />
-                                            <Button id="addLanguageBtn" onClick={this.addLanguage}>Add language</Button>
-                                            {languages}
-                                        </Col>
-                                    </Row>
-                                    <br />
-                                    <Row>
+                                    <Col md={6}>
+                                        <ContentHeading name="Languages" />
+                                        <Button id="addLanguageBtn" onClick={this.addLanguage}>Add language</Button>
+                                        {languages}
+                                    </Col>
+                                </Row>
+                                <br />
+                                <Row>
+                                    <Col md={6}>
                                         <ContentHeading name="Life Philosophy" />
                                         <FieldGroup
                                             name="LifePhilosophyContent"
@@ -750,32 +750,32 @@ export class NewCVForm extends Component {
                                             placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
                                             onChange={this.changeLifePhilosophyHandler}
                                         />
-                                    </Row>
-                                    <br />
-                                    <Row>
-                                        <Col md={6}>
-                                            <ContentHeading name="Most Proud Of" />
-                                            <Button onClick={this.addAchievement} >Add Your Achievements</Button>
-                                            {achievements}
-                                        </Col>
-                                        <Col md={6}>
-                                            <ContentHeading name="Strengths" />
-                                            <FormControl style={{ height: 100 }}
-                                                name="strength"
-                                                componentClass="textarea"
-                                                value={this.state.formControls.strength.value}
-                                                placeholder={this.state.formControls.strength.placeHolder}
-                                                onChange={this.changeStrengthsHandler}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <br />
-                                    <br />
-                                    <Button type="submit">Save & Render as HTML</Button>
+                                    </Col>
+                                    <Col md={6}>
+                                        <ContentHeading name="Strengths" />
+                                        <FormControl
+                                            name="strength"
+                                            componentClass="textarea"
+                                            value={this.state.formControls.strength.value}
+                                            placeholder={this.state.formControls.strength.placeHolder}
+                                            onChange={this.changeStrengthsHandler}
+                                        />
+                                    </Col>
                                 </Row>
+                                <br />
+                                <Row style={{ overflowX: 'hidden' }}>
+                                    <Col md={12}>
+                                        <ContentHeading name="Most Proud Of" />
+                                        <Button onClick={this.addAchievement} >Add Your Achievements</Button>
+                                        {achievements}
+                                    </Col>
+                                </Row>
+                                <br />
+                                <br />
+                                <Button type="submit">Save & Render as HTML</Button>
                             </Col>
                         </Row>
-                </Grid>
+                    </Grid>
                 </form >
             </div>
         );

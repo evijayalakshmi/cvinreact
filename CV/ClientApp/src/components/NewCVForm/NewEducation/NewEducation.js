@@ -11,7 +11,7 @@ export class NewEducation extends Component {
     render() {
         return (
             <Row ref={this.props.innerRef}>
-                <Col md={5} style={{ 'padding-left': '0px' }}>
+                <Col md={5}>
                     <FieldGroup
                         name="stream"
                         id="formControlseducationStream"
