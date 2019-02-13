@@ -787,7 +787,7 @@ export class NewCVForm extends Component {
                                     </Col>
                                 </Row>
                                 <br />
-                                <Row style={{ overflowX: 'hidden' }}>
+                                <Row>
                                     <Col md={12}>
                                         <ContentHeading name="Most Proud Of" />
                                         <Button onClick={this.addAchievement} >Add Your Achievements</Button>
