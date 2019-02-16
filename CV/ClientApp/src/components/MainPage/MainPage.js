@@ -35,12 +35,12 @@ export default class MainPage extends Component {
                         <p id="signupButton"
                             onClick={() => this.switch("signup")}
                             className={this.state.signup ? "yellow" : "blue"}>
-                            Sign In
+                            <h3> Sign In </h3>
                         </p>
                         <p id="loginButton"
                             onClick={() => this.switch("login")}
                             className={this.state.login ? "yellow" : "blue"}>
-                            Login
+                            <h3> Login </h3>
                         </p>
                     </div>
                     {this.state.signup ? <Signup /> : null}

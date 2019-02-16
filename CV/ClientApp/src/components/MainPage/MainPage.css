@@ -4,7 +4,7 @@
 
 #buttons {
     margin: 0 auto;
-    height: 100px;
+    height: 85px;
     background: #2c3e50;
 }
 
@@ -13,8 +13,8 @@
         float: left;
         color: white;
         text-align: center;
-        padding-top: 25px;
-        height: 75%;
+        /*padding-top: 25px;*/
+        height: 100%;
         margin: 0;
     }
 

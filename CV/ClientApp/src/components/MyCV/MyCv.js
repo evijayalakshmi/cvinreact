@@ -16,12 +16,11 @@ export class MyCv extends Component {
     displayName = MyCv.name;
 
     render() {
-
         console.log('from url ', this.props.location.state);
         var data = this.props.location.state;
         return (
-            <div className="page">
-                <Grid fluid>
+            <div>
+                <Grid container>
                     <Row className="marginTop">
                         <Col xs={6} md={8} sm={8} xsOffset={1}>
                             <PersonalInfo info={data.personalDetails} />

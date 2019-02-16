@@ -35,7 +35,9 @@
                 from: "Oct 2005",
                 to: "July 2010",
                 location: "Palo Alto.CA",
-                responsibilities: []
+                    responsibilities: ["Positioned Google Maps as the world leader in moble maps and navigation",
+                        "Oversaw 1000• engineers and product managers workingon Google Maps.Google Places and Google Earth."
+                    ]
             }, {
                 title: "Product Manager & Technical UILead",
                 company: "Google",
