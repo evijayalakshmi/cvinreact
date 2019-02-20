@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
 export class FieldGroup extends Component {
     constructor(props, context) {
@@ -8,11 +7,11 @@ export class FieldGroup extends Component {
 
     render() {
         return (
-            <FormGroup controlId={this.props.id}>
-                <ControlLabel>{this.props.label}</ControlLabel>
-                <FormControl key={this.props.id} {...this.props} />
-                {this.props.help && <HelpBlock>{this.props.help}</HelpBlock>}
-            </FormGroup>
+            <div className="form-group">
+                <label for={this.props.id}>{this.props.label}</label>
+                <input type="text" class="form-control" id={this.props.id} {...this.props} />
+                {this.props.help && <small id="help" class="form-text text-muted">{this.props.help}</small>}
+            </div>
         );
     }
 }

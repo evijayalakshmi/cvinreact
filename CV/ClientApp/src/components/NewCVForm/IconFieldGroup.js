@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, InputGroup, FormControl, HelpBlock } from 'react-bootstrap';
-import { FieldGroup } from './FieldGroup';
 
 export class IconFieldGroup extends Component {
     constructor(props, context) {
@@ -9,14 +7,18 @@ export class IconFieldGroup extends Component {
 
     render() {
         return (
-            <FormGroup>
-                <ControlLabel>{this.props.label}</ControlLabel>
-                <InputGroup>
-                    <InputGroup.Addon><i className={this.props.icon} /></InputGroup.Addon>
-                    <FormControl key={this.props.id} {...this.props} />
-                    {this.props.help && <HelpBlock>{this.props.help}</HelpBlock>}
-                </InputGroup>
-            </FormGroup>
+            <div className="form-group">
+                <label for={this.props.id}>{this.props.label}</label>
+                <div className="input-group">
+                    <div class="input-group-addon">
+                        <span className="input-group-text" id="basic-addon1">
+                            <i className={this.props.icon} />
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id={this.props.id} {...this.props} />
+                    {this.props.help && <small id="help" class="form-text text-muted">{this.props.help}</small>}
+                </div>
+            </div>
         );
     }
 }

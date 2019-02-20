@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row, FormGroup, FormControl, Checkbox, Button, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { ContentHeading } from '../ContentHeading/ContentHeading';
 import { FieldGroup } from './FieldGroup';
 import { IconFieldGroup } from './IconFieldGroup';
@@ -8,9 +7,7 @@ import NewAchievement from './NewAchievement/NewAchievement';
 import './NewCVForm.css';
 import { NewEducation } from './NewEducation/NewEducation';
 import { NewLanguage } from './NewLanguage/NewLanguage';
-import { Redirect } from 'react-router';
 import { CvData } from '../../models/CvData';
-import { NewListItem } from './NewListItem/NewListItem';
 
 export class NewCVForm extends Component {
     displayName = NewCVForm.name;
@@ -368,7 +365,7 @@ export class NewCVForm extends Component {
         });
     }
 
-    deleteAchievemnt = (e, i) => {
+    deleteAchievement = (e, i) => {
         e.preventDefault();
 
         const updatedFormControls = {
@@ -635,7 +632,7 @@ export class NewCVForm extends Component {
                 innerRef={React.createRef()}
                 achievement={this.state.formControls.achievement[i]}
                 valueChange={(e, idx) => this.changeAchievementHandler(e, idx)}
-                delete={(e, idx) => this.deleteAchievemnt(e, idx)} />);
+                delete={(e, idx) => this.deleteAchievement(e, idx)} />);
         }
 
         // Languages
@@ -653,11 +650,11 @@ export class NewCVForm extends Component {
 
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit}>
-                <Grid fluid>
-                    <Row>
+                <div className="container-fluid">
+                    <div className="row">
                         <ContentHeading name="Personal Info" />
-                        <Row>
-                            <Col md={6}>
+                        <div className="row">
+                            <div className="col-md-6">
                                 <FieldGroup
                                     name="name"
                                     id="formControlsName"
@@ -667,8 +664,8 @@ export class NewCVForm extends Component {
                                     placeholder={this.state.formControls.personalInfo.name.placeHolder}
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-                            <Col md={6}>
+                            </div>
+                            <div className="col-md-6">
                                 <IconFieldGroup
                                     name="location"
                                     id="formControlsLocaiton"
@@ -678,10 +675,10 @@ export class NewCVForm extends Component {
                                     icon="fa fa-map-marker"
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={4}>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4">
                                 <IconFieldGroup
                                     name="email"
                                     id="formControlsEmail"
@@ -691,9 +688,8 @@ export class NewCVForm extends Component {
                                     icon="fa fa-at"
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-
-                            <Col md={4}>
+                            </div>
+                            <div className="col-md-4">
                                 <IconFieldGroup
                                     name="linkedIn"
                                     id="formControlsLinkedIn"
@@ -703,9 +699,8 @@ export class NewCVForm extends Component {
                                     icon="fa fa-linkedin"
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-
-                            <Col md={4}>
+                            </div>
+                            <div className="col-md-4">
                                 <IconFieldGroup
                                     name="phoneNumber"
                                     id="formControlsPhone"
@@ -715,10 +710,10 @@ export class NewCVForm extends Component {
                                     icon="fa fa-phone"
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={6}>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
                                 <IconFieldGroup
                                     name="gitURL"
                                     id="formControlsGitHub"
@@ -728,9 +723,8 @@ export class NewCVForm extends Component {
                                     icon="fa fa-github"
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-
-                            <Col md={6}>
+                            </div>
+                            <div className="col-md-6">
                                 <IconFieldGroup
                                     name="blogURL"
                                     id="formControlsBlog"
@@ -740,66 +734,68 @@ export class NewCVForm extends Component {
                                     icon="fa fa-newspaper-o"
                                     onChange={this.changePersonalInfoHandler}
                                 />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={12}>
-                                <ContentHeading name="Experience" />
-                                {experiences}
-                                <Button id="addExpBtn" onClick={this.addExperience}>Add experience</Button>
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <ContentHeading name="Experience" />
+                            {experiences}
+                            <button type="button" className="btn btn-primary" id="addExpBtn" onClick={this.addExperience}>Add experience</button>
+                        </div>
                         <br />
-                        <Row>
-                            <Col md={12}>
-                                <ContentHeading name="Education" />
-                                {educations}
-                                <Button id="addEducationBtn" onClick={this.addEducation}>Add Education</Button>
-                            </Col>
-                        </Row>
+                        <div className="row">
+                            <ContentHeading name="Education" />
+                            {educations}
+                            <button type="button" className="btn btn-primary" id="addEducationBtn" onClick={this.addEducation}>Add Education</button>
+                        </div>
                         <br />
-                        <Row>
-                            <Col md={6}>
+                        <div className="row">
+                            <div className="col-md-6">
                                 <ContentHeading name="Languages" />
                                 {languages}
-                                <Button id="addLanguageBtn" onClick={this.addLanguage}>Add language</Button>
-                            </Col>
-                            <Col md={6}>
+                                <button type="button" className="btn btn-primary" id="addLanguageBtn" onClick={this.addLanguage}>Add language</button>
+                            </div>
+                            <div className="col-md-6">
                                 <ContentHeading name="Most Proud Of" />
-                                <Button onClick={this.addAchievement} >Add Your Achievements</Button>
+                                <button type="button" className="btn btn-primary" onClick={this.addAchievement} >Add Your Achievements</button>
                                 {achievements}
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
                         <br />
-                        <Row>
-                            <Col md={6}>
+                        <div className="row">
+                            <div className="col-md-6">
                                 <ContentHeading name="Strengths" />
-                                <FormControl
-                                    name="strength"
-                                    componentClass="textarea"
-                                    value={this.state.formControls.strength.value}
-                                    placeholder={this.state.formControls.strength.placeHolder}
-                                    onChange={this.changeStrengthsHandler}
-                                />
-
-                            </Col>
-                            <Col md={6}>
+                                <div class="form-group">
+                                    <textarea
+                                        name="strength"
+                                        class="form-control"
+                                        id="exampleFormControlTextarea1"
+                                        rows="3"
+                                        value={this.state.formControls.strength.value}
+                                        placeholder={this.state.formControls.strength.placeHolder}
+                                        onChange={this.changeStrengthsHandler}>
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
                                 <ContentHeading name="Life Philosophy" />
-                                <FieldGroup
-                                    name="LifePhilosophyContent"
-                                    componentClass="textarea"
-                                    id="formControlsLifePhilosophy"
-                                    value={this.state.formControls.lifePhilosophyContent.value}
-                                    placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
-                                    onChange={this.changeLifePhilosophyHandler}
-                                />
-                            </Col>
-                        </Row>
+                                <div class="form-group">
+                                    <textarea
+                                        name="LifePhilosophyContent"
+                                        class="form-control"
+                                        id="formControlsLifePhilosophy"
+                                        rows="3"
+                                        value={this.state.formControls.lifePhilosophyContent.value}
+                                        placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
+                                        onChange={this.changeLifePhilosophyHandler}>
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
                         <br />
                         <br />
-                        <Button type="submit">Save & Render as HTML</Button>
-                    </Row>
-                </Grid>
+                        <button class="btn btn-primary" type="submit">Save & Render as HTML</button>
+                    </div>
+                </div>
             </form >
         );
     }
