@@ -30,7 +30,7 @@ export default class Login extends Component {
         var userData = {
             email: this.state.email,
             password: this.state.password
-        }
+        };
         fetch('api/User/ValidateUser', {
             method: 'POST',
             headers: {
@@ -52,8 +52,9 @@ export default class Login extends Component {
 
     render() {
         if (this.state.isUserValid === true) {
-            return (<Redirect to={{ pathname: '/NewCv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail } }} />);
+            return (<Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail } }} />);
         }
+
         return (
             <div className="Login">
                 <form onSubmit={this.handleSubmit}>

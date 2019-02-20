@@ -8,6 +8,7 @@ import { MyCv } from './components/MyCV/MyCv';
 import { NewCVForm } from './components/NewCVForm/NewCVForm';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import MainPage from './components/MainPage/MainPage';
+import { ContentForm } from './components/ContentForm/ContentForm';
 
 export default class App extends Component {
     displayName = App.name
@@ -18,8 +19,7 @@ export default class App extends Component {
                 <Router>
                     <Switch>
                         <Route exact path='/' component={MainPage} />
-                        <Route path='/NewCv' component={NewCVForm} />
-                        <Route path='/MyCv' component={MyCv} />
+                        <Route path='/Cv' component={ContentForm} />
                     </Switch>
                 </Router>
             </div>
