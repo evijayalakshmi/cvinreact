@@ -20,6 +20,13 @@ export class ContentForm extends Component {
             userName: ''
         };
 
+        fetch('api/ResumeData/GetByEmailId?emailId=' + this.props.location.userInfo.userEmail)
+            .then((response) => {
+                return response.json();
+            }).then((data) => {
+                debugger;
+                this.setState({ oldResumes: data });
+            });
     }
 
     render() {
