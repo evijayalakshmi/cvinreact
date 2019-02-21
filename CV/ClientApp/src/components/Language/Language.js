@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
 import './Language.css'
 
 export class Language extends Component {
@@ -15,15 +14,13 @@ export class Language extends Component {
             indents.push(<span className='indent' key={i + "l"}><i className="fa fa-circle fa-opcircle"></i></span>);
         }
         return (
-            <div>
-                <Row>
-                    <Col md={6} sm={6}>
-                        <span><b>{this.props.language.language}</b></span>
-                    </Col>
-                    <Col md={6} sm={6}>
-                        {indents}
-                    </Col>
-                </Row>
+            <div className="row w-100">
+                <div className="col-md-6 col-sm-6">
+                    <span><b>{this.props.language.language}</b></span>
+                </div>
+                <div className="col-md-6 col-sm-6">
+                    {indents}
+                </div>
             </div>
         );
     }

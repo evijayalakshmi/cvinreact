@@ -10,7 +10,7 @@ export class IconFieldGroup extends Component {
             <div className="form-group">
                 <label for={this.props.id}>{this.props.label}</label>
                 <div className="input-group">
-                    <div class="input-group-addon">
+                    <div class="input-group-prepend">
                         <span className="input-group-text" id="basic-addon1">
                             <i className={this.props.icon} />
                         </span>

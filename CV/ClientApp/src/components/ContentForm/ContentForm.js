@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Col, Grid, Row, FormGroup, FormControl, Checkbox, Button, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 import { NewCVForm } from '../NewCVForm/NewCVForm';
 import { MyCv } from '../MyCV/MyCv';
 import { NewListItem } from '../NewCVForm/NewListItem/NewListItem';
 import { ContentHeading } from '../ContentHeading/ContentHeading';
+import './ContentForm.css';
 
 export class ContentForm extends Component {
     displayName = ContentForm.name;
@@ -33,35 +33,27 @@ export class ContentForm extends Component {
         }
 
         return (
-            <div>
-                <Navbar bg="dark" variant="dark" fixed="top"
-                    style={{ width: "100%" }}>
-                    <Navbar.Brand href="#">Resume Builder App</Navbar.Brand>
-                    <Navbar.Toggle />
-                    <Navbar.Collapse className="justify-content-end">
-                        <Navbar.Text>
-                            Signed in as: {this.state.userName}
-                        </Navbar.Text>
-                        <Navbar.Text>
-                            <a href="#login">Logout</a>
-                        </Navbar.Text>
-                    </Navbar.Collapse>
-                </Navbar>
-
-                <Grid fluid>
-                    <Row>
-                        <Col md={2}>
+            <div className="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between w-100">
+                    <a class="navbar-brand" href="#">Resume Builder</a>
+                    <p class="navbar-text navbar-center">Signed in as {this.state.userName}</p>
+                    <p class="navbar-text navbar-right"><a href="#login" class="navbar-link">Logout</a></p>
+                </nav>
+                <hr />
+                <div className="container-fluid h-100">
+                    <div className="row h-100">
+                        <div className="col-md-2 h-100 saved-resumes">
                             <ContentHeading name="Saved Resumes" />
                             <ul className="list-group">
                                 {resumes}
                             </ul>
-                        </Col>
-                        <Col md={10}>
+                        </div>
+                        <div className="col-md-10 h-100 edit-resumes">
                             {this.state.edit ? <NewCVForm userInfo={{ userName: this.state.userName, userEmail: this.state.userEmail }}/> : null}
                             {this.state.render ? <MyCv /> : null}
-                        </Col>
-                    </Row>
-                </Grid>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

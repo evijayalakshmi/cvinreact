@@ -29,7 +29,6 @@ export default class MainPage extends Component {
 
         return (
             <div className="card">
-                <img src={resumeBuilder} className="img-circle responsive" alt="app-logo" />
                 <div className="card-body">
                     <div id="buttons">
                         <p id="signupButton"

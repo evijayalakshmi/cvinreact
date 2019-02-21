@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row, FormGroup, FormControl, ControlLabel, Checkbox, Radio, HelpBlock, Button, InputGroup } from 'react-bootstrap';
 import { IconFieldGroup } from '../IconFieldGroup';
 
 export default class NewAchievement extends Component {
@@ -9,8 +8,8 @@ export default class NewAchievement extends Component {
 
     render() {
         return (
-            <Row  ref={this.props.innerRef}>
-                <Col md={10}>
+            <div className="row" ref={this.props.innerRef}>
+                <div className="col-md-10">
                     <IconFieldGroup
                         name="achievement"
                         id="formControlsachievement"
@@ -20,11 +19,11 @@ export default class NewAchievement extends Component {
                         componentClass="textarea"
                         onChange={(e) => this.props.valueChange(e, this.props.index)}
                     />
-                </Col>
-                <Col md={2}>
-                    <Button onClick={(e) => this.props.delete(e, this.props.index)}><i class="fa fa-times"></i></Button>
-                </Col>
-            </Row>
+                </div>
+                <div className="col-md-2">
+                    <button onClick={(e) => this.props.delete(e, this.props.index)}><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
         )
     }
 }

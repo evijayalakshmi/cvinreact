@@ -1,7 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
 import './Experience.css'
-import { ContentHeading } from '../ContentHeading/ContentHeading';
 
 export class Experience extends Component {
     displayName = Experience.name;
@@ -11,14 +9,14 @@ export class Experience extends Component {
             <div>
                 <h3 className="heading4">{this.props.experience.title}</h3>
                 <h5 className="heading4"><b>{this.props.experience.company}</b></h5>
-                <Row>
-                    <Col xs={6} md={6} sm={6}>
+                <div className="row w-100">
+                    <div className="col-xs-6 col-md-6 col-sm-6">
                         <i className="fa fa-calendar"></i> {this.props.experience.from} - {this.props.experience.to}
-                    </Col>
-                    <Col xs={6} md={6} sm={6}>
+                    </div>
+                    <div className="col-xs-6 col-md-6 col-sm-6">
                         <i className="fa fa-map-marker"></i> {this.props.experience.location}
-                    </Col>
-                </Row>
+                    </div>
+                </div>
                 <br />
                 <ul>
                     {this.props.experience.responsibilities.map(function (name, index) {

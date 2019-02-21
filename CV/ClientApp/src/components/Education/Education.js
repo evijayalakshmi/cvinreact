@@ -1,6 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
-
 
 export class Education extends Component {
     displayName = Education.name;

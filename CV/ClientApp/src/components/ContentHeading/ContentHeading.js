@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
 import './ContentHeading.css';
 
 export class ContentHeading extends Component {
@@ -7,9 +6,7 @@ export class ContentHeading extends Component {
 
     render() {
         return (
-            <div>
-                <h3 className="heading"><b>{this.props.name.toUpperCase()}</b></h3>
-            </div>
+            <h3 className="heading w-100"><b>{this.props.name.toUpperCase()}</b></h3>
         );
     }
 }

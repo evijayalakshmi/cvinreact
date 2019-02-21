@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
 import './Strength.css';
 
 export class Strength extends Component {

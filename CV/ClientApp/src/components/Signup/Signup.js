@@ -1,14 +1,6 @@
 ﻿import React, { Component } from "react";
-import {
-    Button,
-    HelpBlock,
-    FormGroup,
-    FormControl,
-    ControlLabel,
-    Alert,
-    AlertProps
-} from "react-bootstrap";
 import "./Signup.css";
+import { FieldGroup } from "../NewCVForm/FieldGroup";
 
 export default class Signup extends Component {
     constructor(props) {
@@ -79,74 +71,71 @@ export default class Signup extends Component {
         this.setState({ isLoading: true });
     }
 
-    renderConfirmationForm() {
-        return (
-            <form onSubmit={this.handleConfirmationSubmit}>
-                <FormGroup controlId="confirmationCode" bsSize="large">
-                    <ControlLabel>Confirmation Code</ControlLabel>
-                    <FormControl
-                        autoFocus
-                        type="tel"
-                        value={this.state.confirmationCode}
-                        onChange={this.handleChange}
-                    />
-                    <HelpBlock>Please check your email for the code.</HelpBlock>
-                </FormGroup>
-            </form>
-        );
-    }
+    // renderConfirmationForm() {
+    //     return (
+    //         <form onSubmit={this.handleConfirmationSubmit}>
+    //             <FormGroup controlId="confirmationCode" bsSize="large">
+    //                 <ControlLabel>Confirmation Code</ControlLabel>
+    //                 <FormControl
+    //                     autoFocus
+    //                     type="tel"
+    //                     value={this.state.confirmationCode}
+    //                     onChange={this.handleChange}
+    //                 />
+    //                 <HelpBlock>Please check your email for the code.</HelpBlock>
+    //             </FormGroup>
+    //         </form>
+    //     );
+    // }
 
     renderForm() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <FormGroup controlId="name" bsSize="large">
-                    <ControlLabel>Name</ControlLabel>
-                    <FormControl
-                        autoFocus
-                        type="name"
+                <FieldGroup
+                        name="name"
+                        id="name"
+                        type="text"
+                        label="Name"
                         value={this.state.name}
                         onChange={this.handleChange}
                     />
-                </FormGroup>
-                <FormGroup controlId="email" bsSize="large">
-                    <ControlLabel>Email</ControlLabel>
-                    <FormControl
-                        autoFocus
-                        type="email"
+                <FieldGroup
+                        name="email"
+                        id="email"
+                        type="text"
+                        label="Email"
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
-                </FormGroup>
-                <FormGroup controlId="password" bsSize="large">
-                    <ControlLabel>Password</ControlLabel>
-                    <FormControl
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        type="password"
-                    />
-                </FormGroup>
-                <FormGroup controlId="confirmPassword" bsSize="large">
-                    <ControlLabel>Confirm Password</ControlLabel>
-                    <FormControl
-                        value={this.state.confirmPassword}
-                        onChange={this.handleChange}
-                        type="password"
-                    />
-                </FormGroup>
-                <Button
-                    block
-                    bsSize="large"
+                <FieldGroup
+                    name="password"
+                    id="password"
+                    type="password"
+                    label="Password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                />
+                <FieldGroup
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    type="password"
+                    label="Confirm Password"
+                    value={this.state.confirmPassword}
+                    onChange={this.handleChange}
+                />
+                <button
+                    class="btn btn-primary"
                     disabled={!this.validateForm()}
                     type="submit"
                 >
                     SignIn
-                </Button>
-                {this.state.isUserRegistered === true
-                    ? <Alert variant="success">
+                </button>
+                {this.state.isUserRegistered
+                    ? <div class="alert alert-success" role="alert">
                         <p>Hey {this.state.name},</p>
                         <hr />
                         <p> You registered Successfully! Please login with your credentials. </p>
-                    </Alert>
+                    </div>
                     : null}
             </form>
         );

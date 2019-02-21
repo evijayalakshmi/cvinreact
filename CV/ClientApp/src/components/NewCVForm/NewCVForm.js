@@ -16,7 +16,7 @@ export class NewCVForm extends Component {
         super(props, context);
 
         var cvData = new CvData();
-        var data = cvData.getEmptyData();
+        var data = cvData.getData();
 
         this.state = {
             userEmail: this.props.userInfo.userEmail,
@@ -649,11 +649,11 @@ export class NewCVForm extends Component {
         }
 
         return (
-            <form key="CVFormKey" onSubmit={this.handleSubmit}>
-                <div className="container-fluid">
-                    <div className="row">
+            <form key="CVFormKey" onSubmit={this.handleSubmit} className="edit-form">
+                <div className="row w-100">
+                    <div className="w-100">
                         <ContentHeading name="Personal Info" />
-                        <div className="row">
+                        <div className="row w-100">
                             <div className="col-md-6">
                                 <FieldGroup
                                     name="name"
@@ -677,7 +677,7 @@ export class NewCVForm extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="row">
+                        <div className="row w-100">
                             <div className="col-md-4">
                                 <IconFieldGroup
                                     name="email"
@@ -712,7 +712,7 @@ export class NewCVForm extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="row">
+                        <div className="row w-100">
                             <div className="col-md-6">
                                 <IconFieldGroup
                                     name="gitURL"
@@ -736,65 +736,65 @@ export class NewCVForm extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="row">
-                            <ContentHeading name="Experience" />
-                            {experiences}
-                            <button type="button" className="btn btn-primary" id="addExpBtn" onClick={this.addExperience}>Add experience</button>
-                        </div>
-                        <br />
-                        <div className="row">
-                            <ContentHeading name="Education" />
-                            {educations}
-                            <button type="button" className="btn btn-primary" id="addEducationBtn" onClick={this.addEducation}>Add Education</button>
-                        </div>
-                        <br />
-                        <div className="row">
-                            <div className="col-md-6">
-                                <ContentHeading name="Languages" />
-                                {languages}
-                                <button type="button" className="btn btn-primary" id="addLanguageBtn" onClick={this.addLanguage}>Add language</button>
-                            </div>
-                            <div className="col-md-6">
-                                <ContentHeading name="Most Proud Of" />
-                                <button type="button" className="btn btn-primary" onClick={this.addAchievement} >Add Your Achievements</button>
-                                {achievements}
-                            </div>
-                        </div>
-                        <br />
-                        <div className="row">
-                            <div className="col-md-6">
-                                <ContentHeading name="Strengths" />
-                                <div class="form-group">
-                                    <textarea
-                                        name="strength"
-                                        class="form-control"
-                                        id="exampleFormControlTextarea1"
-                                        rows="3"
-                                        value={this.state.formControls.strength.value}
-                                        placeholder={this.state.formControls.strength.placeHolder}
-                                        onChange={this.changeStrengthsHandler}>
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <ContentHeading name="Life Philosophy" />
-                                <div class="form-group">
-                                    <textarea
-                                        name="LifePhilosophyContent"
-                                        class="form-control"
-                                        id="formControlsLifePhilosophy"
-                                        rows="3"
-                                        value={this.state.formControls.lifePhilosophyContent.value}
-                                        placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
-                                        onChange={this.changeLifePhilosophyHandler}>
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <button class="btn btn-primary" type="submit">Save & Render as HTML</button>
                     </div>
+                    <div className="w-100">
+                        <ContentHeading name="Experience" />
+                        {experiences}
+                        <button type="button" className="btn btn-primary" id="addExpBtn" onClick={this.addExperience}>Add experience</button>
+                    </div>
+                    <br />
+                    <div className="w-100">
+                        <ContentHeading name="Education" />
+                        {educations}
+                        <button type="button" className="btn btn-primary" id="addEducationBtn" onClick={this.addEducation}>Add Education</button>
+                    </div>
+                    <br />
+                    <div className="row w-100">
+                        <div className="col-md-6">
+                            <ContentHeading name="Languages" />
+                            {languages}
+                            <button type="button" className="btn btn-primary" id="addLanguageBtn" onClick={this.addLanguage}>Add language</button>
+                        </div>
+                        <div className="col-md-6">
+                            <ContentHeading name="Most Proud Of" />
+                            {achievements}
+                            <button type="button" className="btn btn-primary" onClick={this.addAchievement} >Add Your Achievements</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div className="row w-100">
+                        <div className="col-md-6">
+                            <ContentHeading name="Strengths" />
+                            <div class="form-group">
+                                <textarea
+                                    name="strength"
+                                    class="form-control"
+                                    id="exampleFormControlTextarea1"
+                                    rows="3"
+                                    value={this.state.formControls.strength.value}
+                                    placeholder={this.state.formControls.strength.placeHolder}
+                                    onChange={this.changeStrengthsHandler}>
+                                </textarea>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <ContentHeading name="Life Philosophy" />
+                            <div class="form-group">
+                                <textarea
+                                    name="LifePhilosophyContent"
+                                    class="form-control"
+                                    id="formControlsLifePhilosophy"
+                                    rows="3"
+                                    value={this.state.formControls.lifePhilosophyContent.value}
+                                    placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
+                                    onChange={this.changeLifePhilosophyHandler}>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <button class="btn btn-primary" type="submit">Save & Render as HTML</button>
                 </div>
             </form >
         );
