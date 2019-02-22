@@ -8,9 +8,9 @@ export class FieldGroup extends Component {
     render() {
         return (
             <div className="form-group">
-                <label for={this.props.id}>{this.props.label}</label>
-                <input type="text" class="form-control" id={this.props.id} {...this.props} />
-                {this.props.help && <small id="help" class="form-text text-muted">{this.props.help}</small>}
+                <label htmlFor={this.props.id}>{this.props.label}</label>
+                <input type="text" className="form-control" id={this.props.id} {...this.props} />
+                {this.props.help && <small id="help" className="form-text text-muted">{this.props.help}</small>}
             </div>
         );
     }

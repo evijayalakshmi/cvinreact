@@ -51,7 +51,7 @@ export default class Login extends Component {
     }
 
     render() {
-        if (this.state.isUserValid === true) {
+        if (this.state.isUserValid) {
             return (<Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail } }} />);
         }
 
@@ -75,7 +75,7 @@ export default class Login extends Component {
                         onChange={this.handleChange}
                     />
                     <button
-                        class="btn btn-primary"
+                        className="btn btn-primary"
                         disabled={!this.validateForm()}
                         type="submit"
                     >
