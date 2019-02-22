@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using cv.DataAccess;
 using cv.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +37,25 @@ namespace cv.Controllers {
             }
             return Ok(user);
         }
+
+        [HttpGet("[action]")]
+        public ActionResult<IReadOnlyCollection<User>> GetAllUsers() {
+            return Ok(_context.Users);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id) {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null) {
+                return NotFound();
+            }
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }

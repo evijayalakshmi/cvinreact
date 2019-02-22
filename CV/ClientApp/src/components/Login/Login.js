@@ -42,7 +42,7 @@ export default class Login extends Component {
             return response.json();
         }
         ).then((data) => {
-            this.setState({ isUserValid: true, userName: data.name, userEmail: data.email });
+            this.setState({ isUserValid: true, userName: data.name, userEmail: data.email, isAdmin: data.isAdmin });
             return data;
         }
         );
@@ -52,7 +52,7 @@ export default class Login extends Component {
 
     render() {
         if (this.state.isUserValid) {
-            return (<Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail } }} />);
+            return (<Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail, isAdmin: this.state.isAdmin } }} />);
         }
 
         return (
