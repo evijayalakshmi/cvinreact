@@ -16,15 +16,14 @@ export class ContentForm extends Component {
             edit: true,
             render: false,
             oldResumes: [],
-            userEmail: '',
-            userName: ''
+            userEmail: this.props.location.userInfo.userEmail,
+            userName: this.props.location.userInfo.userName
         };
 
         fetch('api/ResumeData/GetByEmailId?emailId=' + this.props.location.userInfo.userEmail)
             .then((response) => {
                 return response.json();
             }).then((data) => {
-                debugger;
                 this.setState({ oldResumes: data });
             });
     }
@@ -41,10 +40,10 @@ export class ContentForm extends Component {
 
         return (
             <div className="container-fluid p-0">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between w-100">
-                    <a class="navbar-brand" href="#">Resume Builder</a>
-                    <p class="navbar-text navbar-center">Signed in as {this.state.userName}</p>
-                    <p class="navbar-text navbar-right"><a href="#login" class="navbar-link">Logout</a></p>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between w-100">
+                    <a className="navbar-brand" href="#">Resume Builder</a>
+                    <p className="navbar-text navbar-center">Signed in as {this.state.userName}</p>
+                    <p className="navbar-text navbar-right"><a href="#login" className="navbar-link">Logout</a></p>
                 </nav>
                 <hr />
                 <div className="container-fluid h-100">
