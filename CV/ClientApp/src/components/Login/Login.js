@@ -75,7 +75,7 @@ export default class Login extends Component {
                         onChange={this.handleChange}
                     />
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary btn-block"
                         disabled={!this.validateForm()}
                         type="submit"
                     >

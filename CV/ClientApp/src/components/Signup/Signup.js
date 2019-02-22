@@ -142,7 +142,7 @@ export default class Signup extends Component {
                 </div>
                 <hr />
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-primary btn-block"
                     disabled={!this.validateForm()}
                     type="submit"
                 >
