@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using cv.Models;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace cv.Services {
+
     public class ResumeStoreService : IResumeStoreService {
         private readonly IMongoCollection<ResumeData> _resumes;
 
@@ -19,8 +19,7 @@ namespace cv.Services {
             return resume;
         }
 
-        public IReadOnlyCollection<ResumeData> TryGetByUser(string emailId)
-        {
+        public IReadOnlyCollection<ResumeData> TryGetByUser(string emailId) {
             return _resumes.Find(_ => _.UserEmail == emailId).ToListAsync().Result;
         }
     }

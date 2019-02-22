@@ -17,5 +17,7 @@ namespace cv.DataAccess
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime CreatedTime { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }

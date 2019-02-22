@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿namespace cv.Models {
 
-namespace cv.Models
-{
-    public class SignUpViewModel
-    {
+    public class SignUpViewModel {
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

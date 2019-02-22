@@ -21,7 +21,8 @@ namespace cv.Controllers {
                 Name = userInfo.Name,
                 Email = userInfo.Email,
                 Password = userInfo.Password,
-                CreatedTime = DateTime.UtcNow
+                CreatedTime = DateTime.UtcNow,
+                IsAdmin = userInfo.IsAdmin
             });
             return Ok(_context.SaveChanges() > 0);
         }
