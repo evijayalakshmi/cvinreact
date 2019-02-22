@@ -13,6 +13,7 @@ export default class Signup extends Component {
             password: "",
             confirmPassword: "",
             confirmationCode: "",
+            isAdmin: false,
             isUserRegistered: false
         };
     }
@@ -36,11 +37,18 @@ export default class Signup extends Component {
         });
     }
 
+    handleAdminChange = event => {
+        this.setState({
+            [event.target.id]: !this.state.isAdmin
+        });
+    }
+
     handleSubmit = async event => {
         var newUserData = {
             name: this.state.name,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            isAdmin: this.state.isAdmin
         };
 
         fetch('api/User/RegisterUser', {
@@ -92,21 +100,21 @@ export default class Signup extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <FieldGroup
-                        name="name"
-                        id="name"
-                        type="text"
-                        label="Name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                    />
+                    name="name"
+                    id="name"
+                    type="text"
+                    label="Name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                />
                 <FieldGroup
-                        name="email"
-                        id="email"
-                        type="text"
-                        label="Email"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                    />
+                    name="email"
+                    id="email"
+                    type="text"
+                    label="Email"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                />
                 <FieldGroup
                     name="password"
                     id="password"
@@ -123,15 +131,25 @@ export default class Signup extends Component {
                     value={this.state.confirmPassword}
                     onChange={this.handleChange}
                 />
+                <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="isAdmin"
+                        checked={this.state.isAdmin}
+                        onChange={this.handleAdminChange}
+                    />
+                    <label className="form-check-label" htmlFor="isAdmin">
+                        Is Admin?
+                    </label>
+                </div>
+                <hr />
                 <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     disabled={!this.validateForm()}
                     type="submit"
                 >
                     SignIn
                 </button>
                 {this.state.isUserRegistered
-                    ? <div class="alert alert-success" role="alert">
+                    ? <div className="alert alert-success" role="alert">
                         <p>Hey {this.state.name},</p>
                         <hr />
                         <p> You registered Successfully! Please login with your credentials. </p>

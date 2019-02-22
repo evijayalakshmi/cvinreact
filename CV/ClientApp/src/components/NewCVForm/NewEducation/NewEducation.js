@@ -62,11 +62,11 @@ export class NewEducation extends Component {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"
                                 checked={this.props.education.isCurrentStudent}
                                 onChange={() => this.props.handleCurrentStudentCheck(this.props.index)} />
-                            <label class="form-check-label" for="defaultCheck1">
+                                <label className="form-check-label" htmlFor="defaultCheck1">
                                 Current Student?
                             </label>
                         </div>
