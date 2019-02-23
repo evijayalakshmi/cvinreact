@@ -9,7 +9,7 @@ export class NewListItem extends Component {
                 ref={this.props.innerRef}
                 onClick={(e )=> this.props.onListItemClick(e, this.props.index)}>{this.props.listItem.name}
                 <span className="pull-right button-group">
-                    <button type="button" className="btn">
+                    <button type="button" className="btn" onClick={(e) => this.props.delete(e, this.props.index)}>
                         <i className="fa fa-trash" />
                     </button>
                 </span>

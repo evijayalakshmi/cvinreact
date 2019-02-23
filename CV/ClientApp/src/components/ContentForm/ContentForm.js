@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { NewCVForm } from '../NewCVForm/NewCVForm';
 import { MyCv } from '../MyCV/MyCv';
 import { NewListItem } from '../NewCVForm/NewListItem/NewListItem';
@@ -15,7 +14,7 @@ export class ContentForm extends Component {
 
         this.state = {
             isAdmin: this.props.location.userInfo.isAdmin,
-            oldResumes: [],
+            resumes: [],
             userEmail: this.props.location.userInfo.userEmail,
             userName: this.props.location.userInfo.userName,
             activeListItem: 1
@@ -26,7 +25,7 @@ export class ContentForm extends Component {
                 .then((response) => {
                     return response.json();
                 }).then((data) => {
-                    this.setState({ oldResumes: data });
+                    this.setState({ resumes: data });
                 });
         }
     }
@@ -36,8 +35,49 @@ export class ContentForm extends Component {
         console.log(thisResume);
     }
 
+    addNewListItem = () => {
+        const emptyResumeData = {
+            userEmail: this.state.userEmail,
+            userName: this.state.userName,
+            name: '',
+            personalInfo: {},
+            experiences: [],
+            educations: [],
+            languages: [],
+            lifePhilosophy: '',
+            achievements: [],
+            strengths: []
+        };
+
+        this.setState(prevState => ({
+            resumes: [...prevState.resumes, emptyResumeData]
+        }))
+
+        //const updatedResumes = {
+        //    ...this.state.resumes
+        //};
+
+        //updatedResumes.push(emptyResumeData);
+
+        //this.setState({ resumes: updatedResumes });
+        console.log(this.state);
+    }
+
+    deleteListItem = (resume) => {
+        debugger;
+        fetch('api/ResumeData/' + resume.id, {
+            method: 'DELETE'
+        }).then(response => {
+            this.setState({
+                users: this.state.resumes.filter((res) => {
+                    return res.id !== resume.id;
+                })
+            });
+        });
+    }
+
     renderUserPage() {
-        const resumes = this.state.oldResumes.map((resume, i) => {
+        const resumes = this.state.resumes.map((resume, i) => {
             return (
                 <NewListItem
                     key={i}
@@ -46,6 +86,7 @@ export class ContentForm extends Component {
                     listItem={resume}
                     isActive={i === this.state.activeListItem - 1}
                     onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
+                    delete={(idx) => this.deleteListItem(resume)}
                 />);
         });
 
@@ -56,12 +97,14 @@ export class ContentForm extends Component {
                     <ul className="list-group">
                         {resumes}
                     </ul>
+                    <button class="btn btn-primary btn-block" onClick={() => this.addNewListItem()}>
+                        <i class="fa fa-plus"></i> Add new resume</button>
                 </div>
                 <div className="col-md-10 h-100 edit-resumes">
                     <NewCVForm
                         userInfo={{ userName: this.state.userName, userEmail: this.state.userEmail }}
                         activeResumeIndex={this.state.activeListItem}
-                        cvData={this.state.oldResumes[this.state.activeListItem - 1]}
+                        cvData={this.state.resumes[this.state.activeListItem - 1]}
                     />
                 </div>
             </div>
@@ -86,8 +129,7 @@ export class ContentForm extends Component {
                     <p className="navbar-text navbar-center">Signed in as {this.state.userName}</p>
                     <p className="navbar-text navbar-right"><a href="#login" className="navbar-link">Logout</a></p>
                 </nav>
-                <hr />
-                <div className="container-fluid h-100">
+                <div className="container-fluid h-100 bg">
                     {this.state.isAdmin ? this.renderAdminPage() : this.renderUserPage()}
                 </div>
             </div>

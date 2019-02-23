@@ -19,8 +19,16 @@ namespace cv.Services {
             return resume;
         }
 
+        public ResumeData Get(string id) {
+            return _resumes.Find<ResumeData>(res => res.Id == id).FirstOrDefault();
+        }
+
         public IReadOnlyCollection<ResumeData> TryGetByUser(string emailId) {
             return _resumes.Find(_ => _.UserEmail == emailId).ToListAsync().Result;
+        }
+
+        public void Remove(string id) {
+            _resumes.DeleteOne(res => res.Id == id);
         }
     }
 }

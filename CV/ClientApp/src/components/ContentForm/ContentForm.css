@@ -4,3 +4,7 @@
     top: 0;
     text-align: center;
 }
+
+.bg {
+    background: linear-gradient(#F1F1F1,#3279FD);
+}
