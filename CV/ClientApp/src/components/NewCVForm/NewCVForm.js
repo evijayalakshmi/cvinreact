@@ -15,8 +15,11 @@ export class NewCVForm extends Component {
     constructor(props, context) {
         super(props, context);
 
-        var cvData = new CvData();
-        var data = cvData.getEmptyData();
+        var data = this.props.cvData;
+        if (data === undefined) {
+            var cvData = new CvData();
+            data = cvData.getEmptyData();
+        }
 
         this.state = {
             userEmail: this.props.userInfo.userEmail,
@@ -124,6 +127,119 @@ export class NewCVForm extends Component {
                 }
             }
         };
+    }
+
+    componentWillReceiveProps(props) {
+        const activeIndex = this.props.activeResumeIndex;
+        if (props.activeResumeIndex !== activeIndex) {
+            var data = this.props.cvData;
+            var formControls = {
+                personalInfo: {
+                    name: {
+                        value: data.personalInfo.name,
+                        placeHolder: 'Enter name'
+                    },
+                    location: {
+                        value: data.personalInfo.location,
+                        placeHolder: 'Enter location'
+                    },
+                    email: {
+                        value: data.personalInfo.eMail,
+                        placeHolder: 'Enter email'
+                    },
+                    linkedIn: {
+                        value: '',
+                        placeHolder: 'Enter LinkedIn URL'
+                    },
+                    phoneNumber: {
+                        value: '',
+                        placeHolder: 'Enter phoneNumber'
+                    },
+                    gitURL: {
+                        value: '',
+                        placeHolder: 'Enter Git URL'
+                    },
+                    blogURL: {
+                        value: '',
+                        placeHolder: 'Enter blog URL'
+                    }
+                },
+                experience: data.experiences.map(exp => {
+                    return {
+                        title: {
+                            value: exp.title,
+                            placeHolder: 'Enter Title'
+                        },
+                        company: {
+                            value: exp.company,
+                            placeHolder: 'Enter company'
+                        },
+                        location: {
+                            value: exp.location,
+                            placeHolder: 'Enter location'
+                        },
+                        fromDate: {
+                            value: '',
+                            formattedValue: ''
+                        },
+                        toDate: {
+                            value: '',
+                            formattedValue: ''
+                        },
+                        rolesAndResponsibilities: {
+                            value: '',
+                            placeHolder: 'Enter roles & responsibilities'
+                        },
+                        isCurrentEmployer: false
+                    };
+                }),
+                education: data.educations.map(edu => {
+                    return {
+                        stream: {
+                            value: edu.stream,
+                            placeHolder: 'STREAM OF GRADUATION'
+                        },
+                        university: {
+                            value: edu.university,
+                            placeHolder: 'UNIVERSITY'
+                        },
+                        fromDate: {
+                            value: '',
+                            formattedValue: ''
+                        },
+                        toDate: {
+                            value: '',
+                            formattedValue: ''
+                        },
+                        isCurrentStudent: false
+                    };
+                }),
+                language: data.languages.map(lan => {
+                    return {
+                        name: lan.name.toLocaleLowerCase(),
+                        level: lan.level
+                    };
+                }),
+                achievement: data.achievements.map(mom => {
+                    return {
+                        value: mom,
+                        placeHolder: 'Enter your achievement'
+                    };
+                }),
+                lifePhilosophyContent: {
+                    value: '',
+                    placeHolder: 'Write Your Life Philosophy'
+                },
+                strength: data.strengths.map(st => {
+                    return {
+                        value: st,
+                        placeHolder: 'Enter strengths with comma separated values'
+                    }
+                })
+            }
+
+            this.setState({ formControls: formControls });
+        }
     }
 
     // Personal Info

@@ -17,7 +17,8 @@ export class ContentForm extends Component {
             isAdmin: this.props.location.userInfo.isAdmin,
             oldResumes: [],
             userEmail: this.props.location.userInfo.userEmail,
-            userName: this.props.location.userInfo.userName
+            userName: this.props.location.userInfo.userName,
+            activeListItem: 1
         };
 
         if (!this.state.isAdmin) {
@@ -30,15 +31,23 @@ export class ContentForm extends Component {
         }
     }
 
+    handleListItemClick = (e, idx, thisResume) => {
+        this.setState({ activeListItem: idx + 1 });
+        console.log(thisResume);
+    }
+
     renderUserPage() {
-        const resumes = [];
-        for (var i = 0; i < this.state.oldResumes.length; i += 1) {
-            resumes.push(<NewListItem
-                key={i}
-                index={i}
-                innerRef={React.createRef()}
-                listItem={this.state.oldResumes[i]} />);
-        }
+        const resumes = this.state.oldResumes.map((resume, i) => {
+            return (
+                <NewListItem
+                    key={i}
+                    index={i}
+                    innerRef={React.createRef()}
+                    listItem={resume}
+                    isActive={i === this.state.activeListItem - 1}
+                    onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
+                />);
+        });
 
         return (
             <div className="row h-100">
@@ -49,7 +58,11 @@ export class ContentForm extends Component {
                     </ul>
                 </div>
                 <div className="col-md-10 h-100 edit-resumes">
-                    <NewCVForm userInfo={{ userName: this.state.userName, userEmail: this.state.userEmail }} />
+                    <NewCVForm
+                        userInfo={{ userName: this.state.userName, userEmail: this.state.userEmail }}
+                        activeResumeIndex={this.state.activeListItem}
+                        cvData={this.state.oldResumes[this.state.activeListItem - 1]}
+                    />
                 </div>
             </div>
         );

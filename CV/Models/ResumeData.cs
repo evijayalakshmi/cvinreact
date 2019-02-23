@@ -90,7 +90,7 @@ namespace cv.Models {
         public string Name { get; set; }
 
         [BsonElement("Level")]
-        public string Level { get; set; }
+        public int Level { get; set; }
     }
 
 }

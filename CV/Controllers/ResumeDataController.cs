@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using cv.Models;
 using cv.Services;
-using cv.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace cv.Controllers
 {
     [Route("api/[controller]")]
     public class ResumeDataController : Controller
     {
-
         private readonly IResumeStoreService _resumeStoreService;
 
-        public ResumeDataController(IResumeStoreService resumeStoreService) {
+        public ResumeDataController(IResumeStoreService resumeStoreService)
+        {
             _resumeStoreService = resumeStoreService;
         }
 
@@ -24,7 +22,8 @@ namespace cv.Controllers
         }
 
         [HttpPost("[action]")]
-        public ActionResult<ResumeData> SaveToMongoDB([FromBody] ResumeData request) {
+        public ActionResult<ResumeData> SaveToMongoDB([FromBody] ResumeData request)
+        {
             var req = request;
             var utcTime = DateTime.UtcNow;
             req.Name = string.Format("{0} {1}", "Resume", utcTime);
@@ -37,10 +36,8 @@ namespace cv.Controllers
         }
 
         [HttpGet("[action]")]
-        public ActionResult<IEnumerable<ResumeData>> GetByEmailId([FromQuery] string emailId)
-        {
+        public ActionResult<IEnumerable<ResumeData>> GetByEmailId([FromQuery] string emailId) {
             return Ok(_resumeStoreService.TryGetByUser(emailId));
         }
-
     }
 }
