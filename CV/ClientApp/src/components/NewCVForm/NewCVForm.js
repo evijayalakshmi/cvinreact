@@ -35,15 +35,15 @@ export class NewCVForm extends Component {
         return {
             personalInfo: {
                 name: {
-                    value: data.personalInfo.Name,
+                    value: data.personalInfo.name,
                     placeHolder: 'Enter name'
                 },
                 location: {
-                    value: data.personalInfo.Address,
+                    value: data.personalInfo.location,
                     placeHolder: 'Enter location'
                 },
                 email: {
-                    value: data.personalInfo.Email,
+                    value: data.personalInfo.eMail,
                     placeHolder: 'Enter email'
                 },
                 linkedIn: {
@@ -51,7 +51,7 @@ export class NewCVForm extends Component {
                     placeHolder: 'Enter LinkedIn URL'
                 },
                 phoneNumber: {
-                    value: '',
+                    value: data.personalInfo.phoneNumber,
                     placeHolder: 'Enter phoneNumber'
                 },
                 gitURL: {
@@ -115,7 +115,7 @@ export class NewCVForm extends Component {
             }),
             language: data.languages.map(lan => {
                 return {
-                    name: lan.language.toLocaleLowerCase(),
+                    name: lan.name.toLocaleLowerCase(),
                     level: lan.level
                 };
             }),
@@ -191,7 +191,6 @@ export class NewCVForm extends Component {
     }
 
     changeExperienceHandler = (event, i) => {
-        debugger;
         event.preventDefault();
 
         const name = event.target.name;
@@ -212,7 +211,6 @@ export class NewCVForm extends Component {
     }
 
     changeDateExperienceHandler = (name, value, formattedValue, i) => {
-        debugger;
         const updatedControls = {
             ...this.state.formControls
         };
@@ -525,7 +523,6 @@ export class NewCVForm extends Component {
         // Strengths
         var strength = this.state.formControls.strength.value;
         var values = strength.split(',');
-
         values.forEach(val => formData.strengths.push(val));
 
         return formData;
