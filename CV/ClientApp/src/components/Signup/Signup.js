@@ -14,7 +14,16 @@ export default class Signup extends Component {
             confirmPassword: "",
             confirmationCode: "",
             isAdmin: false,
-            isUserRegistered: false
+            isUserRegistered: false,
+            formErrors: {
+                email: "",
+                password: "",
+                confirmPassword: ""
+            },
+            emailValid: false,
+            passwordValid: false,
+            confirmPasswordValid: false,
+            formValid: false
         };
     }
 
@@ -31,10 +40,46 @@ export default class Signup extends Component {
         return this.state.confirmationCode.length > 0;
     }
 
-    handleChange = event => {
+    validateForm() {
+        //return this.state.email.length > 0 && this.state.password.length > 0;
+        this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.confirmPasswordValid });
+    }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let confirmPasswordValid = this.state.confirmPasswordValid;
+
+        switch (fieldName) {
+            case 'email':
+                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+                break;
+            case 'password':
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+                break;
+            case 'confirmPassword':
+                confirmPasswordValid = value === this.state.password;
+                fieldValidationErrors.confirmPassword = confirmPasswordValid ? '' : ' password doesnt match';
+                break;
+            default:
+                break;
+        }
         this.setState({
-            [event.target.id]: event.target.value
-        });
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid
+        }, this.validateForm);
+    }
+
+    handleChange = event => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        }, () => { this.validateField(name, value) });
     }
 
     handleAdminChange = event => {
@@ -107,6 +152,7 @@ export default class Signup extends Component {
                     placeHolder="Enter Name"
                     value={this.state.name}
                     onChange={this.handleChange}
+
                 />
                 <FieldGroup
                     name="email"
@@ -116,6 +162,7 @@ export default class Signup extends Component {
                     placeHolder="Enter Email"
                     value={this.state.email}
                     onChange={this.handleChange}
+                    error={this.state.formErrors.email}
                 />
                 <FieldGroup
                     name="password"
@@ -125,6 +172,7 @@ export default class Signup extends Component {
                     placeHolder="Enter Password"
                     value={this.state.password}
                     onChange={this.handleChange}
+                    error={this.state.formErrors.password}
                 />
                 <FieldGroup
                     name="confirmPassword"
@@ -134,6 +182,7 @@ export default class Signup extends Component {
                     placeHolder="Confirm your password"
                     value={this.state.confirmPassword}
                     onChange={this.handleChange}
+                    error={this.state.formErrors.confirmPassword}
                 />
                 <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="isAdmin"
@@ -147,7 +196,7 @@ export default class Signup extends Component {
                 <hr />
                 <button
                     className="btn btn-primary btn-block"
-                    disabled={!this.validateForm()}
+                    disabled={!this.state.formValid}
                     type="submit"
                 >
                     SignIn

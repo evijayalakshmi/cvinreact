@@ -30,7 +30,6 @@ export default class Login extends Component {
     }
 
     validateField(fieldName, value) {
-        debugger;
         let fieldValidationErrors = this.state.formErrors;
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
