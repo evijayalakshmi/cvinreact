@@ -12,19 +12,54 @@ export default class Login extends Component {
             email: "",
             password: "",
             userName: "",
-            userEmail: 0,
-            isUserValid: false
+            userEmail: "",
+            isUserValid: false,
+            formErrors: {
+                email: "",
+                password: ""
+            },
+            emailValid: false,
+            passwordValid: false,
+            formValid: false
         };
     }
 
     validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
+        //return this.state.email.length > 0 && this.state.password.length > 0;
+        this.setState({ formValid: this.state.emailValid && this.state.passwordValid });
+    }
+
+    validateField(fieldName, value) {
+        debugger;
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+
+        switch (fieldName) {
+            case 'email':
+                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+                break;
+            case 'password':
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid
+        }, this.validateForm);
     }
 
     handleChange = event => {
+        const name = event.target.name;
+        const value = event.target.value;
         this.setState({
-            [event.target.id]: event.target.value
-        });
+            [name]: value
+        }, () => { this.validateField(name, value) });
     }
 
     handleSubmit = event => {
@@ -67,6 +102,7 @@ export default class Login extends Component {
                         placeHolder="Enter your emailId"
                         value={this.state.email}
                         onChange={this.handleChange}
+                        error={this.state.formErrors.email}
                     />
                     <FieldGroup
                         name="password"
@@ -76,10 +112,11 @@ export default class Login extends Component {
                         placeHolder="Enter your password"
                         value={this.state.password}
                         onChange={this.handleChange}
+                        error={this.state.formErrors.password}
                     />
                     <button
                         className="btn btn-primary btn-block"
-                        disabled={!this.validateForm()}
+                        disabled={!this.state.formValid}
                         type="submit"
                     >
                         Login
