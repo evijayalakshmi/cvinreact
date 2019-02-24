@@ -17,7 +17,7 @@ export class ContentForm extends Component {
             resumes: [],
             userEmail: this.props.location.userInfo.userEmail,
             userName: this.props.location.userInfo.userName,
-            activeListItem: 1
+            activeListItem: 0
         };
 
         if (!this.state.isAdmin) {
@@ -31,7 +31,7 @@ export class ContentForm extends Component {
     }
 
     handleListItemClick = (e, idx, thisResume) => {
-        this.setState({ activeListItem: idx + 1 });
+        this.setState({ activeListItem: idx });
         console.log(thisResume);
     }
 
@@ -39,8 +39,13 @@ export class ContentForm extends Component {
         const emptyResumeData = {
             userEmail: this.state.userEmail,
             userName: this.state.userName,
-            name: '',
-            personalInfo: {},
+            name: 'temp...',
+            personalInfo: {
+                name: '',
+                location: '',
+                eMail: '',
+                blog: '',
+                Address: ''},
             experiences: [],
             educations: [],
             languages: [],
@@ -50,30 +55,29 @@ export class ContentForm extends Component {
         };
 
         this.setState(prevState => ({
-            resumes: [...prevState.resumes, emptyResumeData]
-        }))
-
-        //const updatedResumes = {
-        //    ...this.state.resumes
-        //};
-
-        //updatedResumes.push(emptyResumeData);
-
-        //this.setState({ resumes: updatedResumes });
+            resumes: [...prevState.resumes, emptyResumeData],
+            activeListItem: prevState.resumes.length
+        }));
         console.log(this.state);
     }
 
-    deleteListItem = (resume) => {
-        debugger;
-        fetch('api/ResumeData/' + resume.id, {
-            method: 'DELETE'
-        }).then(response => {
-            this.setState({
-                users: this.state.resumes.filter((res) => {
-                    return res.id !== resume.id;
-                })
+    deleteListItem = (idx, resume) => {
+        if (resume.id !== undefined) {
+            fetch('api/ResumeData/' + resume.id, {
+                method: 'DELETE'
+            }).then(response => {
+                this.setState({
+                    resumes: this.state.resumes.filter((res) => {
+                        return res.id !== resume.id;
+                    })
+                });
             });
-        });
+        } else {
+            this.state.resumes.splice(idx, 1);
+            this.setState({
+                resumes: this.state.resumes
+            });
+        }
     }
 
     renderUserPage() {
@@ -84,9 +88,9 @@ export class ContentForm extends Component {
                     index={i}
                     innerRef={React.createRef()}
                     listItem={resume}
-                    isActive={i === this.state.activeListItem - 1}
+                    isActive={i === this.state.activeListItem}
                     onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
-                    delete={(idx) => this.deleteListItem(resume)}
+                    delete={(e, idx) => this.deleteListItem(idx, resume)}
                 />);
         });
 
@@ -97,15 +101,18 @@ export class ContentForm extends Component {
                     <ul className="list-group">
                         {resumes}
                     </ul>
-                    <button class="btn btn-primary btn-block" onClick={() => this.addNewListItem()}>
-                        <i class="fa fa-plus"></i> Add new resume</button>
+                    <hr />
+                    <button className="btn btn-primary btn-block" onClick={() => this.addNewListItem()}>
+                        <i className="fa fa-plus"></i> Add new resume</button>
                 </div>
                 <div className="col-md-10 h-100 edit-resumes">
-                    <NewCVForm
-                        userInfo={{ userName: this.state.userName, userEmail: this.state.userEmail }}
-                        activeResumeIndex={this.state.activeListItem}
-                        cvData={this.state.resumes[this.state.activeListItem - 1]}
-                    />
+                    {this.state.resumes.length > 0 ?
+                        <NewCVForm
+                            userInfo={{ userName: this.state.userName, userEmail: this.state.userEmail }}
+                            activeResumeIndex={this.state.activeListItem}
+                            cvData={this.state.resumes[this.state.activeListItem]}
+                        /> : null
+                    }
                 </div>
             </div>
         );

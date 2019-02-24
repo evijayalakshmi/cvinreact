@@ -31,16 +31,16 @@ export default class MainPage extends Component {
             <div className="card">
                 <div className="card-body">
                     <div id="buttons">
-                        <p id="signupButton"
+                        <button id="signupButton"
                             onClick={() => this.switch("signup")}
-                            className={this.state.signup ? "yellow" : "blue"}>
+                            className={this.state.signup ? "yellow btnStyles" : "blue"}>
                             <b> Sign In </b>
-                        </p>
-                        <p id="loginButton"
+                        </button>
+                        <button id="loginButton"
                             onClick={() => this.switch("login")}
-                            className={this.state.login ? "yellow" : "blue"}>
+                            className={this.state.login ? "yellow btnStyles" : "blue"}>
                             <b> Login </b>
-                        </p>
+                        </button>
                     </div>
                     {this.state.signup ? <Signup /> : null}
                     {this.state.login ? <Login /> : null}

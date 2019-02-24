@@ -1,28 +1,41 @@
 ﻿.yellow {
-    background-color: gold;
+    background-color: #5aaaff;
 }
 
 #buttons {
     margin: 0 auto;
-    height: 50px;
-    background: #2c3e50;
+    height: 15%;
 }
 
-    #buttons > p {
-        width: 49.95%;
-        float: left;
-        color: white;
-        text-align: center;
-        padding-top: 25px;
-        height: 100%;
-        margin: 0;
-    }
+#signupButton {
+    width: 49.95%;
+    color: white;
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    border: none;
+}
 
-        #buttons > p:hover {
-            background: #f1c40f;
-            color: #2c3e50;
-            cursor: pointer;
-        }
+#loginButton {
+    width: 49.95%;
+    color: white;
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    border:none;
+}
+
+#signupButton:hover {
+    background: #6f42c1;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+#loginButton:hover {
+    background: #6f42c1;
+    color: whitesmoke;
+    cursor: pointer;
+}
 
 
 .card {
@@ -30,14 +43,14 @@
     margin: auto;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0;  
     left: 0;
-    width: 500px;
+    width: 20%;
     border-radius: 1rem;
-    height: 500px;
+    height: 39%;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
 }
 
-.card > img {
-    width: 50%;
-}
+    .card > img {
+        width: 50%;
+    }

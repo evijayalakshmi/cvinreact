@@ -103,7 +103,8 @@ export default class Signup extends Component {
                     name="name"
                     id="name"
                     type="text"
-                    label="Name"
+                    label=""
+                    placeHolder="Enter Name"
                     value={this.state.name}
                     onChange={this.handleChange}
                 />
@@ -111,7 +112,8 @@ export default class Signup extends Component {
                     name="email"
                     id="email"
                     type="text"
-                    label="Email"
+                    label=""
+                    placeHolder="Enter Email"
                     value={this.state.email}
                     onChange={this.handleChange}
                 />
@@ -119,7 +121,8 @@ export default class Signup extends Component {
                     name="password"
                     id="password"
                     type="password"
-                    label="Password"
+                    label=""
+                    placeHolder="Enter Password"
                     value={this.state.password}
                     onChange={this.handleChange}
                 />
@@ -127,7 +130,8 @@ export default class Signup extends Component {
                     name="confirmPassword"
                     id="confirmPassword"
                     type="password"
-                    label="Confirm Password"
+                    label=""
+                    placeHolder="Confirm your password"
                     value={this.state.confirmPassword}
                     onChange={this.handleChange}
                 />

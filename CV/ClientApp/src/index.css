@@ -1,9 +1,9 @@
 html, body {
-    background: linear-gradient(to right, #0062E6, #33AEFF);
+    background: linear-gradient(#F1F1F1,#6f42c1,#F1F1F1);
+    background-attachment: fixed;
     font-family: 'Titillium Web', sans-serif;
     font-size: 15px;
     height: 100%;
-    min-height: 100%;
 }
 
 

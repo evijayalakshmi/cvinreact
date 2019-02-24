@@ -2,6 +2,7 @@
 import "./Login.css";
 import { Redirect } from 'react-router';
 import { FieldGroup } from "../NewCVForm/FieldGroup";
+import Signup from "../Signup/Signup";
 
 export default class Login extends Component {
     constructor(props) {
@@ -62,7 +63,8 @@ export default class Login extends Component {
                         name="email"
                         id="email"
                         type="text"
-                        label="Email"
+                        label=""
+                        placeHolder="Enter your emailId"
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
@@ -70,7 +72,8 @@ export default class Login extends Component {
                         name="password"
                         id="password"
                         type="password"
-                        label="Password"
+                        label=""
+                        placeHolder="Enter your password"
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
@@ -81,6 +84,8 @@ export default class Login extends Component {
                     >
                         Login
                     </button>
+                    <hr />
+                    <p> New User? Please <a href="#signin">SignIn! </a> </p>
                 </form>
             </div>
         );

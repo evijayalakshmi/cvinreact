@@ -16,26 +16,21 @@ export class NewCVForm extends Component {
         super(props, context);
 
         var data = this.props.cvData;
-        if (data === undefined) {
-            var cvData = new CvData();
-            data = cvData.getEmptyData();
-        }
-
         this.state = {
             userEmail: this.props.userInfo.userEmail,
             userName: this.props.userInfo.userName,
             formControls: {
                 personalInfo: {
                     name: {
-                        value: data.personalDetails.Name,
+                        value: data.personalInfo.Name,
                         placeHolder: 'Enter name'
                     },
                     location: {
-                        value: data.personalDetails.Address,
+                        value: data.personalInfo.Address,
                         placeHolder: 'Enter location'
                     },
                     email: {
-                        value: data.personalDetails.Email,
+                        value: data.personalInfo.Email,
                         placeHolder: 'Enter email'
                     },
                     linkedIn: {
@@ -51,7 +46,7 @@ export class NewCVForm extends Component {
                         placeHolder: 'Enter Git URL'
                     },
                     blogURL: {
-                        value: data.personalDetails.blog,
+                        value: '',
                         placeHolder: 'Enter blog URL'
                     }
                 },
@@ -78,7 +73,7 @@ export class NewCVForm extends Component {
                             formattedValue: ''
                         },
                         rolesAndResponsibilities: {
-                            value: exp.responsibilities.join("\r\n"),
+                            value: '',
                             placeHolder: 'Enter roles & responsibilities'
                         },
                         isCurrentEmployer: false
@@ -111,9 +106,9 @@ export class NewCVForm extends Component {
                         level: lan.level
                     };
                 }),
-                achievement: data.moments.map(mom => {
+                achievement: data.achievements.map(mom => {
                     return {
-                        value: mom.content,
+                        value: mom,
                         placeHolder: 'Enter your achievement'
                     };
                 }),
@@ -121,10 +116,12 @@ export class NewCVForm extends Component {
                     value: '',
                     placeHolder: 'Write Your Life Philosophy'
                 },
-                strength: {
-                    value: ([].concat.apply([], data.strengths)).join(','),
-                    placeHolder: 'Enter strengths with comma separated values'
-                }
+                strength: data.strengths.map(st => {
+                    return {
+                        value: st,
+                        placeHolder: 'Enter strengths with comma separated values'
+                    };
+                })
             }
         };
     }
@@ -133,6 +130,7 @@ export class NewCVForm extends Component {
         const activeIndex = this.props.activeResumeIndex;
         if (props.activeResumeIndex !== activeIndex) {
             var data = this.props.cvData;
+
             var formControls = {
                 personalInfo: {
                     name: {
@@ -234,9 +232,9 @@ export class NewCVForm extends Component {
                     return {
                         value: st,
                         placeHolder: 'Enter strengths with comma separated values'
-                    }
+                    };
                 })
-            }
+            };
 
             this.setState({ formControls: formControls });
         }
