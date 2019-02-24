@@ -19,110 +19,7 @@ export class NewCVForm extends Component {
         this.state = {
             userEmail: this.props.userInfo.userEmail,
             userName: this.props.userInfo.userName,
-            formControls: {
-                personalInfo: {
-                    name: {
-                        value: data.personalInfo.Name,
-                        placeHolder: 'Enter name'
-                    },
-                    location: {
-                        value: data.personalInfo.Address,
-                        placeHolder: 'Enter location'
-                    },
-                    email: {
-                        value: data.personalInfo.Email,
-                        placeHolder: 'Enter email'
-                    },
-                    linkedIn: {
-                        value: '',
-                        placeHolder: 'Enter LinkedIn URL'
-                    },
-                    phoneNumber: {
-                        value: '',
-                        placeHolder: 'Enter phoneNumber'
-                    },
-                    gitURL: {
-                        value: '',
-                        placeHolder: 'Enter Git URL'
-                    },
-                    blogURL: {
-                        value: '',
-                        placeHolder: 'Enter blog URL'
-                    }
-                },
-                experience: data.experiences.map(exp => {
-                    return {
-                        title: {
-                            value: exp.title,
-                            placeHolder: 'Enter Title'
-                        },
-                        company: {
-                            value: exp.company,
-                            placeHolder: 'Enter company'
-                        },
-                        location: {
-                            value: exp.location,
-                            placeHolder: 'Enter location'
-                        },
-                        fromDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        toDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        rolesAndResponsibilities: {
-                            value: '',
-                            placeHolder: 'Enter roles & responsibilities'
-                        },
-                        isCurrentEmployer: false
-                    };
-                }),
-                education: data.educations.map(edu => {
-                    return {
-                        stream: {
-                            value: edu.stream,
-                            placeHolder: 'STREAM OF GRADUATION'
-                        },
-                        university: {
-                            value: edu.university,
-                            placeHolder: 'UNIVERSITY'
-                        },
-                        fromDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        toDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        isCurrentStudent: false
-                    };
-                }),
-                language: data.languages.map(lan => {
-                    return {
-                        name: lan.language.toLocaleLowerCase(),
-                        level: lan.level
-                    };
-                }),
-                achievement: data.achievements.map(mom => {
-                    return {
-                        value: mom,
-                        placeHolder: 'Enter your achievement'
-                    };
-                }),
-                lifePhilosophyContent: {
-                    value: '',
-                    placeHolder: 'Write Your Life Philosophy'
-                },
-                strength: data.strengths.map(st => {
-                    return {
-                        value: st,
-                        placeHolder: 'Enter strengths with comma separated values'
-                    };
-                })
-            }
+            formControls: this.initializeFormControls(data)
         };
     }
 
@@ -130,114 +27,115 @@ export class NewCVForm extends Component {
         const activeIndex = this.props.activeResumeIndex;
         if (props.activeResumeIndex !== activeIndex) {
             var data = this.props.cvData;
+            this.setState({ formControls: this.initializeFormControls(data) });
+        }
+    }
 
-            var formControls = {
-                personalInfo: {
-                    name: {
-                        value: data.personalInfo.name,
-                        placeHolder: 'Enter name'
+    initializeFormControls = (data) => {
+        return {
+            personalInfo: {
+                name: {
+                    value: data.personalInfo.Name,
+                    placeHolder: 'Enter name'
+                },
+                location: {
+                    value: data.personalInfo.Address,
+                    placeHolder: 'Enter location'
+                },
+                email: {
+                    value: data.personalInfo.Email,
+                    placeHolder: 'Enter email'
+                },
+                linkedIn: {
+                    value: '',
+                    placeHolder: 'Enter LinkedIn URL'
+                },
+                phoneNumber: {
+                    value: '',
+                    placeHolder: 'Enter phoneNumber'
+                },
+                gitURL: {
+                    value: '',
+                    placeHolder: 'Enter Git URL'
+                },
+                blogURL: {
+                    value: '',
+                    placeHolder: 'Enter blog URL'
+                }
+            },
+            experience: data.experiences.map(exp => {
+                return {
+                    title: {
+                        value: exp.title,
+                        placeHolder: 'Enter Title'
+                    },
+                    company: {
+                        value: exp.company,
+                        placeHolder: 'Enter company'
                     },
                     location: {
-                        value: data.personalInfo.location,
+                        value: exp.location,
                         placeHolder: 'Enter location'
                     },
-                    email: {
-                        value: data.personalInfo.eMail,
-                        placeHolder: 'Enter email'
-                    },
-                    linkedIn: {
+                    fromDate: {
                         value: '',
-                        placeHolder: 'Enter LinkedIn URL'
+                        formattedValue: ''
                     },
-                    phoneNumber: {
+                    toDate: {
                         value: '',
-                        placeHolder: 'Enter phoneNumber'
+                        formattedValue: ''
                     },
-                    gitURL: {
+                    rolesAndResponsibilities: {
                         value: '',
-                        placeHolder: 'Enter Git URL'
+                        placeHolder: 'Enter roles & responsibilities'
                     },
-                    blogURL: {
+                    isCurrentEmployer: false
+                };
+            }),
+            education: data.educations.map(edu => {
+                return {
+                    stream: {
+                        value: edu.stream,
+                        placeHolder: 'STREAM OF GRADUATION'
+                    },
+                    university: {
+                        value: edu.university,
+                        placeHolder: 'UNIVERSITY'
+                    },
+                    fromDate: {
                         value: '',
-                        placeHolder: 'Enter blog URL'
-                    }
-                },
-                experience: data.experiences.map(exp => {
-                    return {
-                        title: {
-                            value: exp.title,
-                            placeHolder: 'Enter Title'
-                        },
-                        company: {
-                            value: exp.company,
-                            placeHolder: 'Enter company'
-                        },
-                        location: {
-                            value: exp.location,
-                            placeHolder: 'Enter location'
-                        },
-                        fromDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        toDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        rolesAndResponsibilities: {
-                            value: '',
-                            placeHolder: 'Enter roles & responsibilities'
-                        },
-                        isCurrentEmployer: false
-                    };
-                }),
-                education: data.educations.map(edu => {
-                    return {
-                        stream: {
-                            value: edu.stream,
-                            placeHolder: 'STREAM OF GRADUATION'
-                        },
-                        university: {
-                            value: edu.university,
-                            placeHolder: 'UNIVERSITY'
-                        },
-                        fromDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        toDate: {
-                            value: '',
-                            formattedValue: ''
-                        },
-                        isCurrentStudent: false
-                    };
-                }),
-                language: data.languages.map(lan => {
-                    return {
-                        name: lan.name.toLocaleLowerCase(),
-                        level: lan.level
-                    };
-                }),
-                achievement: data.achievements.map(mom => {
-                    return {
-                        value: mom,
-                        placeHolder: 'Enter your achievement'
-                    };
-                }),
-                lifePhilosophyContent: {
-                    value: '',
-                    placeHolder: 'Write Your Life Philosophy'
-                },
-                strength: data.strengths.map(st => {
-                    return {
-                        value: st,
-                        placeHolder: 'Enter strengths with comma separated values'
-                    };
-                })
-            };
-
-            this.setState({ formControls: formControls });
-        }
+                        formattedValue: ''
+                    },
+                    toDate: {
+                        value: '',
+                        formattedValue: ''
+                    },
+                    isCurrentStudent: false
+                };
+            }),
+            language: data.languages.map(lan => {
+                return {
+                    name: lan.language.toLocaleLowerCase(),
+                    level: lan.level
+                };
+            }),
+            achievement: data.achievements.map(mom => {
+                return {
+                    value: mom,
+                    placeHolder: 'Enter your achievement'
+                };
+            }),
+            lifePhilosophyContent: {
+                value: '',
+                placeHolder: 'Write Your Life Philosophy'
+            },
+            strength: data.strengths.map(st => {
+                return {
+                    value: st,
+                    placeHolder: 'Enter strengths with comma separated values'
+                };
+            })
+        };
     }
 
     // Personal Info
@@ -879,36 +777,34 @@ export class NewCVForm extends Component {
                     <div className="row w-100">
                         <div className="col-md-6">
                             <ContentHeading name="Strengths" />
-                            <div class="form-group">
+                            <div className="form-group">
                                 <textarea
                                     name="strength"
-                                    class="form-control"
+                                    className="form-control"
                                     id="exampleFormControlTextarea1"
                                     rows="3"
                                     value={this.state.formControls.strength.value}
                                     placeholder={this.state.formControls.strength.placeHolder}
-                                    onChange={this.changeStrengthsHandler}>
-                                </textarea>
+                                    onChange={this.changeStrengthsHandler} />
                             </div>
                         </div>
                         <div className="col-md-6">
                             <ContentHeading name="Life Philosophy" />
-                            <div class="form-group">
+                            <div className="form-group">
                                 <textarea
                                     name="LifePhilosophyContent"
-                                    class="form-control"
+                                    className="form-control"
                                     id="formControlsLifePhilosophy"
                                     rows="3"
                                     value={this.state.formControls.lifePhilosophyContent.value}
                                     placeholder={this.state.formControls.lifePhilosophyContent.placeHolder}
-                                    onChange={this.changeLifePhilosophyHandler}>
-                                </textarea>
+                                    onChange={this.changeLifePhilosophyHandler} />
                             </div>
                         </div>
                     </div>
                     <br />
                     <br />
-                    <button class="btn btn-primary" type="submit">Save & Render as HTML</button>
+                    <button className="btn btn-primary" type="submit">Save</button>
                 </div>
             </form >
         );
