@@ -26,7 +26,7 @@ export class NewCVForm extends Component {
     componentWillReceiveProps(props) {
         const activeIndex = this.props.activeResumeIndex;
         if (props.activeResumeIndex !== activeIndex) {
-            var data = this.props.cvData;
+            var data = props.cvData;
             this.setState({ formControls: this.initializeFormControls(data) });
         }
     }
@@ -642,7 +642,12 @@ export class NewCVForm extends Component {
             },
             body: JSON.stringify(formData)
         }).then((res) => {
-            this.setState(() => ({ toPdf: true }));
+            if (res.status === 200) {
+                alert("Resume successfully saved!!");
+            }
+            //this.setState(() => ({ toPdf: true }));
+        }).catch((error) => {
+            alert('problem in retrieving users ' + error);
         });
         e.preventDefault();
     }

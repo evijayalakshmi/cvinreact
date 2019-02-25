@@ -80,6 +80,64 @@ export class ContentForm extends Component {
         }
     }
 
+    renderToHTMLData = (resume) => {
+        debugger;
+        const formControls = resume;
+        return {
+            personalDetails: {
+                Name: formControls.personalInfo.name,
+                Designation: '',
+                Email: formControls.personalInfo.email,
+                blog: formControls.personalInfo.blogURL,
+                Address: formControls.personalInfo.location
+            },
+            experiences: formControls.experiences.map(exp => {
+                return {
+                    title: exp.title,
+                    company: exp.company,
+                    from: "",
+                    to: "",
+                    location: exp.location.value,
+                    responsibilities: exp.rolesAndResponsibilities.split('\r\n')
+                };
+            }),
+            moments: formControls.achievements.map(mom => {
+                return {
+                    icon: "fa fa-trophy fa-2x",
+                    heading: "Courage I had",
+                    content: mom
+                };
+            }),
+            strengths: formControls.strengths ? this.splitArrayIntoChunks(formControls.strengths, 3) : [],
+            languages: formControls.languages.map(lan => {
+                return { language: lan.name, level: lan.level }
+            }),
+            educations: formControls.educations.map(edu => {
+                return {
+                    stream: edu.stream,
+                    university: edu.university,
+                    icon: "fa fa-calendar",
+                    from: "",
+                    to: ""
+                };
+            }),
+            dayOfLife: []
+        };
+    }
+
+    splitArrayIntoChunks = (arr, chunkLen) => {
+        var chunkList = [];
+        var chunkCount = Math.ceil(arr.length / chunkLen);
+        for (var i = 0; i < chunkCount; i++) {
+            chunkList.push(arr.splice(0, chunkLen));
+        }
+        return chunkList;
+    }
+
+    openResumeExternal = (resume) => {
+        var data = this.renderToHTMLData(resume);
+    }
+
     renderUserPage() {
         const resumes = this.state.resumes.map((resume, i) => {
             return (
@@ -91,6 +149,7 @@ export class ContentForm extends Component {
                     isActive={i === this.state.activeListItem}
                     onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
                     delete={(e, idx) => this.deleteListItem(idx, resume)}
+                    openResume={() => this.openResumeExternal(resume)}
                 />);
         });
 

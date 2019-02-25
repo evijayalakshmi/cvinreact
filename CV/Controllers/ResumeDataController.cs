@@ -25,10 +25,7 @@ namespace cv.Controllers {
             req.Name = string.Format("{0} {1}", "Resume", utcTime);
             req.CreatedTime = utcTime;
 
-            _resumeStoreService.Create(request);
-
-            //return OkObjectResult(insertedResume);
-            return CreatedAtRoute("GetResume", new { id = request.Id.ToString() }, request);
+            return Ok(_resumeStoreService.Create(request));
         }
 
         [HttpGet("[action]")]
