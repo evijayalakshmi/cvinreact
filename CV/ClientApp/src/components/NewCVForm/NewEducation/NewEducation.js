@@ -21,7 +21,7 @@ export class NewEducation extends Component {
                             value={this.props.education.stream.value}
                             placeholder={this.props.education.stream.placeHolder}
                             onChange={(e) => this.props.valueChange(e, this.props.index)}
-                            required="true"
+                            required
                         />
                     </div>
                     <div className="col-md-4">
@@ -32,6 +32,7 @@ export class NewEducation extends Component {
                             value={this.props.education.university.value}
                             placeholder={this.props.education.university.placeHolder}
                             onChange={(e) => this.props.valueChange(e, this.props.index)}
+                            required
                         />
                     </div>
                     <div className="col-md-4">

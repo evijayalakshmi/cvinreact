@@ -7,7 +7,7 @@ export class FieldGroup extends Component {
 
     render() {
         const errorStyle = {
-            color: 'red',
+            color: 'red'
         };
 
         return (

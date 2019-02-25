@@ -36,7 +36,7 @@ export class NewCVForm extends Component {
             personalInfo: {
                 name: {
                     value: data.personalInfo.name,
-                    placeHolder: 'Enter name'
+                    placeHolder: 'Enter name',
                 },
                 location: {
                     value: data.personalInfo.location,
@@ -44,7 +44,8 @@ export class NewCVForm extends Component {
                 },
                 email: {
                     value: data.personalInfo.eMail,
-                    placeHolder: 'Enter email'
+                    placeHolder: 'Enter email',
+                    error: ''
                 },
                 linkedIn: {
                     value: '',
@@ -61,7 +62,8 @@ export class NewCVForm extends Component {
                 blogURL: {
                     value: '',
                     placeHolder: 'Enter blog URL'
-                }
+                },
+                valid: false
             },
             experience: data.experiences.map(exp => {
                 return {
@@ -134,8 +136,42 @@ export class NewCVForm extends Component {
                     value: st,
                     placeHolder: 'Enter strengths with comma separated values'
                 };
-            })
+            }),
+            formValid: false
         };
+    }
+
+    validateForm() {
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        updatedControls.formValid = this.state.formControls.personalInfo.valid;
+
+        this.setState({ formControls: updatedControls });
+    }
+
+    validateField(name, value) {
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        const updatedFormElement = {
+            ...updatedControls.personalInfo[name]
+        };
+
+        switch (name) {
+            case 'email':
+                let emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                updatedFormElement.error = emailValid ? '' : ' is invalid';
+                updatedControls.personalInfo[name] = updatedFormElement;
+
+                updatedControls.personalInfo.valid = emailValid ? true : false;
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formControls: updatedControls
+        }, this.validateForm);
     }
 
     // Personal Info
@@ -154,7 +190,7 @@ export class NewCVForm extends Component {
 
         this.setState({
             formControls: updatedControls
-        });
+        }, () => { this.validateField(name, value); });
     }
 
     // Experience
@@ -684,6 +720,7 @@ export class NewCVForm extends Component {
                                     value={this.state.formControls.personalInfo.name.value}
                                     placeholder={this.state.formControls.personalInfo.name.placeHolder}
                                     onChange={this.changePersonalInfoHandler}
+                                    required
                                 />
                             </div>
                             <div className="col-md-6">
@@ -695,6 +732,7 @@ export class NewCVForm extends Component {
                                     placeholder={this.state.formControls.personalInfo.location.placeHolder}
                                     icon="fa fa-map-marker"
                                     onChange={this.changePersonalInfoHandler}
+                                    required
                                 />
                             </div>
                         </div>
@@ -708,6 +746,8 @@ export class NewCVForm extends Component {
                                     placeholder={this.state.formControls.personalInfo.email.placeHolder}
                                     icon="fa fa-at"
                                     onChange={this.changePersonalInfoHandler}
+                                    error={this.state.formControls.personalInfo.email.error}
+                                    required
                                 />
                             </div>
                             <div className="col-md-4">
@@ -730,6 +770,7 @@ export class NewCVForm extends Component {
                                     placeholder={this.state.formControls.personalInfo.phoneNumber.placeHolder}
                                     icon="fa fa-phone"
                                     onChange={this.changePersonalInfoHandler}
+                                    required
                                 />
                             </div>
                         </div>
@@ -813,7 +854,7 @@ export class NewCVForm extends Component {
                     </div>
                     <br />
                     <br />
-                    <button className="btn btn-primary" type="submit">Save</button>
+                    <button className="btn btn-primary" disabled={!this.state.formControls.formValid} type="submit">Save</button>
                 </div>
             </form >
         );

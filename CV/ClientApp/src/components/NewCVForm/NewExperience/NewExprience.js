@@ -30,8 +30,8 @@ export default class NewExperience extends Component {
                             label="Title"
                             value={this.props.experience.title.value}
                             placeholder={this.props.experience.title.placeHolder}
-                            required="true"
                             onChange={(e) => this.props.valueChange(e, this.props.index)}
+                            required
                         />
                     </div>
                     <div className="col-md-4">
@@ -41,9 +41,9 @@ export default class NewExperience extends Component {
                             type="text"
                             label="Company"
                             value={this.props.experience.company.value}
-                            placeholder={this.props.experience.company.placeHolder}
                             required="true"
                             onChange={(e) => this.props.valueChange(e, this.props.index)}
+                            required
                         />
                     </div>
                     <div  className="col-md-4">
@@ -54,8 +54,8 @@ export default class NewExperience extends Component {
                             label="Location"
                             value={this.props.experience.location.value}
                             placeholder={this.props.experience.location.placeHolder}
-                            required="true"
                             onChange={(e) => this.props.valueChange(e, this.props.index)}
+                            required
                         />
                     </div>
                 </div>
@@ -101,6 +101,7 @@ export default class NewExperience extends Component {
                                 value={this.props.experience.rolesAndResponsibilities.value}
                                 placeholder={this.props.experience.rolesAndResponsibilities.placeHolder}
                                 onChange={(e) => this.props.valueChange(e, this.props.index)}
+                                required
                             />
                         </div>
                     </div>
