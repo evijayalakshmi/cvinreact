@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { FieldGroup } from '../FieldGroup';
-import DatePicker from 'react-bootstrap-date-picker';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 export class NewEducation extends Component {
     constructor(props, context) {
@@ -35,7 +36,7 @@ export class NewEducation extends Component {
                     </div>
                     <div className="col-md-4">
                         <button type="submit" onClick={(e) => this.props.delete(e, this.props.index)}>
-                            <i class="fa fa-trash"> Delete Education</i></button>
+                            <i className="fa fa-trash"> Delete Education</i></button>
                     </div>
                 </div>
                 <div className="row w-100">
@@ -45,8 +46,8 @@ export class NewEducation extends Component {
                                 <label>From</label>
                                 <DatePicker
                                     id="ed-fromDatepicker"
-                                    value={this.props.education.fromDate.value}
-                                    onChange={(v, fv) => this.props.dateValueChange('fromDate', v, fv, this.props.index)}
+                                    selected={this.props.education.fromDate.formattedValue}
+                                    onChange={(v) => this.props.dateValueChange('fromDate', v, this.props.index)}
                                 />
                             </div>
                         </div>
@@ -54,9 +55,9 @@ export class NewEducation extends Component {
                             <div className="form-group">
                                 <label>To</label>
                                 <DatePicker id="ed-toDatepicker"
-                                    value={this.props.education.toDate.value}
+                                    selected={this.props.education.toDate.formattedValue}
                                     disabled={this.props.education.isCurrentStudent}
-                                    onChange={(v, fv) => this.props.dateValueChange('toDate', v, fv, this.props.index)}
+                                    onChange={(v) => this.props.dateValueChange('toDate', v, this.props.index)}
                                 />
                             </div>
                         </div>

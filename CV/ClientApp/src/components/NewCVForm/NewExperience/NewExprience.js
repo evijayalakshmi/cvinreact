@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { FieldGroup } from '../FieldGroup';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+
 import './NewExperience.css';
-import DatePicker from 'react-bootstrap-date-picker';
-import '../NewCVForm.css';
+
 
 
 export default class NewExperience extends Component {
@@ -10,6 +12,7 @@ export default class NewExperience extends Component {
     constructor(props, context) {
         super(props, context);
     }
+
     handleChecked = (e) => {
         this.setState({ isCurrentEmpChecked: !this.state.isCurrentEmpChecked });
     }
@@ -58,31 +61,29 @@ export default class NewExperience extends Component {
                 </div>
                 <div className="row w-100">
                     <div className="col-md-4">
-                        <div className="form-group">
                             <label>From</label>
                             <DatePicker
                                 id="ex-fromDatepicker"
-                                value={this.props.experience.fromDate.value}
-                                onChange={(v, fv) => this.props.dateValueChange('fromDate', v, fv, this.props.index)}
+                                selected={this.props.experience.fromDate.formattedValue}
+                                onChange={(v) => this.props.dateValueChange('fromDate', v, this.props.index)}
                             />
-                        </div>
                     </div>
                     <div className="col-md-4">
                         <div className="form-group">
                             <label>To</label>
                             <DatePicker id="ex-toDatepicker"
-                                value={this.props.experience.toDate.value}
+                                selected={this.props.experience.toDate.formattedValue}
                                 disabled={this.props.experience.isCurrentEmployer}
-                                onChange={(v, fv) => this.props.dateValueChange('toDate', v, fv, this.props.index)}
+                                onChange={(v) => this.props.dateValueChange('toDate', v, this.props.index)}
                             />
                         </div>
                     </div>
                     <div className="col-md-4">
                         <div className="form-group">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                            <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"
                                 checked={this.props.experience.isCurrentEmployer}
-                                onChange={() => this.props.handleCurrentEmployerCheck(this.props.index)}/>
-                            <label class="form-check-label" for="defaultCheck1">
+                                onChange={() => this.props.handleCurrentEmployerCheck(this.props.index)} />
+                            <label className="form-check-label" htmlFor="defaultCheck1">
                                 Current Employer?
                             </label>
                         </div>
@@ -94,18 +95,18 @@ export default class NewExperience extends Component {
                             <label>Roles & Responsibilities</label>
                             <textarea
                                 name="rolesAndResponsibilities"
-                                class="form-control"
+                                className="form-control"
                                 id="formControlsRolesAndResponsibilities"
                                 rows="3"
                                 value={this.props.experience.rolesAndResponsibilities.value}
                                 placeholder={this.props.experience.rolesAndResponsibilities.placeHolder}
-                                onChange={(e) => this.props.valueChange(e, this.props.index)}>
-                            </textarea>
+                                onChange={(e) => this.props.valueChange(e, this.props.index)}
+                            />
                         </div>
                     </div>
                     <div className="col-md-4">
                         <button type="submit" onClick={(e) => this.props.delete(e, this.props.index)}>
-                            <i class="fa fa-trash"> Delete Experience</i></button>
+                            <i className="fa fa-trash"> Delete Experience</i></button>
                     </div>
                 </div>
             </div>

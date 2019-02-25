@@ -25,8 +25,8 @@ export class NewLanguage extends Component {
                     </select>
                 </div>
                 <div className="col-md-4">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input"
                             type="radio"
                             name={this.props.levelGroupName}
                             id="inlineRadio1"
@@ -34,10 +34,10 @@ export class NewLanguage extends Component {
                             checked={this.props.language.level === 1}
                             onChange={(e) => this.props.selectionChange(e, this.props.index)}
                         />
-                        <label class="form-check-label" for="inlineRadio1">Basic</label>
+                        <label className="form-check-label" htmlFor="inlineRadio1">Basic</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input"
                             type="radio"
                             name={this.props.levelGroupName}
                             id="inlineRadio2"
@@ -45,10 +45,10 @@ export class NewLanguage extends Component {
                             checked={this.props.language.level === 2}
                             onChange={(e) => this.props.selectionChange(e, this.props.index)}
                         />
-                        <label class="form-check-label" for="inlineRadio2">Good</label>
+                        <label className="form-check-label" htmlFor="inlineRadio2">Good</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input"
                             type="radio"
                             name={this.props.levelGroupName}
                             id="inlineRadio3"
@@ -56,10 +56,10 @@ export class NewLanguage extends Component {
                             checked={this.props.language.level === 3}
                             onChange={(e) => this.props.selectionChange(e, this.props.index)}
                         />
-                        <label class="form-check-label" for="inlineRadio3">Expert</label>
+                        <label className="form-check-label" htmlFor="inlineRadio3">Expert</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input"
                             type="radio"
                             name={this.props.levelGroupName}
                             id="inlineRadio4"
@@ -67,7 +67,7 @@ export class NewLanguage extends Component {
                             checked={this.props.language.level === 4}
                             onChange={(e) => this.props.selectionChange(e, this.props.index)}
                         />
-                        <label class="form-check-label" for="inlineRadio4">Native</label>
+                        <label className="form-check-label" htmlFor="inlineRadio4">Native</label>
                     </div>
                 </div>
                 <br />

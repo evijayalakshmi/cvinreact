@@ -178,8 +178,14 @@ export class NewCVForm extends Component {
                 placeHolder: 'Enter the location'
             },
             isCurrentEmployer: false,
-            fromDate: '',
-            toDate: '',
+            fromDate: {
+                value: new Date().toLocaleDateString(),
+                formattedValue: new Date()
+            },
+            toDate: {
+                value: new Date().toLocaleDateString(),
+                formattedValue: new Date()
+            },
             rolesAndResponsibilities: {
                 value: '',
                 placeHolder: 'Enter Your Role'
@@ -210,15 +216,15 @@ export class NewCVForm extends Component {
         });
     }
 
-    changeDateExperienceHandler = (name, value, formattedValue, i) => {
+    changeDateExperienceHandler = (name, value, i) => {
         const updatedControls = {
             ...this.state.formControls
         };
         const updatedFormElement = {
             ...updatedControls.experience[i][name]
         };
-        updatedFormElement.value = value;
-        updatedFormElement.formattedValue = formattedValue;
+        updatedFormElement.formattedValue = value;
+        updatedFormElement.value = value.toLocaleDateString();
         updatedControls.experience[i][name] = updatedFormElement;
 
         this.setState({
@@ -269,8 +275,14 @@ export class NewCVForm extends Component {
                 placeHolder: 'UNIVERSITY'
             },
             isCurrentStudent: false,
-            fromDate: '',
-            toDate: '',
+            fromDate: {
+                value: new Date().toLocaleDateString(),
+                formattedValue: new Date()
+            },
+            toDate: {
+                value: new Date().toLocaleDateString(),
+                formattedValue: new Date()
+            }
         });
         this.setState({
             formControls: updatedFormControls
@@ -297,15 +309,15 @@ export class NewCVForm extends Component {
         });
     }
 
-    changeDateEducationHandler = (name, value, formattedValue, i) => {
+    changeDateEducationHandler = (name, value, i) => {
         const updatedControls = {
             ...this.state.formControls
         };
         const updatedFormElement = {
             ...updatedControls.education[i][name]
         };
-        updatedFormElement.value = value;
-        updatedFormElement.formattedValue = formattedValue;
+        updatedFormElement.formattedValue = value;
+        updatedFormElement.value = value.toLocaleDateString();
         updatedControls.education[i][name] = updatedFormElement;
         this.setState({
             formControls: updatedControls
