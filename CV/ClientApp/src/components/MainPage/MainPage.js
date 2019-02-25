@@ -28,22 +28,28 @@ export default class MainPage extends Component {
     render() {
 
         return (
-            <div className="card">
-                <div className="card-body">
-                    <div id="buttons">
-                        <button id="signupButton"
-                            onClick={() => this.switch("signup")}
-                            className={this.state.signup ? "yellow btnStyles" : "blue"}>
-                            <b> Sign In </b>
-                        </button>
-                        <button id="loginButton"
-                            onClick={() => this.switch("login")}
-                            className={this.state.login ? "yellow btnStyles" : "blue"}>
-                            <b> Login </b>
-                        </button>
+            <div className="vertical-center">
+                <div className="container responsive">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-auto">
+                            <div className="col-md-6 offset-md-3" id="card">
+                            <div id="buttons">
+                                <button id="signupButton"
+                                    onClick={() => this.switch("signup")}
+                                    className={this.state.signup ? "yellow btnStyles" : "blue"}>
+                                    <b> Sign In </b>
+                                </button>
+                                <button id="loginButton"
+                                    onClick={() => this.switch("login")}
+                                    className={this.state.login ? "yellow btnStyles" : "blue"}>
+                                    <b> Login </b>
+                                </button>
+                            </div>
+                            {this.state.signup ? <Signup /> : null}
+                                {this.state.login ? <Login /> : null}
+                                </div>
+                        </div>
                     </div>
-                    {this.state.signup ? <Signup /> : null}
-                    {this.state.login ? <Login /> : null}
                 </div>
             </div>
         );

@@ -13,7 +13,6 @@ export default class Signup extends Component {
             password: "",
             confirmPassword: "",
             confirmationCode: "",
-            isAdmin: false,
             isUserRegistered: false,
             formErrors: {
                 email: "",
@@ -82,11 +81,6 @@ export default class Signup extends Component {
         }, () => { this.validateField(name, value) });
     }
 
-    handleAdminChange = event => {
-        this.setState({
-            [event.target.id]: !this.state.isAdmin
-        });
-    }
 
     handleSubmit = async event => {
         var newUserData = {
@@ -184,15 +178,7 @@ export default class Signup extends Component {
                     onChange={this.handleChange}
                     error={this.state.formErrors.confirmPassword}
                 />
-                <div className="form-check">
-                    <input className="form-check-input" type="checkbox" value="" id="isAdmin"
-                        checked={this.state.isAdmin}
-                        onChange={this.handleAdminChange}
-                    />
-                    <label className="form-check-label" htmlFor="isAdmin">
-                        Is Admin?
-                    </label>
-                </div>
+                
                 <hr />
                 <button
                     className="btn btn-primary btn-block"

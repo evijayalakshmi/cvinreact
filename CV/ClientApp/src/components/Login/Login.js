@@ -118,7 +118,7 @@ export default class Login extends Component {
                         disabled={!this.state.formValid}
                         type="submit"
                     >
-                        Login
+                        <h5>Login</h5>
                     </button>
                     <hr />
                     <p> New User? Please <a href="#signin">SignIn! </a> </p>
