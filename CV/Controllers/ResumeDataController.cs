@@ -24,6 +24,7 @@ namespace cv.Controllers {
             var utcTime = DateTime.UtcNow;
             req.Name = string.Format("{0} {1}", "Resume", utcTime);
             req.CreatedTime = utcTime;
+            req.UpdatedTime = utcTime;
 
             return Ok(_resumeStoreService.Create(request));
         }
@@ -42,6 +43,22 @@ namespace cv.Controllers {
             }
 
             _resumeStoreService.Remove(book.Id);
+
+            return NoContent();
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, [FromBody] ResumeData resume) {
+            var res = _resumeStoreService.Get(id);
+
+            if (res == null) {
+                return NotFound();
+            }
+
+            var utcTime = DateTime.UtcNow;
+            resume.Name = string.Format("{0} {1}", "Resume", utcTime);
+            resume.UpdatedTime = utcTime;
+            _resumeStoreService.Update(id, resume);
 
             return NoContent();
         }

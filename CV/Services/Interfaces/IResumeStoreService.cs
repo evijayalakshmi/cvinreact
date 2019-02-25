@@ -13,5 +13,7 @@ namespace cv.Services {
         IReadOnlyCollection<ResumeData> TryGetByUser(string emailId);
 
         void Remove(string id);
+
+        void Update(string id, ResumeData resume);
     }
 }

@@ -26,21 +26,20 @@ export default class Signup extends Component {
         };
     }
 
-    validateForm() {
-        return (
-            this.state.name.length > 0 &&
-            this.state.email.length > 0 &&
-            this.state.password.length > 0 &&
-            this.state.password === this.state.confirmPassword
-        );
-    }
+    //validateForm() {
+    //    return (
+    //        this.state.name.length > 0 &&
+    //        this.state.email.length > 0 &&
+    //        this.state.password.length > 0 &&
+    //        this.state.password === this.state.confirmPassword
+    //    );
+    //}
 
     validateConfirmationForm() {
         return this.state.confirmationCode.length > 0;
     }
 
     validateForm() {
-        //return this.state.email.length > 0 && this.state.password.length > 0;
         this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.confirmPasswordValid });
     }
 
@@ -69,7 +68,8 @@ export default class Signup extends Component {
         this.setState({
             formErrors: fieldValidationErrors,
             emailValid: emailValid,
-            passwordValid: passwordValid
+            passwordValid: passwordValid,
+            confirmPasswordValid: confirmPasswordValid
         }, this.validateForm);
     }
 

@@ -66,6 +66,7 @@ export default class NewExperience extends Component {
                                 id="ex-fromDatepicker"
                                 selected={this.props.experience.fromDate.formattedValue}
                                 onChange={(v) => this.props.dateValueChange('fromDate', v, this.props.index)}
+                                required
                             />
                     </div>
                     <div className="col-md-4">
@@ -75,6 +76,7 @@ export default class NewExperience extends Component {
                                 selected={this.props.experience.toDate.formattedValue}
                                 disabled={this.props.experience.isCurrentEmployer}
                                 onChange={(v) => this.props.dateValueChange('toDate', v, this.props.index)}
+                                required
                             />
                         </div>
                     </div>

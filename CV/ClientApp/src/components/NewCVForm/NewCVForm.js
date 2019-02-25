@@ -19,14 +19,17 @@ export class NewCVForm extends Component {
         this.state = {
             userEmail: this.props.userInfo.userEmail,
             userName: this.props.userInfo.userName,
+            id: data.id,
             formControls: this.initializeFormControls(data)
         };
     }
 
     componentWillReceiveProps(props) {
+        console.log('updating...');
         const activeIndex = this.props.activeResumeIndex;
         if (props.activeResumeIndex !== activeIndex) {
             var data = props.cvData;
+            this.setState({ id: data.id });
             this.setState({ formControls: this.initializeFormControls(data) });
         }
     }
@@ -48,7 +51,7 @@ export class NewCVForm extends Component {
                     error: ''
                 },
                 linkedIn: {
-                    value: '',
+                    value: data.personalInfo.linkedIn ? data.personalInfo.linkedIn : '',
                     placeHolder: 'Enter LinkedIn URL'
                 },
                 phoneNumber: {
@@ -56,11 +59,11 @@ export class NewCVForm extends Component {
                     placeHolder: 'Enter phoneNumber'
                 },
                 gitURL: {
-                    value: '',
+                    value: data.personalInfo.gitURL ? data.personalInfo.gitURL : '',
                     placeHolder: 'Enter Git URL'
                 },
                 blogURL: {
-                    value: '',
+                    value: data.personalInfo.blogURL ? data.personalInfo.blogURL : '',
                     placeHolder: 'Enter blog URL'
                 },
                 valid: false
@@ -88,7 +91,7 @@ export class NewCVForm extends Component {
                         formattedValue: ''
                     },
                     rolesAndResponsibilities: {
-                        value: '',
+                        value: exp.rolesAndResponsibilities,
                         placeHolder: 'Enter roles & responsibilities'
                     },
                     isCurrentEmployer: false
@@ -128,15 +131,13 @@ export class NewCVForm extends Component {
                 };
             }),
             lifePhilosophyContent: {
-                value: '',
+                value: data.lifePhilosophy,
                 placeHolder: 'Write Your Life Philosophy'
             },
-            strength: data.strengths.map(st => {
-                return {
-                    value: st,
-                    placeHolder: 'Enter strengths with comma separated values'
-                };
-            }),
+            strength: {
+                value: data.strengths ? data.strengths.join(',') : '',
+                placeHolder: 'Enter strengths with comma separated values'
+            },
             formValid: false
         };
     }
@@ -246,7 +247,6 @@ export class NewCVForm extends Component {
         };
         updatedFormElement.value = value;
         updatedControls.experience[i][name] = updatedFormElement;
-
         this.setState({
             formControls: updatedControls
         });
@@ -521,6 +521,7 @@ export class NewCVForm extends Component {
         const formData = {
             userEmail: this.state.userEmail,
             userName: this.state.userName,
+            id: this.state.id,
             personalInfo: {},
             experiences: [],
             educations: [],
@@ -634,21 +635,40 @@ export class NewCVForm extends Component {
         console.log('state value is ', this.state);
         var formData = this.stateToFormData();
         console.log('form data to backend ', formData);
-        fetch('api/ResumeData/SaveToMongoDB', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        }).then((res) => {
-            if (res.status === 200) {
-                alert("Resume successfully saved!!");
-            }
-            //this.setState(() => ({ toPdf: true }));
-        }).catch((error) => {
-            alert('problem in retrieving users ' + error);
-        });
+
+        if (this.state.id !== '') {
+            fetch('api/ResumeData/' + this.state.id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }).then((res) => {
+                if (res.status === 204) {
+                    alert("Resume successfully updated!!");
+                }
+                //this.setState(() => ({ toPdf: true }));
+            }).catch((error) => {
+                alert('problem in updating resume ' + error);
+            });
+        } else {
+            fetch('api/ResumeData/SaveToMongoDB', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }).then((res) => {
+                if (res.status === 200) {
+                    alert("Resume successfully saved!!");
+                }
+                //this.setState(() => ({ toPdf: true }));
+            }).catch((error) => {
+                alert('problem in saving resume ' + error);
+            });
+        }
         e.preventDefault();
     }
 
@@ -840,7 +860,9 @@ export class NewCVForm extends Component {
                                     rows="3"
                                     value={this.state.formControls.strength.value}
                                     placeholder={this.state.formControls.strength.placeHolder}
-                                    onChange={this.changeStrengthsHandler} />
+                                    onChange={this.changeStrengthsHandler}
+                                    required
+                                />
                             </div>
                         </div>
                         <div className="col-md-6">

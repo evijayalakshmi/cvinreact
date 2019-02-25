@@ -31,6 +31,7 @@ export class ContentForm extends Component {
     }
 
     handleListItemClick = (e, idx, thisResume) => {
+        e.preventDefault();
         this.setState({ activeListItem: idx });
         console.log(thisResume);
     }
@@ -39,6 +40,7 @@ export class ContentForm extends Component {
         const emptyResumeData = {
             userEmail: this.state.userEmail,
             userName: this.state.userName,
+            id: '',
             name: 'temp...',
             personalInfo: {
                 name: '',

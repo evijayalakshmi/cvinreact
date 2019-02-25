@@ -24,6 +24,9 @@ namespace cv.Models {
         [BsonElement("Created Time")]
         public DateTime CreatedTime { get; set; }
 
+        [BsonElement("Updated Time")]
+        public DateTime UpdatedTime { get; set; }
+
         [BsonElement("Personal Info")]
         public PersonalInfo PersonalInfo { get; set; }
 
@@ -60,6 +63,15 @@ namespace cv.Models {
 
         [BsonElement("Email")]
         public string EMail { get; set; }
+
+        [BsonElement("LinkedIn")]
+        public string LinkedIn { get; set; }
+
+        [BsonElement("GitURL")]
+        public string GitURL { get; set; }
+
+        [BsonElement("BlogURL")]
+        public string BlogURL { get; set; }
     }
 
     public class Experience {
@@ -73,6 +85,12 @@ namespace cv.Models {
         [BsonElement("Location")]
         public string Location { get; set; }
 
+        [BsonElement("From")]
+        public string FromDate { get; set; }
+
+        [BsonElement("To")]
+        public string ToDate { get; set; }
+
         [BsonElement("RolesAndResponsibilities")]
         public string RolesAndResponsibilities { get; set; }
     }
@@ -83,6 +101,12 @@ namespace cv.Models {
 
         [BsonElement("University")]
         public string University { get; set; }
+
+        [BsonElement("From")]
+        public string FromDate { get; set; }
+
+        [BsonElement("To")]
+        public string ToDate { get; set; }
     }
 
     public class Language {

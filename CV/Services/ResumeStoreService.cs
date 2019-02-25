@@ -30,5 +30,10 @@ namespace cv.Services {
         public void Remove(string id) {
             _resumes.DeleteOne(res => res.Id == id);
         }
+
+        public void Update(string id, ResumeData resume) {
+            _resumes.ReplaceOne(res => res.Id == id, resume);
+        }
+
     }
 }
