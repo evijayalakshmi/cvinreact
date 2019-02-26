@@ -30,6 +30,16 @@ namespace cv.Controllers {
         }
 
         [HttpGet("[action]")]
+        public ActionResult<ResumeData> Get([FromQuery] string id) {
+            var res = _resumeStoreService.Get(id);
+
+            if (res == null) {
+                return NotFound();
+            }
+            return Ok(res);
+        }
+
+        [HttpGet("[action]")]
         public ActionResult<IEnumerable<ResumeData>> GetByEmailId([FromQuery] string emailId) {
             return Ok(_resumeStoreService.TryGetByUser(emailId));
         }

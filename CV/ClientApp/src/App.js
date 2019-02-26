@@ -14,7 +14,7 @@ export default class App extends Component {
                     <Switch>
                         <Route exact path='/' component={MainPage} />
                         <Route path='/Cv' component={ContentForm} />
-                        <Route path='/MyCv' component={MyCv} />
+                        <Route path='/MyCv/:id' component={MyCv} />
                     </Switch>
                 </Router>
             </div>

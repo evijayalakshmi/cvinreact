@@ -40,7 +40,7 @@ export default class Login extends Component {
                 fieldValidationErrors.email = emailValid ? '' : ' is invalid';
                 break;
             case 'password':
-                passwordValid = value.length >= 6;
+                passwordValid = value.length >= 4;
                 fieldValidationErrors.password = passwordValid ? '' : ' is too short';
                 break;
             default:

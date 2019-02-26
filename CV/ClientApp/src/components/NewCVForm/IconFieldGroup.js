@@ -19,7 +19,7 @@ export class IconFieldGroup extends Component {
                             <i className={this.props.icon} />
                         </span>
                     </div>
-                    <input type="text" className="form-control" id={this.props.id} {...this.props} />
+                    <input type="text" className="form-control" id={this.props.id} {...this.props} autoComplete="off" />
                 </div>
                 {this.props.help && <small id="help" className="form-text text-muted">{this.props.help}</small>}
                 {this.props.error && <small id="help" className="form-text text-error" style={errorStyle}>{this.props.error}</small>}

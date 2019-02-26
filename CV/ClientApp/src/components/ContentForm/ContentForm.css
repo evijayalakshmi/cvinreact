@@ -3,5 +3,13 @@
     left: 0;
     top: 0;
     text-align: center;
+    color: white;
 }
 
+    .navbar-center b {
+        color: white;
+    }
+
+.bg-dark {
+    background-color: #502DA0 !important;
+}

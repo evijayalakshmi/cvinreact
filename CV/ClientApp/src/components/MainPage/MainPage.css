@@ -9,12 +9,13 @@
 
 #signupButton {
     width: 49.95%;
-    color: white;
+    color: #5AAAFF;
     text-align: center;
     height: 100%;
     margin: 0;
     border: none;
-    padding: 5px;
+    padding: 10px;
+    background-color: #C7DDF5;
 }
 
 #loginButton {
@@ -24,7 +25,7 @@
     height: 100%;
     margin: 0;
     border: none;
-    padding:5px;
+    padding:10px;
 }
 
 #signupButton:hover {
@@ -44,7 +45,7 @@
 }
 
 #card {
-    background: #fff;
+    background: #F1F1F1;
     padding: 90px 90px 90px 90px;
 }
 

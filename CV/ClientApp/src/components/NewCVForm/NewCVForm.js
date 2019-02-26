@@ -41,14 +41,14 @@ export class NewCVForm extends Component {
                     value: data.personalInfo.name,
                     placeHolder: 'Enter name',
                 },
-                location: {
-                    value: data.personalInfo.location,
-                    placeHolder: 'Enter location'
-                },
                 email: {
                     value: data.personalInfo.eMail,
                     placeHolder: 'Enter email',
                     error: ''
+                },
+                currentOccupation: {
+                    value: data.personalInfo.role,
+                    placeHolder: 'Student/Jobseeker/Developer...'
                 },
                 linkedIn: {
                     value: data.personalInfo.linkedIn ? data.personalInfo.linkedIn : '',
@@ -57,6 +57,10 @@ export class NewCVForm extends Component {
                 phoneNumber: {
                     value: data.personalInfo.phoneNumber,
                     placeHolder: 'Enter phoneNumber'
+                },
+                location: {
+                    value: data.personalInfo.location,
+                    placeHolder: 'Enter location'
                 },
                 gitURL: {
                     value: data.personalInfo.gitURL ? data.personalInfo.gitURL : '',
@@ -160,6 +164,9 @@ export class NewCVForm extends Component {
         };
 
         switch (name) {
+            case 'name':
+                
+                break;
             case 'email':
                 let emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
                 updatedFormElement.error = emailValid ? '' : ' is invalid';
@@ -736,32 +743,20 @@ export class NewCVForm extends Component {
                     <div className="w-100">
                         <ContentHeading name="Personal Info" />
                         <div className="row w-100">
-                            <div className="col-md-6">
-                                <FieldGroup
+                            <div className="col-md-4">
+                                <IconFieldGroup
                                     name="name"
                                     id="formControlsName"
                                     type="text"
+                                    pattern='[A-Za-z]'
                                     label="Name"
                                     value={this.state.formControls.personalInfo.name.value}
                                     placeholder={this.state.formControls.personalInfo.name.placeHolder}
+                                    icon="fa fa-user-circle"
                                     onChange={this.changePersonalInfoHandler}
                                     required
                                 />
                             </div>
-                            <div className="col-md-6">
-                                <IconFieldGroup
-                                    name="location"
-                                    id="formControlsLocaiton"
-                                    label="Location"
-                                    value={this.state.formControls.personalInfo.location.value}
-                                    placeholder={this.state.formControls.personalInfo.location.placeHolder}
-                                    icon="fa fa-map-marker"
-                                    onChange={this.changePersonalInfoHandler}
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div className="row w-100">
                             <div className="col-md-4">
                                 <IconFieldGroup
                                     name="email"
@@ -775,6 +770,19 @@ export class NewCVForm extends Component {
                                     required
                                 />
                             </div>
+                            <div className="col-md-4">
+                                <IconFieldGroup
+                                    name="currentOccupation"
+                                    id="formControlsRole"
+                                    label="Current Occupation"
+                                    value={this.state.formControls.personalInfo.currentOccupation.value}
+                                    placeholder={this.state.formControls.personalInfo.currentOccupation.placeHolder}
+                                    icon="fa fa-briefcase"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className="row w-100">
                             <div className="col-md-4">
                                 <IconFieldGroup
                                     name="linkedIn"
@@ -798,6 +806,18 @@ export class NewCVForm extends Component {
                                     required
                                 />
                             </div>
+                            <div className="col-md-4">
+                                <IconFieldGroup
+                                    name="location"
+                                    id="formControlsLocaiton"
+                                    label="Location"
+                                    value={this.state.formControls.personalInfo.location.value}
+                                    placeholder={this.state.formControls.personalInfo.location.placeHolder}
+                                    icon="fa fa-map-marker"
+                                    onChange={this.changePersonalInfoHandler}
+                                    required
+                                />
+                            </div>
                         </div>
                         <div className="row w-100">
                             <div className="col-md-6">
@@ -815,10 +835,10 @@ export class NewCVForm extends Component {
                                 <IconFieldGroup
                                     name="blogURL"
                                     id="formControlsBlog"
-                                    label="Blog"
+                                    label="Blog/Other Links"
                                     value={this.state.formControls.personalInfo.blogURL.value}
                                     placeholder={this.state.formControls.personalInfo.blogURL.placeHolder}
-                                    icon="fa fa-newspaper-o"
+                                    icon="fa fa-external-link"
                                     onChange={this.changePersonalInfoHandler}
                                 />
                             </div>
@@ -840,6 +860,7 @@ export class NewCVForm extends Component {
                         <div className="col-md-6">
                             <ContentHeading name="Languages" />
                             {languages}
+                            <hr />
                             <button type="button" className="btn btn-primary" id="addLanguageBtn" onClick={this.addLanguage}>Add language</button>
                         </div>
                         <div className="col-md-6">

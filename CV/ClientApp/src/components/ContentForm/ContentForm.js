@@ -5,6 +5,7 @@ import { NewListItem } from '../NewCVForm/NewListItem/NewListItem';
 import { ContentHeading } from '../ContentHeading/ContentHeading';
 import './ContentForm.css';
 import { AdminForm } from '../AdminForm/AdminForm';
+import { Link } from "react-router-dom";
 
 export class ContentForm extends Component {
     displayName = ContentForm.name;
@@ -83,7 +84,6 @@ export class ContentForm extends Component {
     }
 
     renderToHTMLData = (resume) => {
-        debugger;
         const formControls = resume;
         return {
             personalDetails: {
@@ -155,9 +155,18 @@ export class ContentForm extends Component {
                 />);
         });
 
+        const newTo = {
+            pathname: "/MyCv/5c74bf5f7fdbc22ad84a8098"
+        };
+
         return (
             <div className="row h-100">
                 <div className="col-md-2 h-100 saved-resumes">
+                    <Link className="btn btn-pink" role="button" target="_blank" to={newTo}>
+                        <button type="button" className="btn btn-outline-success">
+                            Click Me!
+                       </button>
+                    </Link>
                     <ContentHeading name="Saved Resumes" />
                     <ul className="list-group">
                         {resumes}
@@ -194,7 +203,7 @@ export class ContentForm extends Component {
             <div className="container-fluid p-0">
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between w-100">
                     <a className="navbar-brand" href="#">Resume Builder</a>
-                    <p className="navbar-text navbar-center">Signed in as {this.state.userName}</p>
+                    <p className="navbar-text navbar-center">Signed in as <b> {this.state.userName} </b></p>
                     <p className="navbar-text navbar-right"><a href="#login" className="navbar-link">Logout</a></p>
                 </nav>
                 <div className="container-fluid h-100 bg">

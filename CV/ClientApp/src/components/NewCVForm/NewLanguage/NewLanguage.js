@@ -24,7 +24,7 @@ export class NewLanguage extends Component {
                         <option value="german">German</option>
                     </select>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-5 pull-right">
                     <div className="form-check form-check-inline">
                         <input className="form-check-input"
                             type="radio"
@@ -70,7 +70,6 @@ export class NewLanguage extends Component {
                         <label className="form-check-label" htmlFor="inlineRadio4">Native</label>
                     </div>
                 </div>
-                <br />
                 <div className="col-md-2">
                     <button onClick={(e) => this.props.delete(e, this.props.index)}>
                         <i className="fa fa-trash" />
