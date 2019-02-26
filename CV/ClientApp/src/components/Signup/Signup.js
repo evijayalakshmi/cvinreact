@@ -40,7 +40,7 @@ export default class Signup extends Component {
     }
 
     validateForm() {
-        this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.confirmPasswordValid });
+        this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid });
     }
 
     validateField(fieldName, value) {
