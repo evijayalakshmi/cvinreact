@@ -1,13 +1,13 @@
 ﻿import React, { Component } from 'react';
+
 import { ContentHeading } from '../ContentHeading/ContentHeading';
-import { FieldGroup } from './FieldGroup';
 import { IconFieldGroup } from './IconFieldGroup';
 import NewExperience from './NewExperience/NewExprience';
 import NewAchievement from './NewAchievement/NewAchievement';
-import './NewCVForm.css';
 import { NewEducation } from './NewEducation/NewEducation';
 import { NewLanguage } from './NewLanguage/NewLanguage';
-import { CvData } from '../../models/CvData';
+
+import './NewCVForm.css';
 
 export class NewCVForm extends Component {
     displayName = NewCVForm.name;
@@ -584,59 +584,6 @@ export class NewCVForm extends Component {
         return formData;
     }
 
-    splitArrayIntoChunks = (arr, chunkLen) => {
-        var chunkList = [];
-        var chunkCount = Math.ceil(arr.length / chunkLen);
-        for (var i = 0; i < chunkCount; i++) {
-            chunkList.push(arr.splice(0, chunkLen));
-        }
-        return chunkList;
-    }
-
-    renderToHTMLData = () => {
-        const formControls = this.state.formControls;
-        return {
-            personalDetails: {
-                Name: formControls.personalInfo.name.value,
-                Designation: '',
-                Email: formControls.personalInfo.email.value,
-                blog: formControls.personalInfo.blogURL.value,
-                Address: formControls.personalInfo.location.value
-            },
-            experiences: formControls.experience.map(exp => {
-                return {
-                    title: exp.title.value,
-                    company: exp.company.value,
-                    from: "",
-                    to: "",
-                    location: exp.location.value,
-                    responsibilities: exp.rolesAndResponsibilities.value.split('\r\n')
-                };
-            }),
-            moments: formControls.achievement.map(mom => {
-                return {
-                    icon: "fa fa-trophy fa-2x",
-                    heading: "Courage I had",
-                    content: mom.value
-                };
-            }),
-            strengths: this.splitArrayIntoChunks(formControls.strength.value.split(','), 3),
-            languages: formControls.language.map(lan => {
-                return { language: lan.name, level: lan.level }
-            }),
-            educations: formControls.education.map(edu => {
-                return {
-                    stream: edu.stream.value,
-                    university: edu.university.value,
-                    icon: "fa fa-calendar",
-                    from: "",
-                    to: ""
-                };
-            }),
-            dayOfLife: []
-        };
-    }
-
     // Submit Form
     handleSubmit = (e) => {
         console.log('state value is ', this.state);
@@ -655,7 +602,6 @@ export class NewCVForm extends Component {
                 if (res.status === 204) {
                     alert("Resume successfully updated!!");
                 }
-                //this.setState(() => ({ toPdf: true }));
             }).catch((error) => {
                 alert('problem in updating resume ' + error);
             });
@@ -671,7 +617,6 @@ export class NewCVForm extends Component {
                 if (res.status === 200) {
                     alert("Resume successfully saved!!");
                 }
-                //this.setState(() => ({ toPdf: true }));
             }).catch((error) => {
                 alert('problem in saving resume ' + error);
             });
@@ -680,10 +625,6 @@ export class NewCVForm extends Component {
     }
 
     render() {
-        // if (this.state.toPdf === true) {
-        //     return (<Redirect to={{ pathname: '/MyCv', state: this.renderToHTMLData() }} />);
-        // }
-
         // Experiences
         const experiences = [];
         for (var i = 0; i < this.state.formControls.experience.length; i += 1) {

@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 
 import { Doughnut } from 'react-chartjs-2';
-import { CvData } from '../../models/CvData';
+import { CvData } from '../../../models/CvData';
 import './DayChart.css';
 
 export class DayChart extends Component {

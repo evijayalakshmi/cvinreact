@@ -19,7 +19,7 @@ export class Experience extends Component {
                 </div>
                 <br />
                 <ul>
-                    {this.props.experience.responsibilities.map(function (name, index) {
+                    {this.props.experience.rolesAndResponsibilities.map(function (name, index) {
                         return <li className="bulletlist" key={index}>{name}</li>
                     })}
                 </ul>

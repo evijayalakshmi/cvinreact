@@ -4,14 +4,16 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 export class NewEducation extends Component {
+    displayName = NewEducation.name;
+
     constructor(props, context) {
-        super(props, context)
-    };
+        super(props, context);
+    }
 
     render() {
         return (
             <div>
-                <div className="experience-style w-100" ref={this.props.innerRef}>
+                <div className="experience-style w-100 p-2" ref={this.props.innerRef}>
                     <div className="row w-100">
                         <div className="col-md-4 col-md-offset-1">
                             <FieldGroup

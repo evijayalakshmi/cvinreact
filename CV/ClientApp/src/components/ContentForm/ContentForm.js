@@ -44,11 +44,15 @@ export class ContentForm extends Component {
             id: '',
             name: 'temp...',
             personalInfo: {
-                name: '',
-                location: '',
-                eMail: '',
-                blog: '',
-                Address: ''},
+                name: "",
+                location: "",
+                phoneNumer: "123456789",
+                designation: "",
+                email: "",
+                linkedIn: "",
+                gitURL: "",
+                blog: ""
+            },
             experiences: [],
             educations: [],
             languages: [],
@@ -84,43 +88,45 @@ export class ContentForm extends Component {
     }
 
     renderToHTMLData = (resume) => {
-        const formControls = resume;
         return {
-            personalDetails: {
-                Name: formControls.personalInfo.name,
-                Designation: '',
-                Email: formControls.personalInfo.email,
-                blog: formControls.personalInfo.blogURL,
-                Address: formControls.personalInfo.location
+            personalInfo: {
+                Name: resume.personalInfo.name,
+                Location: resume.personalInfo.location,
+                PhoneNumber: resume.personalInfo.phoneNumber,
+                Designation: resume.personalInfo.designation,
+                Email: resume.personalInfo.email,
+                LinkedIn: resume.personalInfo.linkedIn,
+                gitURL: resume.personalInfo.gitURL,
+                blog: resume.personalInfo.blogURL
             },
-            experiences: formControls.experiences.map(exp => {
+            experiences: resume.experiences.map(exp => {
                 return {
                     title: exp.title,
                     company: exp.company,
-                    from: "",
-                    to: "",
-                    location: exp.location.value,
-                    responsibilities: exp.rolesAndResponsibilities.split('\r\n')
+                    location: exp.location,
+                    fromDate: "",
+                    toDate: "",
+                    rolesAndResponsibilities: exp.rolesAndResponsibilities.split('\r\n')
                 };
             }),
-            moments: formControls.achievements.map(mom => {
+            achievements: resume.achievements.map(mom => {
                 return {
                     icon: "fa fa-trophy fa-2x",
                     heading: "Courage I had",
                     content: mom
                 };
             }),
-            strengths: formControls.strengths ? this.splitArrayIntoChunks(formControls.strengths, 3) : [],
-            languages: formControls.languages.map(lan => {
-                return { language: lan.name, level: lan.level }
+            strengths: resume.strengths ? this.splitArrayIntoChunks(resume.strengths, 3) : [],
+            languages: resume.languages.map(lan => {
+                return { language: lan.name, level: lan.level };
             }),
-            educations: formControls.educations.map(edu => {
+            educations: resume.educations.map(edu => {
                 return {
                     stream: edu.stream,
                     university: edu.university,
                     icon: "fa fa-calendar",
-                    from: "",
-                    to: ""
+                    fromDate: "",
+                    toDate: ""
                 };
             }),
             dayOfLife: []
