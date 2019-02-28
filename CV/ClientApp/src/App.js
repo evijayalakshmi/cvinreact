@@ -9,15 +9,13 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
-                <Router>
-                    <Switch>
-                        <Route exact path='/' component={MainPage} />
-                        <Route path='/Cv' component={ContentForm} />
-                        <Route path='/MyCv/:id' component={MyCv} />
-                    </Switch>
-                </Router>
-            </div>
+            <Router>
+                <Switch>
+                    <Route exact path='/' component={MainPage} />
+                    <Route path='/Cv' component={ContentForm} />
+                    <Route path='/MyCv/:id' component={MyCv} />
+                </Switch>
+            </Router>
         );
     }
 }

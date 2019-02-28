@@ -74,8 +74,8 @@ export class NewEducation extends Component {
                     </div>
                     <hr />
                     <div className="col-md-4">
-                        <button type="submit" onClick={(e) => this.props.delete(e, this.props.index)}>
-                            <i className="fa fa-trash"> Delete Education</i></button>
+                        <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
+                            <i className="fa fa-trash"></i> Delete Education</button>
                     </div>
                     <br />
                 </div>

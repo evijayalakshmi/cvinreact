@@ -165,7 +165,6 @@ export class NewCVForm extends Component {
 
         switch (name) {
             case 'name':
-                
                 break;
             case 'email':
                 let emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);

@@ -104,8 +104,8 @@ export default class NewExperience extends Component {
                             </div>
                         </div>
                         <div className="col-md-4">
-                            <button type="submit" className="btn btn-secondary" onClick={(e) => this.props.delete(e, this.props.index)}>
-                                <i className="fa fa-trash"> Delete Experience</i>
+                            <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
+                                <i className="fa fa-trash"></i> Delete Experience
                             </button>
                         </div>
                     </div>
