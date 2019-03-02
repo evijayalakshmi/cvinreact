@@ -75,12 +75,12 @@ export default class Login extends Component {
             body: JSON.stringify(userData)
         }).then((response) => {
             return response.json();
-        }
-        ).then((data) => {
+        }).then((data) => {
             this.setState({ isUserValid: true, userName: data.name, userEmail: data.email, isAdmin: data.isAdmin });
             return data;
-        }
-        );
+        }).catch((error) => {
+            this.setState({ error: 'Invalid username or password' });
+        });
 
         event.preventDefault();
     }
@@ -89,6 +89,10 @@ export default class Login extends Component {
         if (this.state.isUserValid) {
             return (<Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail, isAdmin: this.state.isAdmin } }} />);
         }
+
+        const errorStyle = {
+            color: 'red'
+        };
 
         return (
             <div className="Login">
@@ -121,7 +125,7 @@ export default class Login extends Component {
                         <h5>Login</h5>
                     </button>
                     <hr />
-                    <p> New User? Please <a href="#signin">SignIn! </a> </p>
+                    {this.state.isUserValid ? null : <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
                 </form>
             </div>
         );

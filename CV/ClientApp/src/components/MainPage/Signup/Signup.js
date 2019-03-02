@@ -97,13 +97,13 @@ export default class Signup extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newUserData)
+        }).then((response) => {
+            return response.json();
         }).then((res) => {
-            console.log(JSON.stringify(res.json()));
-            if (res.status === 200) {
-                this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
-            }
-        }
-        );
+            this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
+        }).catch((error) => {
+            this.setState({ error: 'Email already registered!' });
+        });
 
         event.preventDefault();
 
@@ -136,6 +136,10 @@ export default class Signup extends Component {
     // }
 
     renderForm() {
+        const errorStyle = {
+            color: 'red'
+        };
+
         return (
             <form onSubmit={this.handleSubmit}>
                 <FieldGroup
@@ -193,7 +197,7 @@ export default class Signup extends Component {
                         <hr />
                         <p> You registered Successfully! Please login with your credentials. </p>
                     </div>
-                    : null}
+                    : <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
             </form>
         );
     }
