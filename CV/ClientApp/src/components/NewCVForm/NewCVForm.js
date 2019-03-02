@@ -688,7 +688,6 @@ export class NewCVForm extends Component {
                                     name="name"
                                     id="formControlsName"
                                     type="text"
-                                    pattern='[A-Za-z]'
                                     label="Name"
                                     value={this.state.formControls.personalInfo.name.value}
                                     placeholder={this.state.formControls.personalInfo.name.placeHolder}

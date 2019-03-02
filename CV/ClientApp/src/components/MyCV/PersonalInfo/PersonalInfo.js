@@ -7,12 +7,12 @@ export class PersonalInfo extends Component {
         var linkedin = "https://www.linkedin.com/in/vijaya-lakshmi-edupuganti/";
         return (
             <div>
-                <h1><b> {this.props.info.Name.toUpperCase()}</b></h1>
-                <h5 style={{ color: '#500F8E' }}><b> {this.props.info.Designation}</b> </h5>
+                <h1><b> {this.props.info.name.toUpperCase()}</b></h1>
+                <h5 style={{ color: '#500F8E' }}><b> {this.props.info.designation}</b> </h5>
                 <div className="row w-100">
                     <div className="col-xs-4 col-md-4 col-sm-4">
                         <i className="fa fa-at"></i>
-                        <span> {this.props.info.Email} </span>
+                        <span> {this.props.info.email} </span>
                     </div>
                     <div className="col-xs-4 col-md-5 col-sm-5">
                         {this.props.info.blog !== '' ?
