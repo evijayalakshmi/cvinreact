@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { ContentHeading } from './../ContentHeading/ContentHeading';
-import personalPhoto from '../../assets/img/profileplaceholder.png'
+import personalPhoto from '../../../assets/img/profileplaceholder.png'
 import './MyCV.css';
 import { Experience } from './Experience/Experience';
 import { PersonalInfo } from './PersonalInfo/PersonalInfo';
@@ -8,8 +7,9 @@ import { ProudOf } from './ProudOf/ProudOf';
 import { Language } from './Language/Language';
 import { Education } from './Education/Education';
 import { Strength } from './Strength/Strength';
-import { CvData } from '../../models/CvData';
+import { CvData } from '../../../models/CvData';
 import { DayChart } from './DayChart/DayChart';
+import { ContentHeading } from '../../Common/ContentHeading/ContentHeading';
 
 export class MyCv extends Component {
     displayName = MyCv.name;
@@ -125,13 +125,13 @@ export class MyCv extends Component {
                         </div>
                     </div>
                     <div className="row w-100">
-                        <div className="col-xs-6 col-md-6 col-sm-6 col-xs-offset-1">
-                            <ContentHeading name="Experience" />
+                            <div className="col-xs-6 col-md-6 col-sm-6 col-xs-offset-1">
+                                <ContentHeading name="Experience" />
                             {resumeData.experiences.map(function (name, index) {
                                 return (index + 1 !== resumeData.experiences.length) ?
                                     ([<Experience key={index} experience={name} />, <hr key={index + "h"} className="style3" />]) :
                                     <Experience key={index} experience={name} />;
-                            })}
+                                })}
                             <ContentHeading name="A day of my life" />
                             <DayChart />
                         </div>

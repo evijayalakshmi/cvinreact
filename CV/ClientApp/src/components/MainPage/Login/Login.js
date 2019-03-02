@@ -1,8 +1,8 @@
 ﻿import React, { Component } from "react";
 import "./Login.css";
 import { Redirect } from 'react-router';
-import { FieldGroup } from "../NewCVForm/FieldGroup";
 import Signup from "../Signup/Signup";
+import { FieldGroup } from "../../Common/FieldGroup";
 
 export default class Login extends Component {
     constructor(props) {

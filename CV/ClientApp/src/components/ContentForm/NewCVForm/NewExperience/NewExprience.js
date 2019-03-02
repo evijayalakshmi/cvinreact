@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FieldGroup } from '../FieldGroup';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 import './NewExperience.css';
+import { FieldGroup } from '../../../Common/FieldGroup';
 
 export default class NewExperience extends Component {
     constructor(props, context) {

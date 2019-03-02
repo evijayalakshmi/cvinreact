@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
-import { FieldGroup } from '../FieldGroup';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { FieldGroup } from '../../../Common/FieldGroup';
 
 export class NewEducation extends Component {
     displayName = NewEducation.name;

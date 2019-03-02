@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { NewCVForm } from '../NewCVForm/NewCVForm';
-import { MyCv } from '../MyCV/MyCv';
-import { NewListItem } from '../NewCVForm/NewListItem/NewListItem';
-import { ContentHeading } from '../ContentHeading/ContentHeading';
+import { NewCVForm } from './NewCVForm/NewCVForm';
+import { MyCv } from './MyCV/MyCv';
 import './ContentForm.css';
-import { AdminForm } from '../AdminForm/AdminForm';
+import { AdminForm } from './AdminForm/AdminForm';
 import { Link } from "react-router-dom";
+import { NewListItem } from './NewCVForm/NewListItem/NewListItem';
+import { ContentHeading } from '../Common/ContentHeading/ContentHeading';
 
 export class ContentForm extends Component {
     displayName = ContentForm.name;

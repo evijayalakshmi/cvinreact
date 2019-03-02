@@ -1,13 +1,11 @@
 ﻿import React, { Component } from 'react';
-
-import { ContentHeading } from '../ContentHeading/ContentHeading';
-import { IconFieldGroup } from './IconFieldGroup';
 import NewExperience from './NewExperience/NewExprience';
 import NewAchievement from './NewAchievement/NewAchievement';
 import { NewEducation } from './NewEducation/NewEducation';
 import { NewLanguage } from './NewLanguage/NewLanguage';
-
 import './NewCVForm.css';
+import { IconFieldGroup } from '../../Common/IconFieldGroup';
+import { ContentHeading } from '../../Common/ContentHeading/ContentHeading';
 
 export class NewCVForm extends Component {
     displayName = NewCVForm.name;

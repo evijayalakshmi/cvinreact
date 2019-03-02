@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { IconFieldGroup } from '../IconFieldGroup';
+import { IconFieldGroup } from '../../../Common/IconFieldGroup';
 
 export default class NewAchievement extends Component {
     constructor(props, context) {

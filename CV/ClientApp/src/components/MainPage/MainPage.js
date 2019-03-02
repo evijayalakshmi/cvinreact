@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
-import Login from '../Login/Login';
-import Signup from '../Signup/Signup';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
 import resumeBuilder from '../../assets/img/resume-builder.png';
 import './MainPage.css';
 

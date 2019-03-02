@@ -1,6 +1,6 @@
 ﻿import React, { Component } from "react";
 import "./Signup.css";
-import { FieldGroup } from "../NewCVForm/FieldGroup";
+import { FieldGroup } from "../../Common/FieldGroup";
 
 export default class Signup extends Component {
     constructor(props) {
