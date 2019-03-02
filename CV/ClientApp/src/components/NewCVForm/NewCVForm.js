@@ -47,7 +47,7 @@ export class NewCVForm extends Component {
                     error: ''
                 },
                 currentOccupation: {
-                    value: data.personalInfo.role,
+                    value: data.personalInfo.currentOccupation,
                     placeHolder: 'Student/Jobseeker/Developer...'
                 },
                 linkedIn: {
@@ -87,15 +87,15 @@ export class NewCVForm extends Component {
                         placeHolder: 'Enter location'
                     },
                     fromDate: {
-                        value: '',
-                        formattedValue: ''
+                        value: exp.fromDate,
+                        formattedValue: this.parseDate(exp.fromDate)
                     },
                     toDate: {
-                        value: '',
-                        formattedValue: ''
+                        value: exp.toDate,
+                        formattedValue: this.parseDate(exp.toDate)
                     },
                     rolesAndResponsibilities: {
-                        value: exp.rolesAndResponsibilities,
+                        value: exp.rolesAndResponsibilities.join('\n'),
                         placeHolder: 'Enter roles & responsibilities'
                     },
                     isCurrentEmployer: false
@@ -112,12 +112,12 @@ export class NewCVForm extends Component {
                         placeHolder: 'UNIVERSITY'
                     },
                     fromDate: {
-                        value: '',
-                        formattedValue: ''
+                        value: edu.fromDate,
+                        formattedValue: this.parseDate(edu.fromDate)
                     },
                     toDate: {
-                        value: '',
-                        formattedValue: ''
+                        value: edu.toDate,
+                        formattedValue: this.parseDate(edu.toDate)
                     },
                     isCurrentStudent: false
                 };
@@ -144,6 +144,13 @@ export class NewCVForm extends Component {
             },
             formValid: false
         };
+    }
+
+    parseDate = (dateString) => {
+        var dateParts = dateString.split("/");
+
+        // month is 0-based, that's why we need dataParts[1] - 1
+        return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
     }
 
     validateForm() {
@@ -721,6 +728,7 @@ export class NewCVForm extends Component {
                                     value={this.state.formControls.personalInfo.currentOccupation.value}
                                     placeholder={this.state.formControls.personalInfo.currentOccupation.placeHolder}
                                     icon="fa fa-briefcase"
+                                    onChange={this.changePersonalInfoHandler}
                                     required
                                 />
                             </div>

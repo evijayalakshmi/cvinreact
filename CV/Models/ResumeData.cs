@@ -53,6 +53,9 @@ namespace cv.Models {
         [BsonElement("Name")]
         public string Name { get; set; }
 
+        [BsonElement("CurrentOccupation")]
+        public string CurrentOccupation { get; set; }
+
         [BsonElement("Location")]
         public string Location { get; set; }
 
