@@ -16,19 +16,21 @@ export class AdminForm extends Component {
                 return response.json();
             }).then((data) => {
                 data.map((user, i) => {
-                    fetch('api/ResumeData/GetByEmailId?emailId=' + user.email)
-                        .then((response) => {
-                            return response.json();
-                        }).then((resumes) => {
-                            var currentUserData = {
-                                user: user,
-                                resumes
-                            }
-                            this.setState(prevState => ({
-                                userData: [...prevState.userData, currentUserData]
-                            }));
-                        });
-                })
+                    if (!user.isAdmin) {
+                        fetch('api/ResumeData/GetByEmailId?emailId=' + user.email)
+                            .then((response) => {
+                                return response.json();
+                            }).then((resumes) => {
+                                var currentUserData = {
+                                    user: user,
+                                    resumes
+                                }
+                                this.setState(prevState => ({
+                                    userData: [...prevState.userData, currentUserData]
+                                }));
+                            });
+                    }
+                });
             }).catch((error) => {
                 console.error('problem in retrieving users ', error);
             });
