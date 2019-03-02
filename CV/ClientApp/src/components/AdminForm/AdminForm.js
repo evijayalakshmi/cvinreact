@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 export class AdminForm extends Component {
     displayName = AdminForm.name;
@@ -7,14 +8,27 @@ export class AdminForm extends Component {
         super(props);
 
         this.state = {
-            users: []
+            userData: []
         };
 
         fetch('api/User/GetAllUsers')
             .then((response) => {
                 return response.json();
             }).then((data) => {
-                this.setState({ users: data });
+                data.map((user, i) => {
+                    fetch('api/ResumeData/GetByEmailId?emailId=' + user.email)
+                        .then((response) => {
+                            return response.json();
+                        }).then((resumes) => {
+                            var currentUserData = {
+                                user: user,
+                                resumes
+                            }
+                            this.setState(prevState => ({
+                                userData: [...prevState.userData, currentUserData]
+                            }));
+                        });
+                })
             }).catch((error) => {
                 console.error('problem in retrieving users ', error);
             });
@@ -34,19 +48,29 @@ export class AdminForm extends Component {
 
     render() {
 
-        const rows = this.state.users.map((user, i) => {
+        const rows = this.state.userData.map((user, i) => {
+            console.log("render user resumes: ", user, user.resumes);
+            const resumes = user.resumes.map(r => {
+                const newTo = {
+                    pathname: "/MyCv/" + r.id
+                };
+                return (
+                    <Link className="btn btn-pink" role="button" target="_blank" to={newTo}>
+                        <button type="button" className="btn btn-outline-success">
+                            {r.name}
+                       </button>
+                    </Link>);
+            });
+
             return (
                 <tr innerRef={React.createRef()}>
                     <th scope="row">{i + 1}</th>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td> {user.currentOccupation}</td>
+                    <td>{user.user.name}</td>
+                    <td>{user.user.email}</td>
                     <td>
-                        <button className="btn">
-                            <i className="fa fa-eye" />
-                        </button>
+                        {resumes}
                     </td>
-                    <td>{user.createdTime}</td>
+                    <td>{user.user.createdTime}</td>
                 </tr>
             );
         });
@@ -58,8 +82,7 @@ export class AdminForm extends Component {
                         <th scope="col">#</th>
                         <th scope="col">User Name</th>
                         <th scope="col">Email ID</th>
-                        <th scope="col">Current Occupation</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Resumes</th>
                         <th scope="col">Created Time</th>
                     </tr>
                 </thead>

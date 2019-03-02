@@ -174,9 +174,15 @@ export class ContentForm extends Component {
                        </button>
                     </Link>
                     <ContentHeading name="Saved Resumes" />
-                    <ul className="list-group">
-                        {resumes}
-                    </ul>
+                    {
+                        this.state.resumes ?
+                        (<ul className="list-group">
+                            {resumes}
+                        </ul>) :
+                        (<div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>)
+                    }
                     <hr />
                     <button className="btn btn-primary btn-block" onClick={() => this.addNewListItem()}>
                         <i className="fa fa-plus"></i> Add new resume</button>
