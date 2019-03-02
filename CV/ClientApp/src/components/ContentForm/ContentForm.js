@@ -106,7 +106,7 @@ export class ContentForm extends Component {
                     location: exp.location,
                     fromDate: "",
                     toDate: "",
-                    rolesAndResponsibilities: exp.rolesAndResponsibilities.split('\r\n')
+                    rolesAndResponsibilities: exp.rolesAndResponsibilities
                 };
             }),
             achievements: resume.achievements.map(mom => {

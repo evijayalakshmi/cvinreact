@@ -90,7 +90,7 @@ namespace cv.Models {
         public string ToDate { get; set; }
 
         [BsonElement("RolesAndResponsibilities")]
-        public string RolesAndResponsibilities { get; set; }
+        public IEnumerable<string> RolesAndResponsibilities { get; set; }
     }
 
     public class Education {

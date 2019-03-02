@@ -21,7 +21,7 @@ export class PersonalInfo extends Component {
                     </div>
                     <div className="col-xs-4 col-md-3 col-sm-3">
                         <i className="fa fa-map-marker"></i>
-                        <span> {this.props.info.Location} </span>
+                        <span> {this.props.info.location} </span>
                     </div>
                 </div>
                 <br />

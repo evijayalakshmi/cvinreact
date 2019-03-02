@@ -547,7 +547,11 @@ export class NewCVForm extends Component {
             var experience = this.state.formControls.experience[i];
             formData.experiences.push({});
             for (let formElementId in experience) {
-                formData.experiences[i][formElementId] = this.state.formControls.experience[i][formElementId].value;
+                if (formElementId === "rolesAndResponsibilities") {
+                    formData.experiences[i][formElementId] = this.state.formControls.experience[i][formElementId].value.split('\n');
+                } else {
+                    formData.experiences[i][formElementId] = this.state.formControls.experience[i][formElementId].value;
+                }
             }
         }
 

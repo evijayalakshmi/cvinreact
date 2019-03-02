@@ -45,7 +45,7 @@ export class MyCv extends Component {
                 location: resume.personalInfo.location,
                 phoneNumber: resume.personalInfo.phoneNumber,
                 designation: resume.personalInfo.designation,
-                email: resume.personalInfo.email,
+                email: resume.personalInfo.eMail,
                 linkedIn: resume.personalInfo.linkedIn,
                 gitURL: resume.personalInfo.gitURL,
                 blog: resume.personalInfo.blogURL
@@ -57,7 +57,7 @@ export class MyCv extends Component {
                     location: exp.location,
                     fromDate: "",
                     toDate: "",
-                    rolesAndResponsibilities: exp.rolesAndResponsibilities.split('\r\n')
+                    rolesAndResponsibilities: exp.rolesAndResponsibilities
                 };
             }),
             achievements: resume.achievements.map(mom => {
