@@ -43,6 +43,7 @@ export class MyCv extends Component {
             personalInfo: {
                 name: resume.personalInfo.name,
                 location: resume.personalInfo.location,
+                currentOccupation: resume.personalInfo.currentOccupation,
                 phoneNumber: resume.personalInfo.phoneNumber,
                 designation: resume.personalInfo.designation,
                 email: resume.personalInfo.eMail,
@@ -55,8 +56,8 @@ export class MyCv extends Component {
                     title: exp.title,
                     company: exp.company,
                     location: exp.location,
-                    fromDate: "",
-                    toDate: "",
+                    fromDate: exp.fromDate,
+                    toDate: exp.toDate,
                     rolesAndResponsibilities: exp.rolesAndResponsibilities
                 };
             }),
@@ -76,8 +77,8 @@ export class MyCv extends Component {
                     stream: edu.stream,
                     university: edu.university,
                     icon: "fa fa-calendar",
-                    fromDate: "",
-                    toDate: ""
+                    fromDate: edu.fromDate,
+                    toDate: edu.toDate
                 };
             }),
             dayOfLife: [],
@@ -137,7 +138,7 @@ export class MyCv extends Component {
                         </div>
                         <div className="col-xs-6 col-md-4 col-sm-4">
                             <ContentHeading name="Life Philosophy" />
-                            <em> "If you don't have any shadows, you're not standing in the light."</em>
+                            <em>"{resumeData.lifePhilosophy}"</em>
                             <ContentHeading name="Most Proud Of" />
                             {resumeData.achievements.map(function (name, index) {
                                 return (index + 1 !== resumeData.achievements.length) ?

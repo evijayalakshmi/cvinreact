@@ -8,7 +8,7 @@ export class Education extends Component {
             <div>
                 <h4>{this.props.education.stream} </h4>
                 <b> {this.props.education.university}</b> <br />
-                <i className="fa fa-calendar"></i> {this.props.education.from} - {this.props.education.to}
+                <i className="fa fa-calendar"></i> {this.props.education.fromDate} - {this.props.education.toDate}
             </div>
             );
     }

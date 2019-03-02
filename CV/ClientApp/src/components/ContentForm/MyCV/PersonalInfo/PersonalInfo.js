@@ -8,7 +8,7 @@ export class PersonalInfo extends Component {
         return (
             <div>
                 <h1><b> {this.props.info.name.toUpperCase()}</b></h1>
-                <h5 style={{ color: '#500F8E' }}><b> {this.props.info.designation}</b> </h5>
+                <h5 style={{ color: '#500F8E' }}><b> {this.props.info.currentOccupation}</b> </h5>
                 <div className="row w-100">
                     <div className="col-xs-4 col-md-4 col-sm-4">
                         <i className="fa fa-at"></i>

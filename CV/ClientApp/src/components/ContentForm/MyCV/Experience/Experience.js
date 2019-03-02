@@ -11,7 +11,7 @@ export class Experience extends Component {
                 <h5 className="heading4"><b>{this.props.experience.company}</b></h5>
                 <div className="row w-100">
                     <div className="col-xs-6 col-md-6 col-sm-6">
-                        <i className="fa fa-calendar"></i> {this.props.experience.from} - {this.props.experience.to}
+                        <i className="fa fa-calendar"></i> {this.props.experience.fromDate} - {this.props.experience.toDate}
                     </div>
                     <div className="col-xs-6 col-md-6 col-sm-6">
                         <i className="fa fa-map-marker"></i> {this.props.experience.location}
