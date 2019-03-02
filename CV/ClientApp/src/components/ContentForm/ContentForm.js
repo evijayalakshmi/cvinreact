@@ -6,6 +6,8 @@ import { AdminForm } from './AdminForm/AdminForm';
 import { Link } from "react-router-dom";
 import { NewListItem } from './NewCVForm/NewListItem/NewListItem';
 import { ContentHeading } from '../Common/ContentHeading/ContentHeading';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export class ContentForm extends Component {
     displayName = ContentForm.name;
@@ -71,22 +73,37 @@ export class ContentForm extends Component {
     }
 
     deleteListItem = (idx, resume) => {
-        if (resume.id !== '') {
-            fetch('api/ResumeData/' + resume.id, {
-                method: 'DELETE'
-            }).then(response => {
-                this.setState({
-                    resumes: this.state.resumes.filter((res) => {
-                        return res.id !== resume.id;
-                    })
-                });
-            });
-        } else {
-            this.state.resumes.splice(idx, 1);
-            this.setState({
-                resumes: this.state.resumes
-            });
-        }
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure to delete this?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        if (resume.id !== '') {
+                            fetch('api/ResumeData/' + resume.id, {
+                                method: 'DELETE'
+                            }).then(response => {
+                                this.setState({
+                                    resumes: this.state.resumes.filter((res) => {
+                                        return res.id !== resume.id;
+                                    })
+                                });
+                            });
+                        } else {
+                            this.state.resumes.splice(idx, 1);
+                            this.setState({
+                                resumes: this.state.resumes
+                            });
+                        }
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        })
     }
 
     renderToHTMLData = (resume) => {
