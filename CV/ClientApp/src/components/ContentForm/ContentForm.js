@@ -71,7 +71,7 @@ export class ContentForm extends Component {
     }
 
     deleteListItem = (idx, resume) => {
-        if (resume.id !== undefined) {
+        if (resume.id !== '') {
             fetch('api/ResumeData/' + resume.id, {
                 method: 'DELETE'
             }).then(response => {
