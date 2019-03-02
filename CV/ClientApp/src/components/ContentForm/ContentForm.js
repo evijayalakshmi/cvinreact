@@ -18,7 +18,8 @@ export class ContentForm extends Component {
             resumes: [],
             userEmail: this.props.location.userInfo.userEmail,
             userName: this.props.location.userInfo.userName,
-            activeListItem: 0
+            activeListItem: 0,
+            areResumesLoaded: false
         };
 
         if (!this.state.isAdmin) {
@@ -27,6 +28,7 @@ export class ContentForm extends Component {
                     return response.json();
                 }).then((data) => {
                     this.setState({ resumes: data });
+                    this.setState({ areResumesLoaded: true });
                 });
         }
     }
@@ -161,6 +163,15 @@ export class ContentForm extends Component {
                 />);
         });
 
+        const resumeArea =
+            this.state.areResumesLoaded ?
+                (<ul className="list-group">
+                    {resumes}
+                </ul>) :
+                (<div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>);
+
         const newTo = {
             pathname: "/MyCv/5c74bf5f7fdbc22ad84a8098"
         };
@@ -174,15 +185,7 @@ export class ContentForm extends Component {
                        </button>
                     </Link>
                     <ContentHeading name="Saved Resumes" />
-                    {
-                        this.state.resumes ?
-                        (<ul className="list-group">
-                            {resumes}
-                        </ul>) :
-                        (<div className="spinner-border" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>)
-                    }
+                    {resumeArea}
                     <hr />
                     <button className="btn btn-primary btn-block" onClick={() => this.addNewListItem()}>
                         <i className="fa fa-plus"></i> Add new resume</button>
