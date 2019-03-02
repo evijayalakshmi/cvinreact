@@ -2,8 +2,9 @@
     border-bottom: 1px dashed #8c8b8b;
 }
 
-.img-circle {
-    width: 100%;
+.rounded-circle {
+    width: 75%;
+    float: right;
 }
 
 .marginTop {

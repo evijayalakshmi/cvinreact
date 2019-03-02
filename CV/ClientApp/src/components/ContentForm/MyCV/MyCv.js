@@ -122,7 +122,7 @@ export class MyCv extends Component {
                             <PersonalInfo info={resumeData.personalInfo} />
                         </div>
                         <div className="col-xs-6 col-md-2 col-sm-2">
-                            <img src={personalPhoto} className="img-circle responsive" alt="my-photo" />
+                            <img src={personalPhoto} className="rounded-circle responsive" alt="my-photo" />
                         </div>
                     </div>
                     <div className="row w-100">
