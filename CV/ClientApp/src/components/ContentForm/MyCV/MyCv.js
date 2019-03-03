@@ -33,7 +33,10 @@ export class MyCv extends Component {
                 const rData = this.renderToHTMLData(data);
                 //const cvData = this.renderToHTMLData(data);
                 console.log('cv data is ', rData);
-                this.setState({ resume: rData });
+
+                //var cvData = new CvData();
+                //this.setState({ resume: cvData.getData() });
+                this.setState({ resume: rData});
                 console.log('state is ', this.state);
             });
     }
@@ -68,9 +71,9 @@ export class MyCv extends Component {
                     content: mom
                 };
             }),
-            strengths: resume.strengths ? this.splitArrayIntoChunks(resume.strengths, 3) : [],
+            strengths: resume.strengths ? this.splitArrayIntoChunks(resume.strengths,3) : [],
             languages: resume.languages.map(lan => {
-                return { language: lan.name, level: lan.level };
+                return { name: lan.name, level: lan.level };
             }),
             educations: resume.educations.map(edu => {
                 return {
@@ -115,60 +118,83 @@ export class MyCv extends Component {
 
         return (
             <div>
-                {resumeData ? 
-                (<div className="container">
-                    <div className="row marginTop w-100">
-                        <div className="com-xs-6 col-md-8 col-sm-8 col-xs-offset-1">
-                            <PersonalInfo info={resumeData.personalInfo} />
+                {resumeData ?
+                    (<div className="container pageBorder">
+                        <div className="row w-100">
+                            <div className="col-xs-6 col-md-8 col-sm-8">
+                                <PersonalInfo info={resumeData.personalInfo} />
+                            </div>
+                            <div className="col-xs-6 col-md-2 col-sm-4">
+                                <img src={personalPhoto} className="rounded-circle responsive" alt="my-photo" />
+                            </div>
                         </div>
-                        <div className="col-xs-6 col-md-2 col-sm-2">
-                            <img src={personalPhoto} className="rounded-circle responsive" alt="my-photo" />
-                        </div>
-                    </div>
-                    <div className="row w-100">
-                            <div className="col-xs-6 col-md-6 col-sm-6 col-xs-offset-1">
-                                <ContentHeading name="Experience" />
-                            {resumeData.experiences.map(function (name, index) {
-                                return (index + 1 !== resumeData.experiences.length) ?
-                                    ([<Experience key={index} experience={name} />, <hr key={index + "h"} className="style3" />]) :
-                                    <Experience key={index} experience={name} />;
-                                })}
-                            <ContentHeading name="A day of my life" />
-                            <DayChart />
-                        </div>
-                        <div className="col-xs-6 col-md-4 col-sm-4">
-                            <ContentHeading name="Life Philosophy" />
-                            <em>"{resumeData.lifePhilosophy}"</em>
-                            <ContentHeading name="Most Proud Of" />
-                            {resumeData.achievements.map(function (name, index) {
-                                return (index + 1 !== resumeData.achievements.length) ?
-                                    ([<ProudOf key={index} achievement={name} />, <hr key={index + "p"} className="style3" />]) :
-                                    <ProudOf key={index} achievement={name} />;
-                            })}
-                            <ContentHeading name="Strengths" />
-                            {resumeData.strengths.map(function (name, index) {
-                                return (index + 1 !== resumeData.strengths.length) ?
-                                    [<Strength strengths={name} />, <hr className="style3" />] :
-                                    <Strength strengths={name} />;
-                            })}
-                            <ContentHeading name="Languages" />
-                            {resumeData.languages.map(function (name, index) {
-                                return (index + 1 !== resumeData.languages.length) ?
-                                    ([<Language key={index} language={name} />, <hr className="style3" />]) :
-                                    <Language key={index} language={name} />;
-                            })}
-                            <ContentHeading name="Education" />
-                            {resumeData.educations.map(function (name, index) {
-                                return (index + 1 !== resumeData.educations.length) ?
-                                    ([<Education key={index} education={name} />, <hr className="style3" />]) :
-                                    <Education key={index} education={name} />;
-                            })}
+                        <hr />
+                        <div className="row w-100">
+                            <div className="col-md-8 col-xs-6 col-sm-8">
+                                {resumeData.lifePhilosophy !== '' ?
+                                    <div className="row w-100">
+                                        <ContentHeading name="Life Philosophy" />
+                                        <em>"{resumeData.lifePhilosophy}"</em>
+                                    </div> :
+                                    null}
+                                <div className="row w-100">
+                                    {resumeData.experiences.length > 0 ? [<ContentHeading name="Experience" />,
+                                    resumeData.experiences.map(function (name, index) {
+                                        return (index + 1 !== resumeData.experiences.length) ?
+                                            ([<Experience key={index} experience={name} />, <hr key={index + "h"} className="style3" />]) :
+                                            <Experience key={index} experience={name} />;
+                                    })] : null}
+                                </div>
+                                <div className="row w-100">
+                                    <ContentHeading name="Education" />
+                                    {resumeData.educations.map(function (name, index) {
+                                        return (index + 1 !== resumeData.educations.length) ?
+                                            ([<Education key={index} education={name} />, <hr className="style3" />]) :
+                                            <Education key={index} education={name} />;
+                                    })}
+                                </div>
+                            </div>
+                            <div className="col-md-4 col-xs-6 col-sm-4">
+                                <div className="row w-100">
+                                    {resumeData.languages.length > 0 ? [<ContentHeading name="Languages" />,
+                                    resumeData.languages.map(function (name, index) {
+                                        return (index + 1 !== resumeData.languages.length) ?
+                                            ([<Language key={index} language={name} />, <hr className="style3" />]) :
+                                            <Language key={index} language={name} />;
+                            })] : null }
+                                </div>
+                                <div className="row w-100">
+                                    {resumeData.achievements.length > 0 ? [<ContentHeading name="Most Proud Of" />,
+                                    resumeData.achievements.map(function (name, index) {
+                                        return (index + 1 !== resumeData.achievements.length) ?
+                                            ([<ProudOf key={index} achievement={name} />, <hr key={index + "p"} className="style3" />]) :
+                                            <ProudOf key={index} achievement={name} />;
+                                    })] : null}
+                                </div>
 
+                                <div className="row w-100">
+                                    {resumeData.strengths.length > 0 ?
+                                        [<ContentHeading name="Strengths" />,
+                                            resumeData.strengths.map(function (name, index) {
+                                                return (index + 1 !== resumeData.strengths.length) ?
+                                                    [<Strength strengths={name} />, <hr className="style3" />] :
+                                                    <Strength strengths={name} />;
+                                            })] : null}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>) : null}
+                        <div className="row w-100">
+                            {resumeData.dayOfLife.length > 0 ? [
+                                <div className="col">
+                                <ContentHeading name="A day of my life" />
+                                <DayChart />
+                                </div>
+                            ] : null }
+                            
+                        </div>
+                    </div>) : null}
             </div>
-            
+
         );
     }
 }

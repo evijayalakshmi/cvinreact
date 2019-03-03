@@ -3,10 +3,12 @@
 }
 
 .rounded-circle {
-    width: 75%;
+    width: 100%;
     float: right;
 }
-
-.marginTop {
-    margin-top: 15px;
+.pageBorder {
+    border: 5px solid red; 
+}
+.row {
+    margin-left: 0;
 }

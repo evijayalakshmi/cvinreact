@@ -2,9 +2,11 @@
 
 .strengthstyle {
     background-color: transparent;
-    color: black;
+    color: #500f8e;
     border: 1px solid;
-    border-color: cornflowerblue;
+    border-color: black;
     margin-right: 5px;
     display: inline-block;
+    font-size: medium;
+    border-radius: 5px;
 }

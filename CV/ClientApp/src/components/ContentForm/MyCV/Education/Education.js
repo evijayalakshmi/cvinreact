@@ -5,9 +5,9 @@ export class Education extends Component {
 
     render() {
         return (
-            <div>
-                <h4>{this.props.education.stream} </h4>
-                <b> {this.props.education.university}</b> <br />
+            <div className="w-100">
+                <h3 className="heading4">{this.props.education.stream} </h3>
+                <h4 className="heading4"> <b>{this.props.education.university} </b></h4> <hr/>
                 <i className="fa fa-calendar"></i> {this.props.education.fromDate} - {this.props.education.toDate}
             </div>
             );

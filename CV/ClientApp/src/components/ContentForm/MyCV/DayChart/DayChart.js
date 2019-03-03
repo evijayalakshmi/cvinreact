@@ -23,9 +23,7 @@ export class DayChart extends Component {
             ]
         };
         return (
-            <div>
-                <Doughnut data={data} />
-            </div>
+            <Doughnut data={data} />
         );
     }
 

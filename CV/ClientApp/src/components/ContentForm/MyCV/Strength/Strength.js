@@ -9,8 +9,9 @@ export class Strength extends Component {
         return (
             <div>
                 {this.props.strengths.map(function (name, index) {
-                    return <span className="label label-default strengthstyle">{name}</span>;
+                    return <span className="label label-default strengthstyle pr-2 pl-2">{name}</span>;
                 })}
+                <br/>
             </div>
         );
     }

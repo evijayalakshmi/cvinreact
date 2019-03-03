@@ -168,16 +168,32 @@ export class ContentForm extends Component {
     renderUserPage() {
         const resumes = this.state.resumes.map((resume, i) => {
             return (
-                <NewListItem
-                    key={i}
-                    index={i}
-                    innerRef={React.createRef()}
-                    listItem={resume}
-                    isActive={i === this.state.activeListItem}
-                    onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
-                    delete={(e, idx) => this.deleteListItem(idx, resume)}
-                    openResume={() => this.openResumeExternal(resume)}
-                />);
+                <div className="row w-100 p-0 m-0">
+                    <div className="col-md-10 w-100 p-0 m-0">
+                        <NewListItem
+                            key={i}
+                            index={i}
+                            innerRef={React.createRef()}
+                            listItem={resume}
+                            isActive={i === this.state.activeListItem}
+                            onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
+                            delete={(e, idx) => this.deleteListItem(idx, resume)}
+                            openResume={() => this.openResumeExternal(resume)}
+                        />
+                    </div>
+                    {resume.id !== '' ?
+                        <div className="col-md-2 w-100 p-0 m-0">
+                            <Link className="btn btn-pink p-0" role="button" target="_blank" to={{
+                                pathname: "/MyCv/" + resume.id
+                            }}
+                                style={{ 'float': 'right' }}>
+                                <button type="button" className="btn btn-outline-success">
+                                    <i className="fa fa-external-link" />
+                                </button>
+                            </Link>
+                        </div> :
+                    null}
+                </div>);
         });
 
         const resumeArea =
@@ -189,18 +205,9 @@ export class ContentForm extends Component {
                     <span className="sr-only">Loading...</span>
                 </div>);
 
-        const newTo = {
-            pathname: "/MyCv/5c74bf5f7fdbc22ad84a8098"
-        };
-
         return (
             <div className="row h-100">
                 <div className="col-md-2 h-100 saved-resumes">
-                    <Link className="btn btn-pink" role="button" target="_blank" to={newTo}>
-                        <button type="button" className="btn btn-outline-success">
-                            Click Me!
-                       </button>
-                    </Link>
                     <ContentHeading name="Saved Resumes" />
                     {resumeArea}
                     <hr />

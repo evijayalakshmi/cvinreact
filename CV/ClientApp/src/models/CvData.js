@@ -6,7 +6,7 @@
                 name: "Marissa Mayer",
                 location: "Sunnyvale.CA",
                 phoneNumer: "123456789",
-                designation: "Business Woman & Proud Geek",
+                currentOccupation: "Business Woman & Proud Geek",
                 email: "mmayer@yahoo-inc.com",
                 linkedIn: "www.linkedin.com/marissa",
                 gitURL: "",
@@ -15,8 +15,8 @@
             experiences: [{
                 title: "President & CEO",
                 company: "Yahoo!",
-                from: "july 2012",
-                to: "Ongoing",
+                fromDate: "july 2012",
+                toDate: "Ongoing",
                 location: "Sunnyvale, CA",
                 rolesAndResponsibilities: [
                     "Led the $5 billion acquisition of the company with Verizon - the entity which believed most in the immense value Yahoo! has created",
@@ -25,8 +25,8 @@
             }, {
                 title: "Vice President of Location & Local Services",
                 company: "Google",
-                from: "Oct 2010",
-                to: "July 2012",
+                fromDate: "Oct 2010",
+                toDate: "July 2012",
                 location: "Palo Alto.CA",
                 rolesAndResponsibilities: [
                     "Positioned Google Maps as the world leader in moble maps and navigation",
@@ -35,8 +35,8 @@
             }, {
                 title: "Vice President of Search Products & UX",
                 company: "Google",
-                from: "Oct 2005",
-                to: "July 2010",
+                fromDate: "Oct 2005",
+                toDate: "July 2010",
                 location: "Palo Alto.CA",
                 rolesAndResponsibilities: ["Positioned Google Maps as the world leader in moble maps and navigation",
                     "Oversaw 1000• engineers and product managers workingon Google Maps.Google Places and Google Earth."
@@ -44,8 +44,8 @@
             }, {
                 title: "Product Manager & Technical UILead",
                 company: "Google",
-                from: "Oct 2001",
-                to: "July 2005",
+                fromDate: "Oct 2001",
+                toDate: "July 2005",
                 location: "Palo Alto.CA",
                 rolesAndResponsibilities: [
                     "Appointed by the founder Larry Page in 2011 to lead the Product Management and UserInteraction teams",
@@ -54,8 +54,8 @@
             }, {
                 title: "Product Engineer",
                 company: "Google",
-                from: "June 1999",
-                to: "2001",
+                fromDate: "June 1999",
+                toDate: "2001",
                 location: "Palo Alto.CA",
                 rolesAndResponsibilities: [
                     "Joined the company as employee #20 and female employee #1",
@@ -91,22 +91,24 @@
                 stream: "M.S in Computer Science",
                 university: "Stanford University",
                 icon: "fa fa-calendar",
-                from: "Sep 1997",
-                to: "June 1999"
+                fromDate: "Sep 1997",
+                toDate: "June 1999"
 
             }, {
                 stream: "B.S in Symbolic Systems",
                 university: "Stanford University",
                 icon: "fa fa-calendar",
-                from: "Sep 1993",
-                to: "June 1997"
+                fromDate: "Sep 1993",
+                toDate: "June 1997"
             }],
 
             dayOfLife: [
                 { task: "Publicly resolving issues with Yahoo! investors", percentage: 75 }, { task: "Building a business development strategy for yahoo's future after the Verizon acquisition", percentage: 20 }, { task: "Showing Yahoo! employees that their work has meaning", percentage: 85 },
                 { task: "sleeping & dreaming  about work on the 38th floor of the Four Seasons Hotel in SF", percentage: 40 }, { task: "Spending time with Zachary, Mascalliser, and Sylvana", percentage: 90 },
                 { task: "Baking cupcakes & creating spread-sheets for all of the needed ingradients", percentage: 30 }, { task: "Taking care of New York & San Francisco Ballet Jawbone by being a member of their boards ", percentage: 20 }
-            ]
+            ],
+
+            lifePhilosophy: "I am you yoyu are me"
         };
     }
 
@@ -125,8 +127,8 @@
             experiences: [{
                 title: "Software Trainee",
                 company: "Kiva Helsinki Oy!",
-                from: "January 2019",
-                to: "Ongoing",
+                fromDate: "January 2019",
+                toDate: "Ongoing",
                 location: "Helsinki",
                 rolesAndResponsibilities: [
                     "Learning new technologies",
@@ -135,8 +137,8 @@
             }, {
                 title: "Software Programmer Trainee",
                 company: "Deccansoft Software Solutions",
-                from: "Mar 2015",
-                to: "Dec 2015",
+                fromDate: "Mar 2015",
+                toDate: "Dec 2015",
                 location: "Hyderabad, India",
                 rolesAndResponsibilities: [
                     "Developing web applications",
@@ -165,9 +167,8 @@
                 stream: "B.Tech in Computer Science",
                 university: "JNTUK",
                 icon: "fa fa-calendar",
-                from: "Sep 2010",
-                to: "May 2014"
-
+                fromDate: "Sep 2010",
+                toDate: "May 2014"
             }]
         };
     }

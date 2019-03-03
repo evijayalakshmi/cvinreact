@@ -741,6 +741,7 @@ export class NewCVForm extends Component {
                                     placeholder={this.state.formControls.personalInfo.linkedIn.placeHolder}
                                     icon="fa fa-linkedin"
                                     onChange={this.changePersonalInfoHandler}
+                                    required
                                 />
                             </div>
                             <div className="col-md-4">

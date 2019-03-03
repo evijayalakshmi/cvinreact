@@ -16,7 +16,7 @@ export class Language extends Component {
         return (
             <div className="row w-100">
                 <div className="col-md-6 col-sm-6">
-                    <span><b>{this.props.language.language}</b></span>
+                    <span><b>{this.props.language.name}</b></span>
                 </div>
                 <div className="col-md-6 col-sm-6">
                     {indents}
