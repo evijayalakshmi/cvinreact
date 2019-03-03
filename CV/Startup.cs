@@ -25,7 +25,7 @@ namespace CV
         {
             // Add framework services.
             services.AddDbContext<UserContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddScoped<IResumeStoreService, ResumeStoreService>();
