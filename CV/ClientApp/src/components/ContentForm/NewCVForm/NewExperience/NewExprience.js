@@ -38,6 +38,7 @@ export default class NewExperience extends Component {
                                 type="text"
                                 label="Company"
                                 value={this.props.experience.company.value}
+                                placeholder={this.props.experience.company.placeHolder}
                                 onChange={(e) => this.props.valueChange(e, this.props.index)}
                                 required
                             />
@@ -56,19 +57,19 @@ export default class NewExperience extends Component {
                         </div>
                     </div>
                     <div className="row w-100">
-                        <div className="col-md-4">
-                            <label>From</label>
-                            <DatePicker
+                        <div className="col-md-2">
+                            <h6>From</h6>
+                            <DatePicker className="text-center"
                                 id="ex-fromDatepicker"
                                 selected={this.props.experience.fromDate.formattedValue}
                                 onChange={(v) => this.props.dateValueChange('fromDate', v, this.props.index)}
                                 required
                             />
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-2">
                             <div className="form-group">
-                                <label>To</label>
-                                <DatePicker id="ex-toDatepicker"
+                                <h6>To</h6>
+                                <DatePicker id="ex-toDatepicker" className="text-center"
                                     selected={this.props.experience.toDate.formattedValue}
                                     disabled={this.props.experience.isCurrentEmployer}
                                     onChange={(v) => this.props.dateValueChange('toDate', v, this.props.index)}
@@ -76,7 +77,7 @@ export default class NewExperience extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-2">
                             <div className="form-group">
                                 <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"
                                     checked={this.props.experience.isCurrentEmployer}
@@ -85,6 +86,12 @@ export default class NewExperience extends Component {
                                     Current Employer?
                             </label>
                             </div>
+                        </div>
+                        <hr />
+                        <div className="col-md-4">
+                            <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
+                                <i className="fa fa-trash"></i> Delete Experience
+                            </button>
                         </div>
                     </div>
                     <div className="row w-100">
@@ -103,11 +110,7 @@ export default class NewExperience extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-4">
-                            <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
-                                <i className="fa fa-trash"></i> Delete Experience
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
                 <hr />

@@ -10,6 +10,7 @@ import { Strength } from './Strength/Strength';
 import { CvData } from '../../../models/CvData';
 import { DayChart } from './DayChart/DayChart';
 import { ContentHeading } from '../../Common/ContentHeading/ContentHeading';
+import ReactToPrint from 'react-to-print';
 
 export class MyCv extends Component {
     displayName = MyCv.name;
@@ -71,7 +72,7 @@ export class MyCv extends Component {
                     content: mom
                 };
             }),
-            strengths: resume.strengths ? this.splitArrayIntoChunks(resume.strengths,3) : [],
+            strengths: resume.strengths ? this.splitArrayIntoChunks(resume.strengths, 3) : [],
             languages: resume.languages.map(lan => {
                 return { name: lan.name, level: lan.level };
             }),
@@ -118,8 +119,17 @@ export class MyCv extends Component {
 
         return (
             <div>
+                <hr />
+                <hr/>
+                <div className="text-center">
+                    <ReactToPrint
+                        trigger={() => <button className="btn btn-info">Print this out!</button>}
+                        content={() => this.componentRef}
+                    />
+                </div>
+                <hr/>
                 {resumeData ?
-                    (<div className="container pageBorder">
+                    (<div className="container pageBorder p-3" ref={el => (this.componentRef = el)}>
                         <div className="row w-100">
                             <div className="col-xs-6 col-md-8 col-sm-8">
                                 <PersonalInfo info={resumeData.personalInfo} />
@@ -161,7 +171,7 @@ export class MyCv extends Component {
                                         return (index + 1 !== resumeData.languages.length) ?
                                             ([<Language key={index} language={name} />, <hr className="style3" />]) :
                                             <Language key={index} language={name} />;
-                            })] : null }
+                                    })] : null}
                                 </div>
                                 <div className="row w-100">
                                     {resumeData.achievements.length > 0 ? [<ContentHeading name="Most Proud Of" />,
@@ -175,22 +185,22 @@ export class MyCv extends Component {
                                 <div className="row w-100">
                                     {resumeData.strengths.length > 0 ?
                                         [<ContentHeading name="Strengths" />,
-                                            resumeData.strengths.map(function (name, index) {
-                                                return (index + 1 !== resumeData.strengths.length) ?
-                                                    [<Strength strengths={name} />, <hr className="style3" />] :
-                                                    <Strength strengths={name} />;
-                                            })] : null}
+                                        resumeData.strengths.map(function (name, index) {
+                                            return (index + 1 !== resumeData.strengths.length) ?
+                                                [<Strength strengths={name} />, <hr className="style3" />] :
+                                                <Strength strengths={name} />;
+                                        })] : null}
                                 </div>
                             </div>
                         </div>
                         <div className="row w-100">
                             {resumeData.dayOfLife.length > 0 ? [
                                 <div className="col">
-                                <ContentHeading name="A day of my life" />
-                                <DayChart />
+                                    <ContentHeading name="A day of my life" />
+                                    <DayChart />
                                 </div>
-                            ] : null }
-                            
+                            ] : null}
+
                         </div>
                     </div>) : null}
             </div>

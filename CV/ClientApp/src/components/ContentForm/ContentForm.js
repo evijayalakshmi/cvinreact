@@ -46,11 +46,11 @@ export class ContentForm extends Component {
             userEmail: this.state.userEmail,
             userName: this.state.userName,
             id: '',
-            name: 'temp...',
+            name: 'current',
             personalInfo: {
                 name: "",
                 location: "",
-                phoneNumer: "123456789",
+                phoneNumer: "",
                 designation: "",
                 email: "",
                 linkedIn: "",

@@ -219,11 +219,11 @@ export class NewCVForm extends Component {
             },
             company: {
                 value: '',
-                placeHolder: 'Enter Name of Company'
+                placeHolder: 'Enter Company Name'
             },
             location: {
                 value: '',
-                placeHolder: 'Enter the location'
+                placeHolder: 'Enter location'
             },
             isCurrentEmployer: false,
             fromDate: {
@@ -807,13 +807,13 @@ export class NewCVForm extends Component {
                     </div>
                     <br />
                     <div className="row w-100">
-                        <div className="col-md-6">
+                        <div className="col-md-6 p-0">
                             <ContentHeading name="Languages" />
                             {languages}
                             <hr />
                             <button type="button" className="btn btn-primary" id="addLanguageBtn" onClick={this.addLanguage}>Add language</button>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 pr-0">
                             <ContentHeading name="Most Proud Of" />
                             {achievements}
                             <button type="button" className="btn btn-primary" onClick={this.addAchievement} >Add Your Achievements</button>
@@ -821,7 +821,7 @@ export class NewCVForm extends Component {
                     </div>
                     <br />
                     <div className="row w-100">
-                        <div className="col-md-6">
+                        <div className="col-md-6 p-0">
                             <ContentHeading name="Strengths" />
                             <div className="form-group">
                                 <textarea
@@ -836,7 +836,7 @@ export class NewCVForm extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 pr-0">
                             <ContentHeading name="Life Philosophy" />
                             <div className="form-group">
                                 <textarea

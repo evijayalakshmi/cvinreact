@@ -6,9 +6,11 @@
     width: 100%;
     float: right;
 }
+
 .pageBorder {
-    border: 5px solid red; 
+    border: 1px dotted #500f8e;
 }
+
 .row {
     margin-left: 0;
 }

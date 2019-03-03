@@ -39,10 +39,10 @@ export class NewEducation extends Component {
                         </div>
                     </div>
                     <div className="row w-100">
-                        <div className="col-md-4">
+                        <div className="col-md-2">
                             <div className="form-group">
-                                <label> From </label>
-                                <DatePicker
+                                <h6>From</h6>
+                                <DatePicker className="text-center"
                                     id="ed-fromDatepicker"
                                     selected={this.props.education.fromDate.formattedValue}
                                     onChange={(v) => this.props.dateValueChange('fromDate', v, this.props.index)}
@@ -50,10 +50,10 @@ export class NewEducation extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-2">
                             <div className="form-group">
-                                <label>To</label>
-                                <DatePicker id="ed-toDatepicker"
+                                <h6>To</h6>
+                                <DatePicker id="ed-toDatepicker" className="text-center"
                                     selected={this.props.education.toDate.formattedValue}
                                     disabled={this.props.education.isCurrentStudent}
                                     onChange={(v) => this.props.dateValueChange('toDate', v, this.props.index)}
@@ -61,7 +61,7 @@ export class NewEducation extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-2">
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"
                                     checked={this.props.education.isCurrentStudent}
@@ -71,13 +71,13 @@ export class NewEducation extends Component {
                             </label>
                             </div>
                         </div>
+                        <hr />
+                        <div className="col-md-4">
+                            <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
+                                <i className="fa fa-trash"></i> Delete Education</button>
+                        </div>
                     </div>
                     <hr />
-                    <div className="col-md-4">
-                        <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
-                            <i className="fa fa-trash"></i> Delete Education</button>
-                    </div>
-                    <br />
                 </div>
                 <hr />
             </div>
