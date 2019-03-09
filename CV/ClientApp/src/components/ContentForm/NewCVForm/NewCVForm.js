@@ -50,7 +50,7 @@ export class NewCVForm extends Component {
                 },
                 linkedIn: {
                     value: data.personalInfo.linkedIn ? data.personalInfo.linkedIn : '',
-                    placeHolder: 'Enter LinkedIn URL'
+                    placeHolder: 'Enter LinkedIn Profile URL'
                 },
                 phoneNumber: {
                     value: data.personalInfo.phoneNumber,

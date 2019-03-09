@@ -26,7 +26,7 @@ export class PersonalInfo extends Component {
                     <div className="col-xs-4 col-md-3 col-sm-4">
                         {this.props.info.phoneNumber !== '' ?
                             [<i className="fa fa-phone"></i>,
-                            <span> {this.props.info.phoneNumer} </span>] : null
+                            <span> {this.props.info.phoneNumber} </span>] : null
                         }
                     </div>
 

@@ -32,12 +32,12 @@ export class MyCv extends Component {
             }).then((data) => {
                 console.log(data);
                 const rData = this.renderToHTMLData(data);
-                //const cvData = this.renderToHTMLData(data);
-                console.log('cv data is ', rData);
+                const cvData = this.renderToHTMLData(data);
+                //console.log('cv data is ', rData);
 
                 //var cvData = new CvData();
                 //this.setState({ resume: cvData.getData() });
-                this.setState({ resume: rData});
+                this.setState({ resume: rData });
                 console.log('state is ', this.state);
             });
     }
@@ -120,14 +120,14 @@ export class MyCv extends Component {
         return (
             <div>
                 <hr />
-                <hr/>
+                <hr />
                 <div className="text-center">
                     <ReactToPrint
                         trigger={() => <button className="btn btn-info">Print this out!</button>}
                         content={() => this.componentRef}
                     />
                 </div>
-                <hr/>
+                <hr />
                 {resumeData ?
                     (<div className="container pageBorder p-3" ref={el => (this.componentRef = el)}>
                         <div className="row w-100">

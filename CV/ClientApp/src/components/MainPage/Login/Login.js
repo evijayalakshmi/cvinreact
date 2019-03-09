@@ -125,7 +125,8 @@ export default class Login extends Component {
                         <h5>Login</h5>
                     </button>
                     <hr />
-                    {this.state.isUserValid ? null : <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
+                    {this.state.isUserValid ? null :
+                        <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
                 </form>
             </div>
         );
