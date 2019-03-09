@@ -29,8 +29,9 @@ export class ContentForm extends Component {
                 .then((response) => {
                     return response.json();
                 }).then((data) => {
-                    this.setState({ resumes: data });
-                    this.setState({ areResumesLoaded: true });
+                    this.setState({ resumes: data, areResumesLoaded: true });
+                    //this.setState({ resumes: data });
+                    //this.setState({ areResumesLoaded: true });
                 });
         }
     }
