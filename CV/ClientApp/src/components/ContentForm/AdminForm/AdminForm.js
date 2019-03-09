@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import * as _ from 'lodash';
 
 export class AdminForm extends Component {
     displayName = AdminForm.name;
@@ -51,6 +52,7 @@ export class AdminForm extends Component {
     render() {
 
         const rows = this.state.userData.map((user, i) => {
+            const currentOccupation = user.resumes.length > 0 ? _.head(_.reverse(user.resumes)).personalInfo.currentOccupation : '';
             console.log("render user resumes: ", user, user.resumes);
             const resumes = user.resumes.map(r => {
                 const newTo = {
@@ -60,7 +62,7 @@ export class AdminForm extends Component {
                     <Link className="btn btn-pink" role="button" target="_blank" to={newTo}>
                         <button type="button" className="btn btn-outline-success">
                             {r.name}
-                       </button>
+                        </button>
                     </Link>);
             });
 
@@ -69,6 +71,7 @@ export class AdminForm extends Component {
                     <th scope="row">{i + 1}</th>
                     <td>{user.user.name}</td>
                     <td>{user.user.email}</td>
+                    <td>{currentOccupation} </td>
                     <td>
                         {resumes}
                     </td>
@@ -84,6 +87,7 @@ export class AdminForm extends Component {
                         <th scope="col">#</th>
                         <th scope="col">User Name</th>
                         <th scope="col">Email ID</th>
+                        <th scope="col"> Role </th>
                         <th scope="col">Resumes</th>
                         <th scope="col">Created Time</th>
                     </tr>
