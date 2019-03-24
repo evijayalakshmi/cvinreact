@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using cv.Services;
 using cv.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
+using System.Net;
 
 namespace CV
 {
@@ -23,10 +25,26 @@ namespace CV
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+
+            services.AddScoped<SmtpClient>((serviceProvider) =>
+            {
+                var config = serviceProvider.GetRequiredService<IConfiguration>();
+                return new SmtpClient() {
+                    Host = config.GetValue<string>("Email:Smtp:Host"),
+                    Port = config.GetValue<int>("Email:Smtp:Port"),
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                        config.GetValue<string>("Email:Smtp:Username"),
+                        config.GetValue<string>("Email:Smtp:Password")
+                    )
+                };
+            });
+
             // Add framework services.
             services.AddDbContext<UserContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
 
             services.AddScoped<IResumeStoreService, ResumeStoreService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

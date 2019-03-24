@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using cv.DataAccess;
 using cv.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace cv.Controllers {
 
@@ -13,9 +15,19 @@ namespace cv.Controllers {
     [ApiController]
     public class UserController : ControllerBase {
         private readonly UserContext _context;
+        private readonly IMemoryCache _cache;
+        private readonly SmtpClient _smtpClient;
+        private readonly MemoryCacheEntryOptions _cacheEntryOptions;
 
-        public UserController(UserContext context) {
+        public UserController(UserContext context, SmtpClient smtpClient, IMemoryCache cache) {
             _context = context;
+            _cache = cache;
+            _smtpClient = smtpClient;
+
+            // Set cache options.
+            _cacheEntryOptions = new MemoryCacheEntryOptions()
+                    // Keep in cache for this time, reset time if accessed.
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(300));
         }
 
         [HttpPost("[action]")]
@@ -37,6 +49,61 @@ namespace cv.Controllers {
                 return NotFound();
             }
             return Ok(user);
+        }
+
+        [HttpPost("[action]")]
+        public ActionResult<bool> ValidateSecurityCode([FromBody] SecurityCodeViewModel userInfo) {
+            if (_cache.TryGetValue(userInfo.Email, out int cacheEntry)) {
+                if (cacheEntry == userInfo.Code) {
+                    return Ok("OK");
+                } else {
+                    return NotFound();
+                }
+            } else {
+                return NotFound();
+            }
+        }
+
+        //[HttpGet("[action]")]
+        //public ActionResult<bool> SendOTPToMail(string email) {
+        //    SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+        //    client.UseDefaultCredentials = false;
+        //    client.Credentials = new NetworkCredential("username", "password");
+
+            //    MailMessage mailMessage = new MailMessage();
+            //    mailMessage.From = new MailAddress("whoever@me.com");
+            //    mailMessage.To.Add("receiver@me.com");
+            //    mailMessage.Body = "body";
+            //    mailMessage.Subject = "subject";
+            //    client.Send(mailMessage);
+            //}
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> SendOTP(string to) {
+            Random rand = new Random();
+            var rnd = rand.Next(1000000, 9999999);
+            var mailMessage = new MailMessage(
+                from: "vijaya.laxmi502-no-reply@gmail.com",
+                to: to,
+                subject: "Resume Builder App",
+                body: "Welcome to Resume Builder App!<br />" +
+                      "Your security code is <b>" + rnd + "</b>" +
+                      "<hr />" + "This code will expire in <b>5 minutes</b>"
+                );
+            mailMessage.IsBodyHtml = true;
+
+            // Save data in cache.
+            _cache.Set(to, rnd, _cacheEntryOptions);
+            //}
+            try {
+                await _smtpClient.SendMailAsync(mailMessage);
+            } catch (Exception e) {
+                // TODO: Handle the exception
+                Console.Write(e.Message);
+            }
+
+            return Ok("OK");
+
         }
 
         [HttpGet("[action]")]

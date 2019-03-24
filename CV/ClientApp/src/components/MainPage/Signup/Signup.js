@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react";
 import "./Signup.css";
 import { FieldGroup } from "../../Common/FieldGroup";
+import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
 export default class Signup extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Signup extends Component {
             password: "",
             confirmPassword: "",
             confirmationCode: "",
+            isConfirmationCodeSent: false,
             isUserRegistered: false,
             formErrors: {
                 email: "",
@@ -69,11 +71,12 @@ export default class Signup extends Component {
             formErrors: fieldValidationErrors,
             emailValid: emailValid,
             passwordValid: passwordValid,
-            confirmPasswordValid: confirmPasswordValid
+            confirmPasswordValid: confirmPasswordValid,
         }, this.validateForm);
     }
 
     handleChange = event => {
+        event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
         this.setState({
@@ -83,57 +86,96 @@ export default class Signup extends Component {
 
 
     handleSubmit = async event => {
-        var newUserData = {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            isAdmin: this.state.isAdmin
-        };
-
-        fetch('api/User/RegisterUser', {
-            method: 'POST',
-            headers: {
-                'Accept': 'appication/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUserData)
-        }).then((response) => {
-            return response.json();
-        }).then((res) => {
-            this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
-        }).catch((error) => {
-            this.setState({ error: 'Email already registered!' });
-        });
-
         event.preventDefault();
 
-        this.setState({ isLoading: true });
-
-        this.setState({ isLoading: false });
+        fetch('api/User/SendOTP?to=' + this.state.email)
+            .then((response) => {
+                this.setState({ isConfirmationCodeSent: response.ok })
+            });
     }
 
     handleConfirmationSubmit = async event => {
         event.preventDefault();
 
+        var securityData = {
+            email: this.state.email,
+            code: this.state.confirmationCode
+        };
+
+        fetch('api/User/ValidateSecurityCode', {
+            method: 'POST',
+            headers: {
+                'Accept': 'appication/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(securityData)
+        }).then((response) => {
+            if (response.ok) {
+                var newUserData = {
+                    name: this.state.name,
+                    email: this.state.email,
+                    password: this.state.password,
+                    isAdmin: this.state.isAdmin
+                };
+
+                fetch('api/User/RegisterUser', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'appication/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newUserData)
+                }).then((response) => {
+                    return response.json();
+                }).then((res) => {
+                    this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
+                }).catch((error) => {
+                    this.setState({ error: 'Email already registered!' });
+                });
+            } else {
+                this.setState({ error: 'Invalid code, please try again!' });
+            }
+        }).catch((error) => {
+            this.setState({ error: 'Invalid code, please try again!' });
+        });
+
         this.setState({ isLoading: true });
     }
 
-    // renderConfirmationForm() {
-    //     return (
-    //         <form onSubmit={this.handleConfirmationSubmit}>
-    //             <FormGroup controlId="confirmationCode" bsSize="large">
-    //                 <ControlLabel>Confirmation Code</ControlLabel>
-    //                 <FormControl
-    //                     autoFocus
-    //                     type="tel"
-    //                     value={this.state.confirmationCode}
-    //                     onChange={this.handleChange}
-    //                 />
-    //                 <HelpBlock>Please check your email for the code.</HelpBlock>
-    //             </FormGroup>
-    //         </form>
-    //     );
-    // }
+    renderConfirmationForm() {
+        const errorStyle = {
+            color: 'red'
+        };
+
+        return (
+            <form onSubmit={this.handleConfirmationSubmit}>
+                <FieldGroup
+                    name="confirmationCode"
+                    id="confirmationCode"
+                    placeHolder="Enter security code"
+                    autoFocus
+                    type="tel"
+                    label="Confirmation Code"
+                    help="Please check your email for the code"
+                    value={this.state.confirmationCode}
+                    onChange={this.handleChange}
+                />
+                <hr />
+                <button
+                    className="btn btn-primary btn-block"
+                    type="submit">
+                    submit
+                </button>
+                {this.state.isUserRegistered
+                    ? <div className="alert alert-success" role="alert">
+                        <p>Hey {this.state.name},</p>
+                        <hr />
+                        <p> You registered Successfully! Please login with your credentials. </p>
+                    </div>
+                    : <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
+            </form>
+        );
+    }
 
     renderForm() {
         const errorStyle = {
@@ -182,7 +224,6 @@ export default class Signup extends Component {
                     onChange={this.handleChange}
                     error={this.state.formErrors.confirmPassword}
                 />
-                
                 <hr />
                 <button
                     className="btn btn-primary btn-block"
@@ -203,11 +244,13 @@ export default class Signup extends Component {
     }
 
     render() {
-
         return (
             <div className="Signup">
-                {this.renderForm()}
+                {!this.state.isConfirmationCodeSent ? this.renderForm() : this.renderConfirmationForm()}
             </div>
+            //<div className="Signup">
+            //    {this.renderConfirmationForm() ? this.renderForm() : null}
+            //</div>
         );
     }
 }

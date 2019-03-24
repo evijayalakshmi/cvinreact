@@ -6,6 +6,7 @@ import { NewLanguage } from './NewLanguage/NewLanguage';
 import './NewCVForm.css';
 import { IconFieldGroup } from '../../Common/IconFieldGroup';
 import { ContentHeading } from '../../Common/ContentHeading/ContentHeading';
+import { Link } from "react-router-dom";
 
 export class NewCVForm extends Component {
     displayName = NewCVForm.name;
@@ -686,9 +687,24 @@ export class NewCVForm extends Component {
                 delete={(e, idx) => this.deleteLanguage(e, idx)} />);
         }
 
+        const openPDF =
+            this.state.id !== '' ?
+                <div className="pull-right">
+                    <Link className="btn btn-pink p-0" role="button" target="_blank" to={{
+                        pathname: "/MyCv/" + this.state.id
+                    }} style={{ 'float': 'right' }}>
+                        <button type="button" className="btn btn-outline-success">
+                            Open PDF
+                        </button>
+                    </Link>
+                </div> : null;
+
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit} className="edit-form">
                 <div className="row w-100">
+                    <div className="w-100">
+                        {openPDF}
+                    </div>
                     <div className="w-100">
                         <ContentHeading name="Personal Info" />
                         <div className="row w-100">

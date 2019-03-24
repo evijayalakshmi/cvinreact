@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { NewCVForm } from './NewCVForm/NewCVForm';
-import { MyCv } from './MyCV/MyCv';
 import './ContentForm.css';
 import { AdminForm } from './AdminForm/AdminForm';
-import { Link } from "react-router-dom";
 import { NewListItem } from './NewCVForm/NewListItem/NewListItem';
 import { ContentHeading } from '../Common/ContentHeading/ContentHeading';
 import { confirmAlert } from 'react-confirm-alert';
@@ -21,7 +19,8 @@ export class ContentForm extends Component {
             userEmail: this.props.location.userInfo.userEmail,
             userName: this.props.location.userInfo.userName,
             activeListItem: 0,
-            areResumesLoaded: false
+            areResumesLoaded: false,
+            showModal: false
         };
 
         if (!this.state.isAdmin) {
@@ -107,93 +106,24 @@ export class ContentForm extends Component {
         })
     }
 
-    renderToHTMLData = (resume) => {
-        return {
-            personalInfo: {
-                Name: resume.personalInfo.name,
-                Location: resume.personalInfo.location,
-                PhoneNumber: resume.personalInfo.phoneNumber,
-                Designation: resume.personalInfo.designation,
-                Email: resume.personalInfo.email,
-                LinkedIn: resume.personalInfo.linkedIn,
-                gitURL: resume.personalInfo.gitURL,
-                blog: resume.personalInfo.blogURL
-            },
-            experiences: resume.experiences.map(exp => {
-                return {
-                    title: exp.title,
-                    company: exp.company,
-                    location: exp.location,
-                    fromDate: "",
-                    toDate: "",
-                    rolesAndResponsibilities: exp.rolesAndResponsibilities
-                };
-            }),
-            achievements: resume.achievements.map(mom => {
-                return {
-                    icon: "fa fa-trophy fa-2x",
-                    heading: "Courage I had",
-                    content: mom
-                };
-            }),
-            strengths: resume.strengths ? this.splitArrayIntoChunks(resume.strengths, 3) : [],
-            languages: resume.languages.map(lan => {
-                return { language: lan.name, level: lan.level };
-            }),
-            educations: resume.educations.map(edu => {
-                return {
-                    stream: edu.stream,
-                    university: edu.university,
-                    icon: "fa fa-calendar",
-                    fromDate: "",
-                    toDate: ""
-                };
-            }),
-            dayOfLife: []
-        };
-    }
-
-    splitArrayIntoChunks = (arr, chunkLen) => {
-        var chunkList = [];
-        var chunkCount = Math.ceil(arr.length / chunkLen);
-        for (var i = 0; i < chunkCount; i++) {
-            chunkList.push(arr.splice(0, chunkLen));
-        }
-        return chunkList;
-    }
-
-    openResumeExternal = (resume) => {
-        var data = this.renderToHTMLData(resume);
+    openModalDialog = () => {
+        this.setState({ showModal: true });
     }
 
     renderUserPage() {
         const resumes = this.state.resumes.map((resume, i) => {
             return (
                 <div className="row w-100 p-0 m-0">
-                    <div className="col-md-10 w-100 p-0 m-0">
-                        <NewListItem
-                            key={i}
-                            index={i}
-                            innerRef={React.createRef()}
-                            listItem={resume}
-                            isActive={i === this.state.activeListItem}
-                            onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
-                            delete={(e, idx) => this.deleteListItem(idx, resume)}
-                            openResume={() => this.openResumeExternal(resume)}
-                        />
-                    </div>
-                    {resume.id !== '' ?
-                        <div className="col-md-2 w-100 p-0 m-0">
-                            <Link className="btn btn-pink p-0" role="button" target="_blank" to={{
-                                pathname: "/MyCv/" + resume.id
-                            }}
-                                style={{ 'float': 'right' }}>
-                                <button type="button" className="btn btn-outline-success">
-                                    <i className="fa fa-external-link" />
-                                </button>
-                            </Link>
-                        </div> :
-                    null}
+                    <NewListItem
+                        key={i}
+                        index={i}
+                        innerRef={React.createRef()}
+                        listItem={resume}
+                        isActive={i === this.state.activeListItem}
+                        onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
+                        delete={(e, idx) => this.deleteListItem(idx, resume)}
+                        openResume={() => this.openResumeExternal(resume)}
+                    />
                 </div>);
         });
 
