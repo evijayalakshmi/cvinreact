@@ -53,7 +53,8 @@ export class NewEducation extends Component {
                         <div className="col-md-2">
                             <div className="form-group">
                                 <h6>To</h6>
-                                <DatePicker id="ed-toDatepicker" className="text-center"
+                                <DatePicker className="text-center"
+                                    id="ed-toDatepicker" 
                                     selected={this.props.education.toDate.formattedValue}
                                     disabled={this.props.education.isCurrentStudent}
                                     onChange={(v) => this.props.dateValueChange('toDate', v, this.props.index)}

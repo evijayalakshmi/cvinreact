@@ -91,7 +91,7 @@ export class NewCVForm extends Component {
                     },
                     toDate: {
                         value: exp.toDate,
-                        formattedValue: this.parseDate(exp.toDate)
+                        formattedValue: exp.toDate === "Ongoing" ? new Date() : this.parseDate(exp.toDate)
                     },
                     rolesAndResponsibilities: {
                         value: exp.rolesAndResponsibilities.join('\n'),
@@ -116,7 +116,7 @@ export class NewCVForm extends Component {
                     },
                     toDate: {
                         value: edu.toDate,
-                        formattedValue: this.parseDate(edu.toDate)
+                        formattedValue: edu.toDate === "Ongoing" ? new Date() : this.parseDate(edu.toDate)
                     },
                     isCurrentStudent: false
                 };
@@ -189,6 +189,8 @@ export class NewCVForm extends Component {
 
     // Personal Info
     changePersonalInfoHandler = (event) => {
+        debugger;
+        event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
 
@@ -634,6 +636,8 @@ export class NewCVForm extends Component {
     }
 
     render() {
+        debugger;
+
         // Experiences
         const experiences = [];
         for (var i = 0; i < this.state.formControls.experience.length; i += 1) {

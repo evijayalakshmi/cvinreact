@@ -20,7 +20,8 @@ export class IconFieldGroup extends Component {
                         </span>
                     </div>
                     <input type="text" className="form-control" id={this.props.id} {...this.props} autoComplete="off" />
-                    {this.props.delete && [<hr/>, <button className="btn btn-info" onClick={(e) => this.props.delete(e)}><i class="fa fa-trash"></i>Delete</button>]}
+                    {this.props.delete && [<hr />, <button className="btn btn-info" onClick={(e) => this.props.delete(e)}>
+                        <i className="fa fa-trash"></i>Delete</button>]}
                 </div>
                 {this.props.help && <small id="help" className="form-text text-muted">{this.props.help}</small>}
                 {this.props.error && <small id="help" className="form-text text-error" style={errorStyle}>{this.props.error}</small>}

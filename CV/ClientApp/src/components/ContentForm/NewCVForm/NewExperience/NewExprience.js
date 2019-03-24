@@ -96,7 +96,7 @@ export default class NewExperience extends Component {
                     </div>
                     <div className="row w-100">
                         <div className="col-md-8">
-                            <div className="form-group" controlId="formControlsTextarea">
+                            <div className="form-group" controlid="formControlsTextarea">
                                 <label>Roles & Responsibilities</label>
                                 <textarea
                                     name="rolesAndResponsibilities"

@@ -30,8 +30,8 @@ export default class MainPage extends Component {
         return (
             <div className="vertical-center">
                 <div className="container responsive">
-                    <div class="row">
-                        <div class="col-md-12 col-xs-auto">
+                    <div className="row">
+                        <div className="col-md-12 col-xs-auto">
                             <div className="col-md-6 offset-md-3" id="card">
                             <div id="buttons">
                                 <button id="signupButton"

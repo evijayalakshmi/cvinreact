@@ -102,7 +102,7 @@ export default class Login extends Component {
                         id="email"
                         type="text"
                         label=""
-                        placeHolder="Enter your emailId"
+                        placeholder="Enter your emailId"
                         value={this.state.email}
                         onChange={this.handleChange}
                         error={this.state.formErrors.email}
@@ -112,7 +112,7 @@ export default class Login extends Component {
                         id="password"
                         type="password"
                         label=""
-                        placeHolder="Enter your password"
+                        placeholder="Enter your password"
                         value={this.state.password}
                         onChange={this.handleChange}
                         error={this.state.formErrors.password}
