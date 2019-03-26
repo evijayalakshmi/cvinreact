@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using cv.DataAccess;
+﻿using cv.DataAccess;
 using cv.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace cv.Controllers {
 
@@ -70,13 +70,13 @@ namespace cv.Controllers {
         //    client.UseDefaultCredentials = false;
         //    client.Credentials = new NetworkCredential("username", "password");
 
-            //    MailMessage mailMessage = new MailMessage();
-            //    mailMessage.From = new MailAddress("whoever@me.com");
-            //    mailMessage.To.Add("receiver@me.com");
-            //    mailMessage.Body = "body";
-            //    mailMessage.Subject = "subject";
-            //    client.Send(mailMessage);
-            //}
+        //    MailMessage mailMessage = new MailMessage();
+        //    mailMessage.From = new MailAddress("whoever@me.com");
+        //    mailMessage.To.Add("receiver@me.com");
+        //    mailMessage.Body = "body";
+        //    mailMessage.Subject = "subject";
+        //    client.Send(mailMessage);
+        //}
 
         [HttpGet("[action]")]
         public async Task<IActionResult> SendOTP(string to) {
@@ -104,6 +104,26 @@ namespace cv.Controllers {
 
             return Ok("OK");
 
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SendUserCredentials([FromBody] LoginViewModel userInfo) {
+            var mailMessage = new MailMessage(
+               from: "vijaya.laxmi502-no-reply@gmail.com",
+               to: userInfo.Email,
+               subject: "Resume Builder App",
+               body: "Welcome to Resume Builder App!<br />" + "<hr />" +
+                     "Here is your <b> Login Credentials: </b> <br/>" + "<b> Username: " + userInfo.Email + "</b>" + "<br/>" + "<b> Password: " + userInfo.Password + "</b>"
+               );
+            mailMessage.IsBodyHtml = true;
+
+            try {
+                await _smtpClient.SendMailAsync(mailMessage);
+            } catch (Exception e) {
+                // TODO: Handle the exception
+                Console.Write(e.Message);
+            }
+
+            return Ok("OK");
         }
 
         [HttpGet("[action]")]

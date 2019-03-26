@@ -2,6 +2,7 @@
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { FieldGroup } from '../../../Common/FieldGroup';
+import '../../../ContentForm/ContentForm';
 
 export class NewEducation extends Component {
     displayName = NewEducation.name;
@@ -64,11 +65,11 @@ export class NewEducation extends Component {
                         </div>
                         <div className="col-md-2">
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                <input className="form-check-input chkStyle" type="checkbox" value="" id="defaultCheck1"
                                     checked={this.props.education.isCurrentStudent}
                                     onChange={() => this.props.handleCurrentStudentCheck(this.props.index)} />
                                 <label className="form-check-label" htmlFor="defaultCheck1">
-                                    Current Student?
+                                    Ongoing Studies?
                             </label>
                             </div>
                         </div>

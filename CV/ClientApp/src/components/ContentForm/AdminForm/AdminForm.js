@@ -20,6 +20,7 @@ export class AdminForm extends Component {
                     if (!user.isAdmin) {
                         fetch('api/ResumeData/GetByEmailId?emailId=' + user.email)
                             .then((response) => {
+                                debugger;
                                 return response.json();
                             }).then((resumes) => {
                                 var currentUserData = {
@@ -66,6 +67,8 @@ export class AdminForm extends Component {
                     </Link>);
             });
 
+            const createdTime = new Date(user.user.createdTime).toDateString();
+
             return (
                 <tr innerRef={React.createRef()}>
                     <th scope="row">{i + 1}</th>
@@ -75,7 +78,7 @@ export class AdminForm extends Component {
                     <td>
                         {resumes}
                     </td>
-                    <td>{user.user.createdTime}</td>
+                    <td>{createdTime}</td>
                 </tr>
             );
         });

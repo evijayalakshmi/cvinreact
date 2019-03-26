@@ -91,7 +91,7 @@ export default class Signup extends Component {
         fetch('api/User/SendOTP?to=' + this.state.email)
             .then((response) => {
                 this.setState({ isConfirmationCodeSent: response.ok })
-            });
+            })
     }
 
     handleConfirmationSubmit = async event => {
@@ -128,6 +128,18 @@ export default class Signup extends Component {
                 }).then((response) => {
                     return response.json();
                 }).then((res) => {
+                    const userCredentials = {
+                        email: this.state.email,
+                        password: this.state.password
+                    }
+                    fetch('api/User/SendUserCredentials', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'appication/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userCredentials)
+                    });
                     this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
                 }).catch((error) => {
                     this.setState({ error: 'Email already registered!' });
@@ -146,6 +158,7 @@ export default class Signup extends Component {
         const errorStyle = {
             color: 'red'
         };
+        const helpText = `Please check your given email  ${this.state.email}  for the code`;
 
         return (
             <form onSubmit={this.handleConfirmationSubmit}>
@@ -156,7 +169,7 @@ export default class Signup extends Component {
                     autoFocus
                     type="tel"
                     label="Confirmation Code"
-                    help="Please check your email for the code"
+                    help={helpText}
                     value={this.state.confirmationCode}
                     onChange={this.handleChange}
                 />

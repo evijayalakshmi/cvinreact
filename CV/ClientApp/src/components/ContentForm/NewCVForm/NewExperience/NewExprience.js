@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import '../../../ContentForm/ContentForm';
 
 import './NewExperience.css';
 import { FieldGroup } from '../../../Common/FieldGroup';
@@ -78,8 +79,8 @@ export default class NewExperience extends Component {
                             </div>
                         </div>
                         <div className="col-md-2">
-                            <div className="form-group">
-                                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                            <div className="form-check">
+                                <input className="form-check-input chkStyle" type="checkbox" value="" id="defaultCheck1"
                                     checked={this.props.experience.isCurrentEmployer}
                                     onChange={() => this.props.handleCurrentEmployerCheck(this.props.index)} />
                                 <label className="form-check-label" htmlFor="defaultCheck1">
@@ -88,11 +89,6 @@ export default class NewExperience extends Component {
                             </div>
                         </div>
                         <hr />
-                        <div className="col-md-4">
-                            <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
-                                <i className="fa fa-trash"></i> Delete Experience
-                            </button>
-                        </div>
                     </div>
                     <div className="row w-100">
                         <div className="col-md-8">
@@ -110,7 +106,11 @@ export default class NewExperience extends Component {
                                 />
                             </div>
                         </div>
-                        
+                        <div className="col-md-4">
+                            <button type="submit" className="btn btn-info" onClick={(e) => this.props.delete(e, this.props.index)}>
+                                <i className="fa fa-trash"></i> Delete Experience
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <hr />

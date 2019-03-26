@@ -149,7 +149,7 @@ export class NewCVForm extends Component {
         var dateParts = dateString.split("/");
 
         // month is 0-based, that's why we need dataParts[1] - 1
-        return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+        return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
     }
 
     validateForm() {
@@ -207,6 +207,30 @@ export class NewCVForm extends Component {
             formControls: updatedControls
         }, () => { this.validateField(name, value); });
     }
+
+    //ImageUpload
+
+    //handleUploadClick(event) {
+    //    event.preventDefault();
+    //    var self = this;
+    //    var apiBaseUrl = axios.defaults.baseURL + "user/upload";
+    //    if (this.state.filesToBeSent.length > 0) {
+    //        var filesArray = this.state.filesToBeSent;
+    //        let f = new FormData();
+    //        for (var i in filesArray) {
+    //            //console.log("files",filesArray[i][0]);
+    //            f = new FormData();
+    //            f.append("File", filesArray[i][0])
+    //            axios.post(apiBaseUrl, f, {
+    //                headers: { 'Content-Type': 'multipart/form-data' }
+    //            });
+    //        }
+    //        alert("File upload completed");
+    //    }
+    //    else {
+    //        alert("Please select files first");
+    //    }
+    //}
 
     // Experience
     addExperience = (e) => {
@@ -635,6 +659,11 @@ export class NewCVForm extends Component {
         e.preventDefault();
     }
 
+    handleUploadClick = (event) => {
+        debugger;
+        alert('changed...');
+    }
+
     render() {
         debugger;
 
@@ -691,23 +720,25 @@ export class NewCVForm extends Component {
                 delete={(e, idx) => this.deleteLanguage(e, idx)} />);
         }
 
-        const openPDF =
+        const resumePreview =
             this.state.id !== '' ?
                 <div className="pull-right">
                     <Link className="btn btn-pink p-0" role="button" target="_blank" to={{
                         pathname: "/MyCv/" + this.state.id
                     }} style={{ 'float': 'right' }}>
                         <button type="button" className="btn btn-outline-success">
-                            Open PDF
+                            Preview
                         </button>
                     </Link>
                 </div> : null;
+
+        const btnText = this.state.id === '' ? "Save" : "Update";
 
         return (
             <form key="CVFormKey" onSubmit={this.handleSubmit} className="edit-form">
                 <div className="row w-100">
                     <div className="w-100">
-                        {openPDF}
+                        {resumePreview}
                     </div>
                     <div className="w-100">
                         <ContentHeading name="Personal Info" />
@@ -790,7 +821,7 @@ export class NewCVForm extends Component {
                             </div>
                         </div>
                         <div className="row w-100">
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                                 <IconFieldGroup
                                     name="gitURL"
                                     id="formControlsGitHub"
@@ -801,7 +832,7 @@ export class NewCVForm extends Component {
                                     onChange={this.changePersonalInfoHandler}
                                 />
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                                 <IconFieldGroup
                                     name="blogURL"
                                     id="formControlsBlog"
@@ -811,6 +842,11 @@ export class NewCVForm extends Component {
                                     icon="fa fa-external-link"
                                     onChange={this.changePersonalInfoHandler}
                                 />
+                            </div>
+                            <div className="col-md-4">
+                                <label> Upload you image </label><br />
+                                
+                                <input type="file" class="form-control-file" onChange={this.handleUploadClick} />
                             </div>
                         </div>
                     </div>
@@ -872,7 +908,7 @@ export class NewCVForm extends Component {
                     </div>
                     <br />
                     <br />
-                    <button className="btn btn-primary" disabled={!this.state.formControls.formValid} type="submit">Save</button>
+                    <button className="btn btn-primary" disabled={!this.state.formControls.formValid} type="submit">{btnText}</button>
                 </div>
             </form >
         );

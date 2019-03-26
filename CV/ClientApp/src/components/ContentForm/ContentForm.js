@@ -46,7 +46,7 @@ export class ContentForm extends Component {
             userEmail: this.state.userEmail,
             userName: this.state.userName,
             id: '',
-            name: 'current',
+            name: 'Current Resume',
             personalInfo: {
                 name: "",
                 location: "",
@@ -113,20 +113,19 @@ export class ContentForm extends Component {
     renderUserPage() {
         const resumes = this.state.resumes.map((resume, i) => {
             return (
-                <div className="row w-100 p-0 m-0">
-                    <NewListItem
-                        key={i}
-                        index={i}
-                        innerRef={React.createRef()}
-                        listItem={resume}
-                        isActive={i === this.state.activeListItem}
-                        onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
-                        delete={(e, idx) => this.deleteListItem(idx, resume)}
-                        openResume={() => this.openResumeExternal(resume)}
-                    />
-                </div>);
-        });
+                <NewListItem
+                    key={i}
+                    index={i}
+                    innerRef={React.createRef()}
+                    listItem={resume}
+                    isActive={i === this.state.activeListItem}
+                    onListItemClick={(e, idx) => this.handleListItemClick(e, idx, resume)}
+                    delete={(e, idx) => this.deleteListItem(idx, resume)}
+                    openResume={() => this.openResumeExternal(resume)}
+                />
+            );
 
+        });
         const resumeArea =
             this.state.areResumesLoaded ?
                 (<ul className="list-group">
@@ -135,7 +134,6 @@ export class ContentForm extends Component {
                 (<div className="spinner-border" role="status">
                     <span className="sr-only">Loading...</span>
                 </div>);
-
         return (
             <div className="row h-100">
                 <div className="col-md-2 h-100 saved-resumes">
@@ -143,7 +141,7 @@ export class ContentForm extends Component {
                     {resumeArea}
                     <hr />
                     <button className="btn btn-primary btn-block" onClick={() => this.addNewListItem()}>
-                        <i className="fa fa-plus"></i> Add new resume</button>
+                        <i className="fa fa-plus"></i> Create new resume</button>
                 </div>
                 <div className="col-md-10 h-100 edit-resumes">
                     {this.state.resumes.length > 0 ?
@@ -174,6 +172,7 @@ export class ContentForm extends Component {
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between w-100">
                     <a className="navbar-brand" href="#">Resume Builder</a>
                     <p className="navbar-text navbar-center">Signed in as <b> {this.state.userName} </b></p>
+                    <p className="navbar-text navbar-right"><a href="/changepassword" className="navbar-link">Change Password</a></p>
                     <p className="navbar-text navbar-right"><a href="#login" className="navbar-link">Logout</a></p>
                 </nav>
                 <div className="container-fluid h-100 bg">

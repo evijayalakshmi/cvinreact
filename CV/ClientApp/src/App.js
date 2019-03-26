@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainPage from './components/MainPage/MainPage';
 import { ContentForm } from './components/ContentForm/ContentForm';
 import { MyCv } from './components/ContentForm/MyCV/MyCv';
+import ChangePassword from './components/MainPage/ChangePassword/ChangePassword';
 
 
 export default class App extends Component {
@@ -15,6 +16,7 @@ export default class App extends Component {
                     <Route exact path='/' component={MainPage} />
                     <Route path='/Cv' component={ContentForm} />
                     <Route path='/MyCv/:id' component={MyCv} />
+                    <Route path='/changepassword' component={ChangePassword} />
                 </Switch>
             </Router>
         );
