@@ -6,6 +6,7 @@ import { NewListItem } from './NewCVForm/NewListItem/NewListItem';
 import { ContentHeading } from '../Common/ContentHeading/ContentHeading';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Link } from "react-router-dom";
 
 export class ContentForm extends Component {
     displayName = ContentForm.name;
@@ -18,6 +19,7 @@ export class ContentForm extends Component {
             resumes: [],
             userEmail: this.props.location.userInfo.userEmail,
             userName: this.props.location.userInfo.userName,
+            userPassword: this.props.location.userInfo.userPassword,
             activeListItem: 0,
             areResumesLoaded: false,
             showModal: false
@@ -167,12 +169,16 @@ export class ContentForm extends Component {
     }
 
     render() {
+        const newTo = {
+            pathname: "/changepassword",
+            param: { userEmail: this.state.userEmail, userName: this.state.userName, userPassword: this.state.userPassword }
+        };
         return (
             <div className="container-fluid p-0">
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between w-100">
                     <a className="navbar-brand" href="#">Resume Builder</a>
                     <p className="navbar-text navbar-center">Signed in as <b> {this.state.userName} </b></p>
-                    <p className="navbar-text navbar-right"><a href="/changepassword" className="navbar-link">Change Password</a></p>
+                    <p className="navbar-text navbar-right"><Link to={newTo}>Change Password</Link></p>
                     <p className="navbar-text navbar-right"><a href="#login" className="navbar-link">Logout</a></p>
                 </nav>
                 <div className="container-fluid h-100 bg">

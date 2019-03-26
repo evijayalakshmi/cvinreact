@@ -88,7 +88,7 @@ export default class Login extends Component {
     render() {
         if (this.state.isUserValid) {
             return (
-                <Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail, isAdmin: this.state.isAdmin } }} />
+                <Redirect to={{ pathname: '/Cv', userInfo: { userName: this.state.userName, userEmail: this.state.userEmail, password: this.state.password, isAdmin: this.state.isAdmin } }} />
             );
         }
 
