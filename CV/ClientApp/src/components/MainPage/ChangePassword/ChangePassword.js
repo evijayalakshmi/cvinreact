@@ -3,7 +3,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { IconFieldGroup } from '../../Common/IconFieldGroup';
 import { ContentForm } from '../../ContentForm/ContentForm';
 import { ContentHeading } from '../../Common/ContentHeading/ContentHeading';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Button, Modal, ModalHeader, ModalFooter } from 'react-bootstrap';
 
 export default class ChangePassword extends Component {
     displayName = ChangePassword.name;
