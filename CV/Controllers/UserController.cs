@@ -52,6 +52,18 @@ namespace cv.Controllers {
         }
 
         [HttpPost("[action]")]
+        public ActionResult<User> ChangePassword([FromBody] ChangePasswordViewModel userInfo) {
+            var user = _context.Users.ToList().Find(u => u.Email == userInfo.Email && u.Password == userInfo.OldPassword);
+            if (user == null) {
+                return NotFound();
+            } else {
+                user.Password = userInfo.NewPassword;
+                _context.SaveChanges();
+                return Ok(user);
+            }
+        }
+
+        [HttpPost("[action]")]
         public ActionResult<bool> ValidateSecurityCode([FromBody] SecurityCodeViewModel userInfo) {
             if (_cache.TryGetValue(userInfo.Email, out int cacheEntry)) {
                 if (cacheEntry == userInfo.Code) {
@@ -113,6 +125,28 @@ namespace cv.Controllers {
                subject: "Resume Builder App",
                body: "Welcome to Resume Builder App!<br />" + "<hr />" +
                      "Here is your <b> Login Credentials: </b> <br/>" + "<b> Username: " + userInfo.Email + "</b>" + "<br/>" + "<b> Password: " + userInfo.Password + "</b>"
+               );
+            mailMessage.IsBodyHtml = true;
+
+            try {
+                await _smtpClient.SendMailAsync(mailMessage);
+            } catch (Exception e) {
+                // TODO: Handle the exception
+                Console.Write(e.Message);
+            }
+
+            return Ok("OK");
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SendUpdatedPassword([FromBody] LoginViewModel userInfo) {
+            var mailMessage = new MailMessage(
+               from: "vijaya.laxmi502-no-reply@gmail.com",
+               to: userInfo.Email,
+               subject: "Resume Builder App",
+               body: "Welcome to Resume Builder App!<br />" + "<hr />" +
+                     "Here is your, <br/>"
+                     + "Updated Password: <b>"  + userInfo.Password + "</b>"
                );
             mailMessage.IsBodyHtml = true;
 

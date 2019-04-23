@@ -13,13 +13,13 @@ export class ContentForm extends Component {
 
     constructor(props) {
         super(props);
-
+        debugger;
         this.state = {
             isAdmin: this.props.location.userInfo.isAdmin,
             resumes: [],
             userEmail: this.props.location.userInfo.userEmail,
             userName: this.props.location.userInfo.userName,
-            userPassword: this.props.location.userInfo.userPassword,
+            userPassword: this.props.location.userInfo.password,
             activeListItem: 0,
             areResumesLoaded: false,
             showModal: false
