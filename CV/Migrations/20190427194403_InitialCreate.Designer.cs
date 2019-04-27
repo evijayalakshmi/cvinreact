@@ -10,7 +10,7 @@ using cv.DataAccess;
 namespace CV.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20190303162755_InitialCreate")]
+    [Migration("20190427194403_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

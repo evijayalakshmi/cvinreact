@@ -41,6 +41,7 @@ export default class ChangePassword extends Component {
     }
 
     validateField(fieldName, value) {
+        debugger;
         let fieldValidationErrors = this.state.formErrors;
         let isOldPwdValid = this.state.isOldPwdValid;
         let isNewPwdValid = this.state.isNewPwdValid;
@@ -70,26 +71,27 @@ export default class ChangePassword extends Component {
         }, this.validateForm);
     }
 
+    handleChange = event => {
+        debugger;
+        const name = event.target.name;
+        const value = event.target.value;
+        debugger;
+        this.setState({
+            [name]: value
+        }, () => { this.validateField(name, value) });
+    }
+
     //handleChange = event => {
     //    const name = event.target.name;
     //    const value = event.target.value;
     //    debugger;
     //    this.setState({
     //        [name]: value
-    //    }, () => { this.validateField(name, value) });
+    //    });
     //}
 
-    handleChange = event => {
-        const name = event.target.name;
-        const value = event.target.value;
-        debugger;
-        this.setState({
-            [name]: value
-        });
-    }
-
     handleSubmit = event => {
-        debugger;
+        event.preventDefault();
         var userData = {
             email: this.state.userEmail,
             oldPassword: this.state.oldPassword,
@@ -104,14 +106,14 @@ export default class ChangePassword extends Component {
             body: JSON.stringify(userData)
         }).then((response) => {
             return response.json();
-            }).then((data) => {
-                debugger;
-                this.setState({ userEmail: data.email, newPassword: data.password });
-                var userCredentials = {
-                    email: this.state.userEmail,
-                    password: this.state.newPassword
-                };
-                fetch('api/User/SendUpdatedPassword', {
+        }).then((data) => {
+            debugger;
+            this.setState({ userEmail: data.email, newPassword: data.password });
+            var userCredentials = {
+                email: this.state.userEmail,
+                password: this.state.newPassword
+            };
+            fetch('api/User/SendUpdatedPassword', {
                 method: 'POST',
                 headers: {
                     'Accept': 'appication/json',
@@ -125,9 +127,8 @@ export default class ChangePassword extends Component {
                 }
             })
         }).catch((error) => {
-            debugger;
             this.setState({ error: 'May given invalid password, please try again!' });
-            alert('Problem in changing password ' + error);
+            alert('Problem in changing password ' + error );
         });
     }
 
@@ -148,30 +149,32 @@ export default class ChangePassword extends Component {
                                         name="oldPassword"
                                         id="password"
                                         type="password"
-                                        label="Current Password"
+                                        label=""
                                         icon="fa fa-key"
                                         placeholder="Enter your current password"
                                         onChange={this.handleChange}
-
+                                        error={this.state.formErrors.oldPassword}
                                     />
                                     <IconFieldGroup
                                         name="newPassword"
                                         id="password"
                                         type="password"
-                                        label="New Password"
+                                        label=""
                                         icon="fa fa-key"
                                         placeholder="Enter your new password"
                                         onChange={this.handleChange}
+                                        error={this.state.formErrors.newPassword}
 
                                     />
                                     <IconFieldGroup
                                         name="confirmNewPassword"
                                         id="password"
                                         type="password"
-                                        label="Confirm New Password"
+                                        label=""
                                         icon="fa fa-key"
                                         placeholder="Confirm your password"
                                         onChange={this.handleChange}
+                                        error={this.state.formErrors.confirmNewPassword}
 
                                     />
                                     <hr />
