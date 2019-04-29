@@ -2,6 +2,8 @@
 import "./Signup.css";
 import { FieldGroup } from "../../Common/FieldGroup";
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Redirect } from 'react-router';
 
 export default class Signup extends Component {
     constructor(props) {
@@ -140,6 +142,7 @@ export default class Signup extends Component {
                         },
                         body: JSON.stringify(userCredentials)
                     });
+                    alert(this.state.name + " registered successfully! Please login with your credentials sent to your mail.");
                     this.setState({ isUserRegistered: true, name: '', email: '', password: '', confirmPassword: '' });
                 }).catch((error) => {
                     this.setState({ error: 'Email already registered!' });
@@ -160,7 +163,13 @@ export default class Signup extends Component {
         };
         const helpText = `Please check your given email  ${this.state.email}  for the code`;
 
+        if (this.state.isUserRegistered) {
+            return (
+                <Redirect to={{ pathname: '/' }} />
+            );
+        }
         return (
+
             <form onSubmit={this.handleConfirmationSubmit}>
                 <FieldGroup
                     name="confirmationCode"
@@ -180,12 +189,13 @@ export default class Signup extends Component {
                     submit
                 </button>
                 {this.state.isUserRegistered
-                    ? <div className="alert alert-success" role="alert">
-                        <p>Hey {this.state.name},</p>
+                    ? null
+                    :
+                    <div>
+                        <p>Hello {this.state.name},</p>
                         <hr />
-                        <p> You registered Successfully! Please login with your credentials. </p>
-                    </div>
-                    : <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
+                        <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>
+                    </div>}
             </form>
         );
     }
