@@ -19,6 +19,7 @@ namespace CV
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://35.228.136.119")
                 .UseStartup<Startup>();
     }
 }
