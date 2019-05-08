@@ -15,4 +15,8 @@ FROM microsoft/dotnet:2.1.1-aspnetcore-runtime
 WORKDIR /app
 COPY --from=builder /source/dist .
 EXPOSE 80
+
+# Make sure the app binds to port 8080
+ENV ASPNETCORE_URLS http://*:8080
+
 ENTRYPOINT ["dotnet", "CV.dll"]
