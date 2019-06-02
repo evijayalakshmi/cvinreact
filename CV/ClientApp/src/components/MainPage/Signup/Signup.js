@@ -257,9 +257,9 @@ export default class Signup extends Component {
                 </button>
                 {this.state.isUserRegistered
                     ? <div className="alert alert-success" role="alert">
-                        <p>Hey {this.state.name},</p>
+                        <p>Hi {this.state.name},</p>
                         <hr />
-                        <p> You registered Successfully! Please login with your credentials. </p>
+                        <p> Your registration is successful! Please login with your credentials. </p>
                     </div>
                     : <small id="help" className="form-text text-error" style={errorStyle}>{this.state.error}</small>}
             </form>
